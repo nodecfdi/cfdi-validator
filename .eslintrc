@@ -24,6 +24,24 @@
             "error",
             "always"
         ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "quote-props": [
+            "error",
+            "consistent"
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "@typescript-eslint/no-floating-promises": [
             "error"
         ],
