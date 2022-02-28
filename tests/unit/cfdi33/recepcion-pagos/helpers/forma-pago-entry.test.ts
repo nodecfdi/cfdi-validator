@@ -9,10 +9,10 @@ describe('FormaPagoEntry', () => {
         description: string,
         useSenderRfc: boolean,
         useSenderAccount: boolean,
-        useSenderAccountRegExp: string,
+        useSenderAccountRegExp: RegExp | undefined,
         useReceiverRfc: boolean,
         useReceiverAccount: boolean,
-        useReceiverAccountRegExp: string,
+        useReceiverAccountRegExp: RegExp | undefined,
         allowPaymentSignature: boolean
     ): FormaPagoEntryInterface => {
         return {
@@ -29,24 +29,24 @@ describe('FormaPagoEntry', () => {
     };
 
     test.each([
-        [createEntry('foo', 'bar', false, false, '', false, false, '', false)],
-        [createEntry('foo', 'bar', true, false, '', false, false, '', false)],
-        [createEntry('foo', 'bar', false, true, '', false, false, '', false)],
-        [createEntry('foo', 'bar', false, true, '/[0-9]+/', false, false, '', false)],
-        [createEntry('foo', 'bar', false, false, '/[0-9]+/', false, false, '', false)],
-        [createEntry('foo', 'bar', false, false, '', true, false, '', false)],
-        [createEntry('foo', 'bar', false, false, '', false, true, '', false)],
-        [createEntry('foo', 'bar', false, false, '', false, true, '/[0-9]+/', false)],
-        [createEntry('foo', 'bar', false, false, '', false, false, '/[0-9]+/', false)],
-        [createEntry('foo', 'bar', false, false, '', false, false, '', true)],
+        [createEntry('foo', 'bar', false, false, undefined, false, false, undefined, false)],
+        [createEntry('foo', 'bar', true, false, undefined, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, true, undefined, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, true, /[0-9]+/, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, false, /[0-9]+/, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, false, undefined, true, false, undefined, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, true, undefined, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, true, /[0-9]+/, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, false, /[0-9]+/, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, false, undefined, true)],
     ])('construct valid object', (entry: FormaPagoEntryInterface) => {
         const paymentType = new FormaPagoEntry(entry);
-        let expectedSenderAccountPattern = '/^$/';
-        if (entry.useSenderAccount && '' !== entry.useSenderAccountRegExp) {
+        let expectedSenderAccountPattern = /^$/;
+        if (entry.useSenderAccount && entry.useSenderAccountRegExp) {
             expectedSenderAccountPattern = entry.useSenderAccountRegExp;
         }
-        let expectedReceiverAccountPattern = '/^$/';
-        if (entry.useReceiverAccount && '' !== entry.useReceiverAccountRegExp) {
+        let expectedReceiverAccountPattern = /^$/;
+        if (entry.useReceiverAccount && entry.useReceiverAccountRegExp) {
             expectedReceiverAccountPattern = entry.useReceiverAccountRegExp;
         }
 
@@ -54,10 +54,10 @@ describe('FormaPagoEntry', () => {
         expect(paymentType.description()).toBe(entry.description);
         expect(paymentType.allowSenderRfc()).toBe(entry.useSenderRfc);
         expect(paymentType.allowSenderAccount()).toBe(entry.useSenderAccount);
-        expect(paymentType.senderAccountPattern()).toBe(expectedSenderAccountPattern);
+        expect(paymentType.senderAccountPattern()).toStrictEqual(expectedSenderAccountPattern);
         expect(paymentType.allowReceiverRfc()).toBe(entry.useReceiverRfc);
         expect(paymentType.allowReceiverAccount()).toBe(entry.useReceiverAccount);
-        expect(paymentType.receiverAccountPattern()).toBe(expectedReceiverAccountPattern);
+        expect(paymentType.receiverAccountPattern()).toStrictEqual(expectedReceiverAccountPattern);
         expect(paymentType.allowPaymentSignature()).toBe(entry.allowPaymentSignature);
     });
 
@@ -69,10 +69,10 @@ describe('FormaPagoEntry', () => {
                 description: 'bar',
                 useSenderRfc: false,
                 useSenderAccount: false,
-                useSenderAccountRegExp: '',
+                useSenderAccountRegExp: undefined,
                 useReceiverRfc: false,
                 useReceiverAccount: false,
-                useReceiverAccountRegExp: '',
+                useReceiverAccountRegExp: undefined,
                 allowPaymentSignature: false,
             });
         } catch (e) {
@@ -89,10 +89,10 @@ describe('FormaPagoEntry', () => {
                 description: '',
                 useSenderRfc: false,
                 useSenderAccount: false,
-                useSenderAccountRegExp: '',
+                useSenderAccountRegExp: undefined,
                 useReceiverRfc: false,
                 useReceiverAccount: false,
-                useReceiverAccountRegExp: '',
+                useReceiverAccountRegExp: undefined,
                 allowPaymentSignature: false,
             });
         } catch (e) {

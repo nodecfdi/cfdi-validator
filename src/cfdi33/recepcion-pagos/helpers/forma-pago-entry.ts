@@ -3,10 +3,10 @@ export interface FormaPagoEntryInterface {
     description: string;
     useSenderRfc: boolean;
     useSenderAccount: boolean;
-    useSenderAccountRegExp: string;
+    useSenderAccountRegExp?: RegExp;
     useReceiverRfc: boolean;
     useReceiverAccount: boolean;
-    useReceiverAccountRegExp: string;
+    useReceiverAccountRegExp?: RegExp;
     allowPaymentSignature: boolean;
 }
 
@@ -15,10 +15,10 @@ export class FormaPagoEntry {
     private readonly _description: string;
     private readonly _allowSenderRfc: boolean;
     private readonly _allowSenderAccount: boolean;
-    private readonly _senderAccountPattern: string;
+    private readonly _senderAccountPattern: RegExp;
     private readonly _allowReceiverRfc: boolean;
     private readonly _allowReceiverAccount: boolean;
-    private readonly _receiverAccountPattern: string;
+    private readonly _receiverAccountPattern: RegExp;
     private readonly _allowPaymentSignature: boolean;
 
     constructor(entry: FormaPagoEntryInterface) {
@@ -39,9 +39,9 @@ export class FormaPagoEntry {
         this._allowPaymentSignature = entry.allowPaymentSignature;
     }
 
-    protected pattern(allowed: boolean, pattern: string): string {
-        if (!allowed || '' === pattern) {
-            return '/^$/';
+    protected pattern(allowed: boolean, pattern?: RegExp): RegExp {
+        if (!allowed || !pattern) {
+            return /^$/;
         }
         return pattern;
     }
@@ -62,7 +62,7 @@ export class FormaPagoEntry {
         return this._allowSenderAccount;
     }
 
-    public senderAccountPattern(): string {
+    public senderAccountPattern(): RegExp {
         return this._senderAccountPattern;
     }
 
@@ -74,7 +74,7 @@ export class FormaPagoEntry {
         return this._allowReceiverAccount;
     }
 
-    public receiverAccountPattern(): string {
+    public receiverAccountPattern(): RegExp {
         return this._receiverAccountPattern;
     }
 
