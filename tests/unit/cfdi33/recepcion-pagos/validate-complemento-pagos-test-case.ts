@@ -7,6 +7,7 @@ import { Assert } from '../../../../src/assert';
 const useValidateComplementoPagosTestCase = (): {
     runValidate: () => Promise<void>;
     getComprobante33: () => Cfdi33.Comprobante;
+    getComplemento: () => Pagos10.Pagos;
     assertStatusEqualsCode: (expected: Status, code: string) => void;
     assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
     setValidator: (validator: ValidatorInterface) => void;
@@ -38,8 +39,13 @@ const useValidateComplementoPagosTestCase = (): {
         expect(getAsserts()).toHaveLength(0);
     });
 
+    const getComplemento = (): Pagos10.Pagos => {
+        return complemento;
+    };
+
     return {
         getComprobante33,
+        getComplemento,
         runValidate,
         assertStatusEqualsCode,
         setValidator,
@@ -47,5 +53,4 @@ const useValidateComplementoPagosTestCase = (): {
         getAssertByCodeOrFail,
     };
 };
-
 export { useValidateComplementoPagosTestCase };
