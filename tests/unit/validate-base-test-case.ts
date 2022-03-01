@@ -7,11 +7,13 @@ import { Status } from '../../src/status';
 const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
     assertStatusEqualsCode: (expected: Status, code: string) => void;
+    assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
     setValidator: (validator: ValidatorInterface) => void;
     setAsserts: (asserts: Asserts) => void;
     setComprobante: (comprobante: CNodeInterface) => void;
     getComprobante: () => CNodeInterface;
     getAsserts: () => Asserts;
+    getAssertByCodeOrFail: (code: string) => Assert;
 } => {
     let _validator: ValidatorInterface;
     let _comprobante: CNodeInterface;
@@ -71,6 +73,8 @@ const useValidateBaseTestCase = (): {
         getAsserts,
         runValidate,
         assertStatusEqualsCode,
+        assertStatusEqualsAssert,
+        getAssertByCodeOrFail,
     };
 };
 export { useValidateBaseTestCase };
