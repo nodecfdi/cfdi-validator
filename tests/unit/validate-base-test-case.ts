@@ -8,6 +8,7 @@ const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
     assertStatusEqualsCode: (expected: Status, code: string) => void;
     assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
+    assertStatusEqualsStatus: (expected: Status, current: Status) => void;
     setValidator: (validator: ValidatorInterface) => void;
     setAsserts: (asserts: Asserts) => void;
     setComprobante: (comprobante: CNodeInterface) => void;
@@ -60,6 +61,10 @@ const useValidateBaseTestCase = (): {
         expect(expected.equalsTo(actual)).toBeTruthy();
     };
 
+    const assertStatusEqualsStatus = (expected: Status, current: Status): void => {
+        expect(current).toStrictEqual(current);
+    };
+
     const assertStatusEqualsCode = (expected: Status, code: string): void => {
         const actualAssert = getAssertByCodeOrFail(code);
         assertStatusEqualsAssert(expected, actualAssert);
@@ -74,6 +79,7 @@ const useValidateBaseTestCase = (): {
         runValidate,
         assertStatusEqualsCode,
         assertStatusEqualsAssert,
+        assertStatusEqualsStatus,
         getAssertByCodeOrFail,
     };
 };

@@ -10,6 +10,7 @@ const useValidate33TestCase = (): {
     getComprobante33: () => Cfdi33.Comprobante;
     assertStatusEqualsCode: (expected: Status, code: string) => void;
     assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
+    assertStatusEqualsStatus: (expected: Status, current: Status) => void;
     getAsserts: () => Asserts;
     setValidator: (validator: ValidatorInterface) => void;
     getAssertByCodeOrFail: (code: string) => Assert;
@@ -23,6 +24,7 @@ const useValidate33TestCase = (): {
         setValidator,
         assertStatusEqualsAssert,
         getAssertByCodeOrFail,
+        assertStatusEqualsStatus,
     } = useValidateBaseTestCase();
 
     beforeEach(() => {
@@ -45,6 +47,7 @@ const useValidate33TestCase = (): {
         setValidator,
         assertStatusEqualsAssert,
         getAssertByCodeOrFail,
+        assertStatusEqualsStatus,
     };
 };
 export { useValidate33TestCase };

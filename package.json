@@ -41,6 +41,7 @@
         "@types/jest": "^27.4.1",
         "@types/luxon": "^2.0.9",
         "@types/node": "^17.0.21",
+        "@types/temp": "^0.9.1",
         "@typescript-eslint/eslint-plugin": "^5.12.1",
         "@typescript-eslint/parser": "^5.12.1",
         "eslint": "^8.10.0",
@@ -59,8 +60,10 @@
         "@nodecfdi/cfdiutils-common": "^0.4.0",
         "@nodecfdi/cfdiutils-core": "^0.5.0",
         "@nodecfdi/cfdiutils-elements": "^1.1.0",
+        "@nodecfdi/credentials": "^1.2.0",
         "@nodecfdi/rfc": "^1.2.0",
         "luxon": "^2.3.1",
+        "temp": "^0.9.4",
         "typescript-mix": "^3.1.3"
     }
 }
