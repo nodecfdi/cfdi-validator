@@ -6,6 +6,6 @@ export abstract class XmlStringPropertyTrait {
     }
 
     public getXmlString(): string {
-        return this._xmlString;
+        return this._xmlString || '';
     }
 }

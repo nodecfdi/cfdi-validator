@@ -4,9 +4,12 @@ import { Status } from '../../../src/status';
 import { Asserts } from '../../../src/asserts';
 import { ValidatorInterface } from '../../../src/contracts/validator-interface';
 import { Assert } from '../../../src/assert';
+import { XmlResolver } from '@nodecfdi/cfdiutils-core';
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 
 const useValidate33TestCase = (): {
     runValidate: () => Promise<void>;
+    setComprobante: (comprobante: CNodeInterface) => void;
     getComprobante33: () => Cfdi33.Comprobante;
     assertStatusEqualsCode: (expected: Status, code: string) => void;
     assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
@@ -14,6 +17,8 @@ const useValidate33TestCase = (): {
     getAsserts: () => Asserts;
     setValidator: (validator: ValidatorInterface) => void;
     getAssertByCodeOrFail: (code: string) => Assert;
+    utilAsset(file: string): string;
+    newResolver(): XmlResolver;
 } => {
     const {
         runValidate,
@@ -25,6 +30,8 @@ const useValidate33TestCase = (): {
         assertStatusEqualsAssert,
         getAssertByCodeOrFail,
         assertStatusEqualsStatus,
+        utilAsset,
+        newResolver,
     } = useValidateBaseTestCase();
 
     beforeEach(() => {
@@ -48,6 +55,9 @@ const useValidate33TestCase = (): {
         assertStatusEqualsAssert,
         getAssertByCodeOrFail,
         assertStatusEqualsStatus,
+        utilAsset,
+        newResolver,
+        setComprobante,
     };
 };
 export { useValidate33TestCase };

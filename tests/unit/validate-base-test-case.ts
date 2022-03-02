@@ -3,6 +3,8 @@ import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../src/asserts';
 import { Assert } from '../../src/assert';
 import { Status } from '../../src/status';
+import { useTestCase } from '../test-case';
+import { XmlResolver } from '@nodecfdi/cfdiutils-core';
 
 const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
@@ -15,7 +17,11 @@ const useValidateBaseTestCase = (): {
     getComprobante: () => CNodeInterface;
     getAsserts: () => Asserts;
     getAssertByCodeOrFail: (code: string) => Assert;
+    utilAsset(file: string): string;
+    newResolver(): XmlResolver;
 } => {
+    const { utilAsset, newResolver } = useTestCase();
+
     let _validator: ValidatorInterface;
     let _comprobante: CNodeInterface;
     let _asserts: Asserts;
@@ -81,6 +87,8 @@ const useValidateBaseTestCase = (): {
         assertStatusEqualsAssert,
         assertStatusEqualsStatus,
         getAssertByCodeOrFail,
+        utilAsset,
+        newResolver,
     };
 };
 export { useValidateBaseTestCase };

@@ -62,6 +62,7 @@
         "@nodecfdi/cfdiutils-elements": "^1.1.0",
         "@nodecfdi/credentials": "^1.2.0",
         "@nodecfdi/rfc": "^1.2.0",
+        "@nodecfdi/xml-schema-validator": "^1.0.0",
         "luxon": "^2.3.1",
         "temp": "^0.9.4",
         "typescript-mix": "^3.1.3"
