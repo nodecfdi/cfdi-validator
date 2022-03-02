@@ -19,6 +19,8 @@ const useValidate33TestCase = (): {
     getAssertByCodeOrFail: (code: string) => Assert;
     utilAsset(file: string): string;
     newResolver(): XmlResolver;
+    setupCfdiFile(cfdiFile: string): void;
+    getComprobante(): CNodeInterface;
 } => {
     const {
         runValidate,
@@ -32,6 +34,7 @@ const useValidate33TestCase = (): {
         assertStatusEqualsStatus,
         utilAsset,
         newResolver,
+        setupCfdiFile,
     } = useValidateBaseTestCase();
 
     beforeEach(() => {
@@ -58,6 +61,8 @@ const useValidate33TestCase = (): {
         utilAsset,
         newResolver,
         setComprobante,
+        setupCfdiFile,
+        getComprobante,
     };
 };
 export { useValidate33TestCase };

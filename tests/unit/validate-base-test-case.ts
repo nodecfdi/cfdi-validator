@@ -1,10 +1,12 @@
 import { ValidatorInterface } from '../../src/contracts/validator-interface';
-import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { CNode, CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../src/asserts';
 import { Assert } from '../../src/assert';
 import { Status } from '../../src/status';
 import { useTestCase } from '../test-case';
-import { XmlResolver } from '@nodecfdi/cfdiutils-core';
+import { SaxonbCliBuilder, XmlResolver } from '@nodecfdi/cfdiutils-core';
+import { Hydrater } from '../../src/hydrater';
+import { readFileSync } from 'fs';
 
 const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
@@ -19,17 +21,32 @@ const useValidateBaseTestCase = (): {
     getAssertByCodeOrFail: (code: string) => Assert;
     utilAsset(file: string): string;
     newResolver(): XmlResolver;
+    setupCfdiFile(cfdiFile: string): void;
 } => {
     const { utilAsset, newResolver } = useTestCase();
 
     let _validator: ValidatorInterface;
     let _comprobante: CNodeInterface;
     let _asserts: Asserts;
+    let _hidrater: Hydrater;
 
     beforeEach(() => {
         _comprobante = new CNode('root');
         _asserts = new Asserts();
+        _hidrater = new Hydrater();
+        _hidrater.setXmlResolver(newResolver());
+        _hidrater.setXsltBuilder(new SaxonbCliBuilder('/usr/bin/saxonb-xslt'));
     });
+
+    const setupCfdiFile = (cfdiFile: string): void => {
+        // setup hydrate and re-hydrate the validator
+        const content = readFileSync(utilAsset(cfdiFile), 'binary');
+        _hidrater.setXmlString(content);
+        _hidrater.hydrate(_validator);
+
+        // setup comprobante
+        _comprobante = XmlNodeUtils.nodeFromXmlString(content);
+    };
 
     const setValidator = (validator: ValidatorInterface): void => {
         _validator = validator;
@@ -89,6 +106,7 @@ const useValidateBaseTestCase = (): {
         getAssertByCodeOrFail,
         utilAsset,
         newResolver,
+        setupCfdiFile,
     };
 };
 export { useValidateBaseTestCase };
