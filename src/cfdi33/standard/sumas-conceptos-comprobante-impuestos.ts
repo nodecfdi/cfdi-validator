@@ -126,7 +126,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             'Calculado',
             this._sumasConceptos.getImpuestosTrasladados(),
             'Comprobante',
-            parseFloat(this._comprobante.searchAttribute('cfdi:Impuestos', 'TotalImpuestosTrasladados'))
+            parseFloat(this._comprobante.searchAttribute('cfdi:Impuestos', 'TotalImpuestosTrasladados') || '0')
         );
     }
 
@@ -136,7 +136,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             'Calculado',
             this._sumasConceptos.getImpuestosRetenidos(),
             'Comprobante',
-            parseFloat(this._comprobante.searchAttribute('cfdi:Impuestos', 'TotalImpuestosRetenidos'))
+            parseFloat(this._comprobante.searchAttribute('cfdi:Impuestos', 'TotalImpuestosRetenidos') || '0')
         );
     }
 
