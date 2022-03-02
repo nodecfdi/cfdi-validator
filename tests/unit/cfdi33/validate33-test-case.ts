@@ -6,6 +6,7 @@ import { ValidatorInterface } from '../../../src/contracts/validator-interface';
 import { Assert } from '../../../src/assert';
 import { XmlResolver } from '@nodecfdi/cfdiutils-core';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { Hydrater } from '../../../src/hydrater';
 
 const useValidate33TestCase = (): {
     runValidate: () => Promise<void>;
@@ -21,6 +22,7 @@ const useValidate33TestCase = (): {
     newResolver(): XmlResolver;
     setupCfdiFile(cfdiFile: string): void;
     getComprobante(): CNodeInterface;
+    getHydrater(): Hydrater;
 } => {
     const {
         runValidate,
@@ -35,6 +37,7 @@ const useValidate33TestCase = (): {
         utilAsset,
         newResolver,
         setupCfdiFile,
+        getHydrater,
     } = useValidateBaseTestCase();
 
     beforeEach(() => {
@@ -63,6 +66,7 @@ const useValidate33TestCase = (): {
         setComprobante,
         setupCfdiFile,
         getComprobante,
+        getHydrater,
     };
 };
 export { useValidate33TestCase };
