@@ -7,6 +7,7 @@ import { useTestCase } from '../test-case';
 import { SaxonbCliBuilder, XmlResolver } from '@nodecfdi/cfdiutils-core';
 import { Hydrater } from '../../src/hydrater';
 import { readFileSync } from 'fs';
+import { Certificate } from '@nodecfdi/credentials';
 
 const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
@@ -23,6 +24,11 @@ const useValidateBaseTestCase = (): {
     utilAsset(file: string): string;
     newResolver(): XmlResolver;
     setupCfdiFile(cfdiFile: string): void;
+    setUpCertificado(
+        comprobanteAttributes?: Record<string, unknown>,
+        emisorAttributes?: Record<string, unknown>,
+        certificateFile?: string
+    ): void;
 } => {
     const { utilAsset, newResolver } = useTestCase();
 
@@ -98,6 +104,31 @@ const useValidateBaseTestCase = (): {
         assertStatusEqualsAssert(expected, actualAssert);
     };
 
+    const setUpCertificado = (
+        comprobanteAttributes: Record<string, unknown> = {},
+        emisorAttributes: Record<string, unknown> = {},
+        certificateFile = ''
+    ): void => {
+        certificateFile = certificateFile !== '' ? certificateFile : utilAsset('certs/EKU9003173C9.cer');
+        const certificado = Certificate.openFile(certificateFile);
+        _comprobante.addAttributes({
+            Certificado: certificado.pemAsOneLine(),
+            NoCertificado: certificado.serialNumber().bytes(),
+            ...comprobanteAttributes,
+        });
+
+        let emisor = _comprobante.searchNode('cfdi:Emisor');
+        if (!emisor) {
+            emisor = new CNode('cfdi:Emisor');
+            _comprobante.addChild(emisor);
+        }
+        emisor.addAttributes({
+            Nombre: certificado.legalName(),
+            Rfc: certificado.rfc(),
+            ...emisorAttributes,
+        });
+    };
+
     return {
         setAsserts,
         setComprobante,
@@ -113,6 +144,7 @@ const useValidateBaseTestCase = (): {
         newResolver,
         setupCfdiFile,
         getHydrater,
+        setUpCertificado,
     };
 };
 export { useValidateBaseTestCase };
