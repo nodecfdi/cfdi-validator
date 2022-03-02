@@ -18,7 +18,7 @@ describe('ImporteSaldoInsolutoRequerido', () => {
 
     test('invalid', () => {
         const docto = new DoctoRelacionado({
-            MetedoDePagoDR: 'PPD',
+            MetodoDePagoDR: 'PPD',
             ImpSaldoInsoluto: null,
         });
         const validator = new ImporteSaldoInsolutoRequerido();

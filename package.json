@@ -30,7 +30,7 @@
         "generate": "rimraf build && rimraf dist && yarn build && yarn build:types && yarn docs && rimraf build",
         "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
         "lint": "eslint --ext .js,.ts .",
-        "test": "jest",
+        "test": "jest --maxWorkers 1",
         "docs": "typedoc src --out docs"
     },
     "devDependencies": {

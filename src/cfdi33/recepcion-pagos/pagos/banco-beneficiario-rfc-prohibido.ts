@@ -17,7 +17,7 @@ export class BancoBeneficiarioRfcProhibido extends AbstractPagoValidator {
     public validatePago(pago: CNodeInterface): boolean {
         const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
 
-        if (!(payment.allowReceiverRfc() && pago.attributes().has('RfcEmisorCtaBen'))) {
+        if (!payment.allowReceiverRfc() && pago.attributes().has('RfcEmisorCtaBen')) {
             throw new ValidatePagoException(
                 `FormaDePago: "${pago.attributes().get('FormaDePagoP')}", Rfc: "${pago
                     .attributes()
