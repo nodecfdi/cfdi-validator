@@ -23,6 +23,7 @@ const useValidate33TestCase = (): {
     setupCfdiFile(cfdiFile: string): void;
     getComprobante(): CNodeInterface;
     getHydrater(): Hydrater;
+    getValidator(): ValidatorInterface;
     setUpCertificado(
         comprobanteAttributes?: Record<string, unknown>,
         emisorAttributes?: Record<string, unknown>,
@@ -44,6 +45,7 @@ const useValidate33TestCase = (): {
         setupCfdiFile,
         getHydrater,
         setUpCertificado,
+        getValidator,
     } = useValidateBaseTestCase();
 
     beforeEach(() => {
@@ -74,6 +76,7 @@ const useValidate33TestCase = (): {
         getComprobante,
         getHydrater,
         setUpCertificado,
+        getValidator,
     };
 };
 export { useValidate33TestCase };

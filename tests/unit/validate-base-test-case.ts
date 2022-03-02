@@ -21,6 +21,7 @@ const useValidateBaseTestCase = (): {
     getAsserts: () => Asserts;
     getAssertByCodeOrFail: (code: string) => Assert;
     getHydrater: () => Hydrater;
+    getValidator: () => ValidatorInterface;
     utilAsset(file: string): string;
     newResolver(): XmlResolver;
     setupCfdiFile(cfdiFile: string): void;
@@ -65,6 +66,10 @@ const useValidateBaseTestCase = (): {
 
     const setAsserts = (asserts: Asserts): void => {
         _asserts = asserts;
+    };
+
+    const getValidator = (): ValidatorInterface => {
+        return _validator;
     };
 
     const getComprobante = (): CNodeInterface => {
@@ -145,6 +150,7 @@ const useValidateBaseTestCase = (): {
         setupCfdiFile,
         getHydrater,
         setUpCertificado,
+        getValidator,
     };
 };
 export { useValidateBaseTestCase };
