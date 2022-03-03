@@ -14,7 +14,7 @@ export class NumeroParcialidadRequerido extends AbstractDoctoRelacionadoValidato
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        if (!docto.attributes().has('NumParcialidad') && 'PPD' === docto.attributes().get('MetodoDePagoDR')) {
+        if (!docto.offsetExists('NumParcialidad') && 'PPD' === docto.get('MetodoDePagoDR')) {
             throw this.exception('No hay número de parcialidad y el método de pago es PPD');
         }
         return true;

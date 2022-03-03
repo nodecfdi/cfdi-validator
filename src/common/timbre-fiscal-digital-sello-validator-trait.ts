@@ -34,12 +34,12 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
             return Promise.resolve(undefined);
         }
 
-        if ('1.1' !== tfd.attributes().get('Version')) {
+        if ('1.1' !== tfd.get('Version')) {
             assert.setExplanation('La versión del timbre fiscal digital no es 1.1');
             return Promise.resolve(undefined);
         }
 
-        const validationSellosMatch = comprobante.attributes().get('Sello') !== tfd.attributes().get('SelloCFD');
+        const validationSellosMatch = comprobante.get('Sello') !== tfd.get('SelloCFD');
         if (validationSellosMatch) {
             assert.setStatus(
                 Status.error(),
@@ -48,8 +48,8 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
             return Promise.resolve(undefined);
         }
 
-        const certificadoSAT = tfd.attributes().get('NoCertificadoSAT');
-        if (!SatCertificateNumber.isValidCertificateNumber(certificadoSAT || '')) {
+        const certificadoSAT = tfd.get('NoCertificadoSAT');
+        if (!SatCertificateNumber.isValidCertificateNumber(certificadoSAT)) {
             assert.setStatus(
                 Status.error(),
                 `El atributo NoCertificadoSAT con el valor "${certificadoSAT}" no es valido`
@@ -60,7 +60,7 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
         let certificado: Certificate;
         const resolver = this.getXmlResolver();
         try {
-            const certificadoUrl = new SatCertificateNumber(certificadoSAT || '').remoteUrl();
+            const certificadoUrl = new SatCertificateNumber(certificadoSAT).remoteUrl();
             if (!resolver.hasLocalPath()) {
                 const temporaryFile = openSync({ prefix: '.cer' });
                 const certificadoFile = temporaryFile.path;
@@ -81,9 +81,9 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
 
         const tfdCadenaOrigen = new TfdCadenaDeOrigen(resolver, this.getXsltBuilder());
         // fix al parecer no me regresa el namespace xmlns:xsi
-        tfd.attributes().set('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-        const source = await tfdCadenaOrigen.build(XmlNodeUtils.nodeToXmlString(tfd), tfd.attributes().get('Version'));
-        const signature = Buffer.from(tfd.attributes().get('SelloSAT') || '', 'base64').toString('hex');
+        tfd.set('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        const source = await tfdCadenaOrigen.build(XmlNodeUtils.nodeToXmlString(tfd), tfd.get('Version'));
+        const signature = Buffer.from(tfd.get('SelloSAT'), 'base64').toString('hex');
 
         const verification = certificado.publicKey().verify(source, signature);
         if (!verification) {

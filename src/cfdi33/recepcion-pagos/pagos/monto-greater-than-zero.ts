@@ -11,8 +11,8 @@ export class MontoGreaterThanZero extends AbstractPagoValidator {
     protected title = 'En un pago, el monto debe ser mayor a cero (CRP207)';
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (!this.isGreaterThan(parseFloat(pago.attributes().get('Monto') || '0'), 0)) {
-            throw new ValidatePagoException(`Monto: "${pago.attributes().get('Monto')}"`);
+        if (!this.isGreaterThan(parseFloat(pago.get('Monto') || '0'), 0)) {
+            throw new ValidatePagoException(`Monto: "${pago.get('Monto')}"`);
         }
 
         return true;

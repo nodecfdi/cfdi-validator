@@ -17,8 +17,8 @@ export class CfdiRelacionados extends AbstractRecepcionPagos10 {
             return Promise.resolve();
         }
         assert.setStatus(
-            Status.when('04' === cfdiRelacionados.attributes().get('TipoRelacion')),
-            `Tipo de relación: "${cfdiRelacionados.attributes().get('TipoRelacion')}"`
+            Status.when('04' === cfdiRelacionados.get('TipoRelacion')),
+            `Tipo de relación: "${cfdiRelacionados.get('TipoRelacion')}"`
         );
         return Promise.resolve();
     }

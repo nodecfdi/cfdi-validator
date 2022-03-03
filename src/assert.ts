@@ -20,7 +20,7 @@ export class Assert {
         }
         this._code = code;
         this._title = title;
-        this.setStatus(status ?? Status.none());
+        this.setStatus(status || Status.none());
         this._explanation = explanation;
     }
 

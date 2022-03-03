@@ -14,7 +14,7 @@ export class ImporteSaldoInsolutoRequerido extends AbstractDoctoRelacionadoValid
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        if (!docto.attributes().has('ImpSaldoInsoluto') && 'PPD' === docto.attributes().get('MetodoDePagoDR')) {
+        if (!docto.offsetExists('ImpSaldoInsoluto') && 'PPD' === docto.get('MetodoDePagoDR')) {
             throw this.exception('No hay saldo insoluto y el método de pago es PPD');
         }
         return true;

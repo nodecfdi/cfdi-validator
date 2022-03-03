@@ -84,7 +84,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             'Calculado',
             this._sumasConceptos.getSubTotal(),
             'Comprobante',
-            parseFloat(this._comprobante.attributes().get('SubTotal') || '0')
+            parseFloat(this._comprobante.get('SubTotal') || '0')
         );
     }
 
@@ -94,19 +94,17 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             'Calculado',
             this._sumasConceptos.getDescuento(),
             'Comprobante',
-            parseFloat(this._comprobante.attributes().get('Descuento') || '0')
+            parseFloat(this._comprobante.get('Descuento') || '0')
         );
     }
 
     private validateDescuentoLessOrEqualThanSubTotal(): void {
-        const subtotal = parseFloat(this._comprobante.attributes().get('SubTotal') || '0');
-        const descuento = parseFloat(this._comprobante.attributes().get('Descuento') || '0');
+        const subtotal = parseFloat(this._comprobante.get('SubTotal') || '0');
+        const descuento = parseFloat(this._comprobante.get('Descuento') || '0');
         this._asserts.putStatus(
             'SUMAS12',
             Status.when(subtotal >= descuento),
-            `Subtotal: ${this._comprobante.attributes().get('SubTotal')}, Descuento: ${this._comprobante
-                .attributes()
-                .get('Descuento')}`
+            `Subtotal: ${this._comprobante.get('SubTotal')}, Descuento: ${this._comprobante.get('Descuento')}`
         );
     }
 
@@ -116,7 +114,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             'Calculado',
             this._sumasConceptos.getTotal(),
             'Comprobante',
-            parseFloat(this._comprobante.attributes().get('Total') || '0')
+            parseFloat(this._comprobante.get('Total') || '0')
         );
     }
 
@@ -171,14 +169,14 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
         this._comprobante.searchNodes(...impuestosPath).forEach((extracted) => {
             const newTemp: Record<string, unknown> = {};
             impuestosKeys.forEach((impuestoKey) => {
-                newTemp[impuestoKey] = extracted.attributes().get(impuestoKey);
+                newTemp[impuestoKey] = extracted.get(impuestoKey);
             });
-            newTemp['Importe'] = extracted.attributes().get('Importe');
+            newTemp['Importe'] = extracted.get('Importe');
             newTemp['Encontrado'] = false;
             const newKey = SumasConceptos.impuestoKey(
-                extracted.attributes().get('Impuesto') || '',
-                extracted.attributes().get('TipoFactor') || '',
-                extracted.attributes().get('TasaOCuota') || ''
+                extracted.get('Impuesto'),
+                extracted.get('TipoFactor'),
+                extracted.get('TasaOCuota')
             );
             extractedItems[newKey] = newTemp;
         });

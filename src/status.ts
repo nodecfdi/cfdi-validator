@@ -53,7 +53,7 @@ export class Status {
     }
 
     public static when(condition: boolean, errorStatus: Status | null = null): Status {
-        return condition ? Status.ok() : errorStatus ?? Status.error();
+        return condition ? Status.ok() : errorStatus || Status.error();
     }
 
     public equalsTo(status: Status): boolean {

@@ -46,7 +46,7 @@ export class EmisorRegimenFiscal extends AbstractDiscoverableVersion33 {
         asserts.put(
             'REGFIS01',
             'El régimen fiscal contenga un valor apropiado según el tipo de RFC emisor (CFDI33130 y CFDI33131)',
-            Status.when(validCodes.includes(regimenFiscal)),
+            Status.when(validCodes.includes(regimenFiscal.trim())),
             `Rfc: "${emisorRfc}", Regimen Fiscal: "${regimenFiscal}"`
         );
 

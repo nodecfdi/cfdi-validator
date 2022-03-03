@@ -16,9 +16,9 @@ export class BancoBeneficiarioRfcCorrecto extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (pago.attributes().has('RfcEmisorCtaBen')) {
+        if (pago.offsetExists('RfcEmisorCtaBen')) {
             try {
-                Rfc.checkIsValid(pago.attributes().get('RfcEmisorCtaBen') || '', Rfc.DISALLOW_GENERIC);
+                Rfc.checkIsValid(pago.get('RfcEmisorCtaBen'), Rfc.DISALLOW_GENERIC);
             } catch (e) {
                 throw new ValidatePagoException((e as Error).message);
             }

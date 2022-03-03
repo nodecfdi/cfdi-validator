@@ -8,7 +8,7 @@ export abstract class TimbreFiscalDigitalVersionValidatorTrait {
 
         const tfdVersion = comprobante.searchNode('cfdi:Complemento', 'tfd:TimbreFiscalDigital');
         if (tfdVersion) {
-            asserts.putStatus('TFDVERSION01', Status.when('1.1' === tfdVersion.attributes().get('Version')));
+            asserts.putStatus('TFDVERSION01', Status.when('1.1' === tfdVersion.get('Version')));
         }
 
         return Promise.resolve(undefined);

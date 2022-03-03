@@ -15,20 +15,13 @@ export class TipoCadenaPagoCertificado extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const notEmpty =
-            '' !== pago.attributes().get('TipoCadPago')
-                ? !('' !== pago.attributes().get('CertPago'))
-                : '' !== pago.attributes().get('CertPago');
+        const notEmpty = '' !== pago.get('TipoCadPago') ? !('' !== pago.get('CertPago')) : '' !== pago.get('CertPago');
         if (
             notEmpty ||
-            (pago.attributes().has('TipoCadPago')
-                ? !pago.attributes().has('CertPago')
-                : pago.attributes().has('CertPago'))
+            (pago.offsetExists('TipoCadPago') ? !pago.offsetExists('CertPago') : pago.offsetExists('CertPago'))
         ) {
             throw new ValidatePagoException(
-                `Tipo cadena pago: "${pago.attributes().get('TipoCadPago')}", Certificado: "${pago
-                    .attributes()
-                    .get('CertPago')}"`
+                `Tipo cadena pago: "${pago.get('TipoCadPago')}", Certificado: "${pago.get('CertPago')}"`
             );
         }
 

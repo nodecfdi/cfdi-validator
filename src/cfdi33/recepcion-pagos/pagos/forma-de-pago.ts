@@ -12,13 +12,13 @@ export class FormaDePago extends AbstractPagoValidator {
 
     public validatePago(pago: CNodeInterface): boolean {
         try {
-            const paymentType = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+            const paymentType = this.createPaymentType(pago.get('FormaDePagoP'));
             if ('99' === paymentType.key()) {
                 throw new ValidatePagoException('Cannot be 99');
             }
         } catch (e) {
             throw new ValidatePagoException(
-                `FormaDePagoP: "${pago.attributes().get('FormaDePagoP')}" ${(e as ValidatePagoException).message}`
+                `FormaDePagoP: "${pago.get('FormaDePagoP')}" ${(e as ValidatePagoException).message}`
             );
         }
         return true;

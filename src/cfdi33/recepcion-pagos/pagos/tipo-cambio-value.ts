@@ -14,19 +14,19 @@ export class TipoCambioValue extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (!pago.attributes().has('TipoCambioP')) {
+        if (!pago.offsetExists('TipoCambioP')) {
             return true;
         }
         let reason = '';
-        if (isNaN(Number(pago.attributes().get('TipoCambioP')))) {
+        if (isNaN(Number(pago.get('TipoCambioP')))) {
             reason = 'No es numérico';
-        } else if (CurrencyDecimals.decimalsCount(pago.attributes().get('TipoCambioP') || '') > 6) {
+        } else if (CurrencyDecimals.decimalsCount(pago.get('TipoCambioP')) > 6) {
             reason = 'Tiene más de 6 decimales';
-        } else if (!this.isGreaterThan(parseFloat(pago.attributes().get('TipoCambioP') || '0'), 0.000001)) {
+        } else if (!this.isGreaterThan(parseFloat(pago.get('TipoCambioP') || '0'), 0.000001)) {
             reason = 'No es mayor a "0.000001"';
         }
         if ('' !== reason) {
-            throw new ValidatePagoException(`TipoCambioP: ${pago.attributes().get('TipoCambioP')}, ${reason}`);
+            throw new ValidatePagoException(`TipoCambioP: ${pago.get('TipoCambioP')}, ${reason}`);
         }
 
         return true;

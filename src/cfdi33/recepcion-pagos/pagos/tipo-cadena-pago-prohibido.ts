@@ -14,14 +14,12 @@ export class TipoCadenaPagoProhibido extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        const payment = this.createPaymentType(pago.get('FormaDePagoP'));
 
         // si NO es bancarizado y está establecida la cuenta ordenante existe
-        if (!payment.allowPaymentSignature() && pago.attributes().has('TipoCadPago')) {
+        if (!payment.allowPaymentSignature() && pago.offsetExists('TipoCadPago')) {
             throw new ValidatePagoException(
-                `Forma de pago: "${pago.attributes().get('FormaDePagoP')}", Tipo cadena pago: "${pago
-                    .attributes()
-                    .get('TipoCadPago')}"`
+                `Forma de pago: "${pago.get('FormaDePagoP')}", Tipo cadena pago: "${pago.get('TipoCadPago')}"`
             );
         }
 

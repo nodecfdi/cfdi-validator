@@ -18,10 +18,7 @@ export class UsoCfdi extends AbstractRecepcionPagos10 {
             assert.setStatus(Status.error(), 'No se encontró el nodo Receptor');
             return Promise.resolve();
         }
-        assert.setStatus(
-            Status.when('P01' === receptor.attributes().get('UsoCFDI')),
-            `Uso CFDI: "${receptor.attributes().get('UsoCFDI')}"`
-        );
+        assert.setStatus(Status.when('P01' === receptor.get('UsoCFDI')), `Uso CFDI: "${receptor.get('UsoCFDI')}"`);
         return Promise.resolve();
     }
 

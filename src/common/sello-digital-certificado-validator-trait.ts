@@ -55,7 +55,7 @@ abstract class SelloDigitalCertificadoValidatorTrait {
         this._asserts.putStatus('SELLO01', Status.ok());
 
         // start validations
-        this.validateNoCertificado(comprobante.attributes().get('NoCertificado') || '');
+        this.validateNoCertificado(comprobante.get('NoCertificado'));
         const hasRegistroFiscal =
             comprobante.searchNodes('cfdi:Complemento', 'registrofiscal:CFDIRegistroFiscal').length > 0;
         const noCertificadoSAT = comprobante.searchAttribute(
@@ -63,15 +63,15 @@ abstract class SelloDigitalCertificadoValidatorTrait {
             'tfd:TimbreFiscalDigital',
             'NoCertificadoSAT'
         );
-        if (!hasRegistroFiscal || comprobante.attributes().get('NoCertificado') !== noCertificadoSAT) {
+        if (!hasRegistroFiscal || comprobante.get('NoCertificado') !== noCertificadoSAT) {
             // validate emisor rfc
             this.validateRfc(comprobante.searchAttribute('cfdi:Emisor', 'Rfc'));
             // validate emisor nombre
             this.validateNombre(comprobante.searchAttribute('cfdi:Emisor', 'Nombre'));
         }
-        this.validateFecha(comprobante.attributes().get('Fecha') || '');
+        this.validateFecha(comprobante.get('Fecha'));
 
-        return this.validateSello(comprobante.attributes().get('Sello') || '', version);
+        return this.validateSello(comprobante.get('Sello'), version);
     }
 
     private async buildCadenaOrigen(version: string): Promise<string> {

@@ -30,45 +30,45 @@ export class ComprobantePagos extends AbstractRecepcionPagos10 {
         asserts.put(
             'PAGCOMP02',
             'La forma de pago no debe existir (CRP104)',
-            Status.when(!comprobante.attributes().has('FormaPago'))
+            Status.when(!comprobante.offsetExists('FormaPago'))
         );
         asserts.put(
             'PAGCOMP03',
             'Las condiciones de pago no deben existir (CRP106)',
-            Status.when(!comprobante.attributes().has('CondicionesDePago'))
+            Status.when(!comprobante.offsetExists('CondicionesDePago'))
         );
         asserts.put(
             'PAGCOMP04',
             'El método de pago no debe existir (CRP105)',
-            Status.when(!comprobante.attributes().has('MetodoPago'))
+            Status.when(!comprobante.offsetExists('MetodoPago'))
         );
         asserts.put(
             'PAGCOMP05',
             'La moneda debe ser "XXX" (CRP103)',
-            Status.when('XXX' === comprobante.attributes().get('Moneda')),
-            `Moneda: "${comprobante.attributes().get('Moneda')}"`
+            Status.when('XXX' === comprobante.get('Moneda')),
+            `Moneda: "${comprobante.get('Moneda')}"`
         );
         asserts.put(
             'PAGCOMP06',
             'El tipo de cambio no debe existir (CRP108)',
-            Status.when(!comprobante.attributes().has('TipoCambio'))
+            Status.when(!comprobante.offsetExists('TipoCambio'))
         );
         asserts.put(
             'PAGCOMP07',
             'El descuento no debe existir (CRP107)',
-            Status.when(!comprobante.attributes().has('Descuento'))
+            Status.when(!comprobante.offsetExists('Descuento'))
         );
         asserts.put(
             'PAGCOMP08',
             'El subtotal del documento debe ser cero "0" (CRP102)',
-            Status.when('0' === comprobante.attributes().get('SubTotal')),
-            `SubTotal: "${comprobante.attributes().get('SubTotal')}"`
+            Status.when('0' === comprobante.get('SubTotal')),
+            `SubTotal: "${comprobante.get('SubTotal')}"`
         );
         asserts.put(
             'PAGCOMP09',
             'El total del documento debe ser cero "0" (CRP109)',
-            Status.when('0' === comprobante.attributes().get('Total')),
-            `Total: "${comprobante.attributes().get('Total')}"`
+            Status.when('0' === comprobante.get('Total')),
+            `Total: "${comprobante.get('Total')}"`
         );
         asserts.put(
             'PAGCOMP10',

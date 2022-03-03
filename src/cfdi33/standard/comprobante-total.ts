@@ -16,9 +16,7 @@ export class ComprobanteTotal extends AbstractDiscoverableVersion33 {
         asserts.put(
             'TOTAL01',
             'El atributo Total existe, no está vacío y cumple con el patrón [0-9]+(.[0-9]+)?',
-            Status.when(
-                '' !== comprobante.attributes().get('Total') && !!comprobante.attributes().get('Total')?.match(pattern)
-            )
+            Status.when('' !== comprobante.get('Total') && !!comprobante.get('Total').match(pattern))
         );
         return Promise.resolve(undefined);
     }

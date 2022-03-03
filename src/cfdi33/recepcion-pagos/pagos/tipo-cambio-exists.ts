@@ -15,15 +15,9 @@ export class TipoCambioExists extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (
-            !('MXN' === pago.attributes().get('MonedaP')
-                ? !('' !== pago.attributes().get('TipoCambioP'))
-                : '' !== pago.attributes().get('TipoCambioP'))
-        ) {
+        if (!('MXN' === pago.get('MonedaP') ? !('' !== pago.get('TipoCambioP')) : '' !== pago.get('TipoCambioP'))) {
             throw new ValidatePagoException(
-                `Moneda "${pago.attributes().get('MonedaP')}", Tipo de cambio: "${pago
-                    .attributes()
-                    .get('TipoCambioP')}"`
+                `Moneda "${pago.get('MonedaP')}", Tipo de cambio: "${pago.get('TipoCambioP')}"`
             );
         }
 

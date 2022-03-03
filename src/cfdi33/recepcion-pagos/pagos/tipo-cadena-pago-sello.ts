@@ -16,19 +16,13 @@ export class TipoCadenaPagoSello extends AbstractPagoValidator {
 
     public validatePago(pago: CNodeInterface): boolean {
         const notEmpty =
-            '' !== pago.attributes().get('TipoCadPago')
-                ? !('' !== pago.attributes().get('SelloPago'))
-                : '' !== pago.attributes().get('SelloPago');
+            '' !== pago.get('TipoCadPago') ? !('' !== pago.get('SelloPago')) : '' !== pago.get('SelloPago');
         if (
             notEmpty ||
-            (pago.attributes().has('TipoCadPago')
-                ? !pago.attributes().has('SelloPago')
-                : pago.attributes().has('SelloPago'))
+            (pago.offsetExists('TipoCadPago') ? !pago.offsetExists('SelloPago') : pago.offsetExists('SelloPago'))
         ) {
             throw new ValidatePagoException(
-                `Tipo cadena pago: "${pago.attributes().get('TipoCadPago')}", Sello: "${pago
-                    .attributes()
-                    .get('SelloPago')}"`
+                `Tipo cadena pago: "${pago.get('TipoCadPago')}", Sello: "${pago.get('SelloPago')}"`
             );
         }
 

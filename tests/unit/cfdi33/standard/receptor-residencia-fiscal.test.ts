@@ -45,7 +45,8 @@ describe('ReceptorResidenciaFiscal', () => {
 
             expect(getAsserts().hasErrors()).toBeFalsy();
             assertStatusEqualsCode(Status.ok(), ok);
-        }
+        },
+        5000
     );
 
     test.each([
@@ -89,12 +90,13 @@ describe('ReceptorResidenciaFiscal', () => {
             await runValidate();
 
             assertStatusEqualsCode(Status.error(), error);
-        }
+        },
+        5000
     );
 
     test('valid case without receptor node', async () => {
         await runValidate();
 
         expect(getAsserts().hasErrors()).toBeFalsy();
-    });
+    }, 5000);
 });

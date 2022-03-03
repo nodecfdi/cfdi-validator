@@ -37,9 +37,9 @@ export class ComprobanteTipoCambio extends AbstractDiscoverableVersion33 {
     public validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         this.registerAssets(asserts);
 
-        const existsTipoCambio = comprobante.attributes().has('TipoCambio');
-        const tipoCambio = comprobante.attributes().get('TipoCambio');
-        const moneda = comprobante.attributes().get('Moneda');
+        const existsTipoCambio = comprobante.offsetExists('TipoCambio');
+        const tipoCambio = comprobante.get('TipoCambio');
+        const moneda = comprobante.get('Moneda');
 
         asserts.putStatus('TIPOCAMBIO01', Status.when('' !== moneda));
         if ('' === moneda) {
@@ -59,7 +59,7 @@ export class ComprobanteTipoCambio extends AbstractDiscoverableVersion33 {
 
         if ('MXN' !== moneda && 'XXX' !== moneda) {
             const pattern = /^[0-9]{1,18}(\.[0-9]{1,6})?$/;
-            asserts.putStatus('TIPOCAMBIO04', Status.when(!!tipoCambio?.match(pattern)));
+            asserts.putStatus('TIPOCAMBIO04', Status.when(!!tipoCambio.match(pattern)));
         }
         return Promise.resolve(undefined);
     }

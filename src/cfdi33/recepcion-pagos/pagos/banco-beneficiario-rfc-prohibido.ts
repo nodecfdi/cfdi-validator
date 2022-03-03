@@ -15,13 +15,11 @@ export class BancoBeneficiarioRfcProhibido extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        const payment = this.createPaymentType(pago.get('FormaDePagoP'));
 
-        if (!payment.allowReceiverRfc() && pago.attributes().has('RfcEmisorCtaBen')) {
+        if (!payment.allowReceiverRfc() && pago.offsetExists('RfcEmisorCtaBen')) {
             throw new ValidatePagoException(
-                `FormaDePago: "${pago.attributes().get('FormaDePagoP')}", Rfc: "${pago
-                    .attributes()
-                    .get('RfcEmisorCtaBen')}"`
+                `FormaDePago: "${pago.get('FormaDePagoP')}", Rfc: "${pago.get('RfcEmisorCtaBen')}"`
             );
         }
 

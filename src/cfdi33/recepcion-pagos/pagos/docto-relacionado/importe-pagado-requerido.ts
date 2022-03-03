@@ -14,12 +14,12 @@ export class ImportePagadoRequerido extends AbstractDoctoRelacionadoValidator {
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        if (!docto.attributes().has('ImpPagado')) {
+        if (!docto.offsetExists('ImpPagado')) {
             const documentsCount = this.getPago().searchNodes('pago10:DoctoRelacionado').length;
             if (documentsCount > 1) {
                 throw this.exception('No hay importe pagado y hay más de 1 documento en el pago');
             }
-            if (docto.attributes().has('TipoCambioDR')) {
+            if (docto.offsetExists('TipoCambioDR')) {
                 throw this.exception('No hay importe pagado y existe el tipo de cambio del documento');
             }
         }

@@ -21,9 +21,9 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const pagoAmount = parseFloat(pago.attributes().get('Monto') || '0');
+        const pagoAmount = parseFloat(pago.get('Monto') || '0');
         const bounds = this.calculateDocumentsAmountBounds(pago);
-        const currencyDecimals = CurrencyDecimals.newFromKnownCurrencies(pago.attributes().get('MonedaP') || '', 2);
+        const currencyDecimals = CurrencyDecimals.newFromKnownCurrencies(pago.get('MonedaP'), 2);
         const lower = currencyDecimals.round(bounds['lower']);
         const upper = currencyDecimals.round(bounds['upper']);
         if (pagoAmount < lower || pagoAmount > upper) {
@@ -49,10 +49,10 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
         pago: CNodeInterface
     ): Record<string, number> {
         const amount = this.calculateDocumentAmount(doctoRelacionado, pago);
-        const impPagado = doctoRelacionado.attributes().get('ImpPagado') ?? amount;
-        const tipoCambioDR = doctoRelacionado.attributes().get('TipoCambioDR');
+        const impPagado = doctoRelacionado.get('ImpPagado') || amount;
+        const tipoCambioDR = doctoRelacionado.get('TipoCambioDR');
         let exchangeRate = 1;
-        if ('' !== tipoCambioDR && pago.attributes().get('MonedaP') !== pago.attributes().get('MonedaDR')) {
+        if ('' !== tipoCambioDR && pago.get('MonedaP') !== pago.get('MonedaDR')) {
             exchangeRate = parseFloat(tipoCambioDR || '0');
         }
         const numDecimalsAmount = this.getNumDecimals(`${impPagado}`);

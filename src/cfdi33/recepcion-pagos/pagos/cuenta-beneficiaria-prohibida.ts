@@ -15,14 +15,12 @@ export class CuentaBeneficiariaProhibida extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        const payment = this.createPaymentType(pago.get('FormaDePagoP'));
 
         // si No es bancarizado y está establecida la cuenta beneficiaria
-        if (!payment.allowReceiverAccount() && pago.attributes().has('CtaBeneficiario')) {
+        if (!payment.allowReceiverAccount() && pago.offsetExists('CtaBeneficiario')) {
             throw new ValidatePagoException(
-                `Forma de pago: "${pago.attributes().get('FormaDePagoP')}", Cuenta: "${pago
-                    .attributes()
-                    .get('CtaBeneficiario')}"`
+                `Forma de pago: "${pago.get('FormaDePagoP')}", Cuenta: "${pago.get('CtaBeneficiario')}"`
             );
         }
         return true;

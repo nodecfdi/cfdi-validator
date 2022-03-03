@@ -10,8 +10,8 @@ export class Moneda extends AbstractDoctoRelacionadoValidator {
     protected title = 'En un documento relacionado, la moneda no puede ser "XXX" (CRP217)';
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        if ('XXX' === docto.attributes().get('MonedaDR')) {
-            throw this.exception(`MonedaDR: "${docto.attributes().get('MonedaDR')}"`);
+        if ('XXX' === docto.get('MonedaDR')) {
+            throw this.exception(`MonedaDR: "${docto.get('MonedaDR')}"`);
         }
 
         return true;

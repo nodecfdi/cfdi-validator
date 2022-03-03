@@ -21,7 +21,7 @@ export class ComprobanteFormaPago extends AbstractDiscoverableVersion33 {
 
         const existsComplementoPagos = undefined !== comprobante.searchNode('cfdi:Complemento', 'pago10:Pagos');
         if (existsComplementoPagos) {
-            const existsFormaPago = comprobante.attributes().has('FormaPago');
+            const existsFormaPago = comprobante.offsetExists('FormaPago');
             assert.setStatus(Status.when(!existsFormaPago));
         }
         return Promise.resolve(undefined);

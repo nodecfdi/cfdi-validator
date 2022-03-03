@@ -14,11 +14,11 @@ export class CuentaOrdenanteProhibida extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        const payment = this.createPaymentType(pago.get('FormaDePagoP'));
 
         // si NO es bancarizado y está establecida la cuenta ordenante existe
-        if (!payment.allowSenderAccount() && pago.attributes().has('CtaOrdenante')) {
-            throw new ValidatePagoException(`Bancarizado: Si, Cuenta: "${pago.attributes().get('CtaOrdenante')}"`);
+        if (!payment.allowSenderAccount() && pago.offsetExists('CtaOrdenante')) {
+            throw new ValidatePagoException(`Bancarizado: Si, Cuenta: "${pago.get('CtaOrdenante')}"`);
         }
         return true;
     }

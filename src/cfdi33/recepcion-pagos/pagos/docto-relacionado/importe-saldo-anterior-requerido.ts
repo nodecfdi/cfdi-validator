@@ -14,7 +14,7 @@ export class ImporteSaldoAnteriorRequerido extends AbstractDoctoRelacionadoValid
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        if (!docto.attributes().has('ImpSaldoAnt') && 'PPD' === docto.attributes().get('MetodoDePagoDR')) {
+        if (!docto.offsetExists('ImpSaldoAnt') && 'PPD' === docto.get('MetodoDePagoDR')) {
             throw this.exception('No hay saldo anterior y el método de pago es PPD');
         }
         return true;

@@ -17,14 +17,14 @@ export class TipoCambioValor extends AbstractDoctoRelacionadoValidator {
         const pago = this.getPago();
 
         if (
-            'MXN' === docto.attributes().get('MonedaDR') &&
-            pago.attributes().get('MonedaP') !== docto.attributes().get('MonedaDR') &&
-            '1' !== docto.attributes().get('TipoCambioDR')
+            'MXN' === docto.get('MonedaDR') &&
+            pago.get('MonedaP') !== docto.get('MonedaDR') &&
+            '1' !== docto.get('TipoCambioDR')
         ) {
             throw this.exception(
-                `Moneda pago: "${pago.attributes().get('MonedaP')}", Moneda documento: "${docto
-                    .attributes()
-                    .get('MonedaDR')}", Tipo cambio docto: "${docto.attributes().get('TipoCambioDR')}"`
+                `Moneda pago: "${pago.get('MonedaP')}", Moneda documento: "${docto.get(
+                    'MonedaDR'
+                )}", Tipo cambio docto: "${docto.get('TipoCambioDR')}"`
             );
         }
         return true;

@@ -63,20 +63,20 @@ export class ComprobanteTipoDeComprobante extends AbstractDiscoverableVersion33 
     public validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         this.registerAsserts(asserts);
 
-        const tipoComprobante = comprobante.attributes().get('TipoDeComprobante');
+        const tipoComprobante = comprobante.get('TipoDeComprobante');
 
         if ('T' === tipoComprobante || 'P' === tipoComprobante || 'N' === tipoComprobante) {
-            asserts.putStatus('TIPOCOMP01', Status.when(!comprobante.attributes().has('CondicionesDePago')));
+            asserts.putStatus('TIPOCOMP01', Status.when(!comprobante.offsetExists('CondicionesDePago')));
             asserts.putStatus('TIPOCOMP02', Status.when(!comprobante.searchNode('cfdi:Impuestos')));
         }
 
         if ('T' === tipoComprobante || 'P' === tipoComprobante) {
-            asserts.putStatus('TIPOCOMP03', Status.when(!comprobante.attributes().has('FormaPago')));
-            asserts.putStatus('TIPOCOMP04', Status.when(!comprobante.attributes().has('MetodoPago')));
-            asserts.putStatus('TIPOCOMP05', Status.when(!comprobante.attributes().has('Descuento')));
+            asserts.putStatus('TIPOCOMP03', Status.when(!comprobante.offsetExists('FormaPago')));
+            asserts.putStatus('TIPOCOMP04', Status.when(!comprobante.offsetExists('MetodoPago')));
+            asserts.putStatus('TIPOCOMP05', Status.when(!comprobante.offsetExists('Descuento')));
             asserts.putStatus('TIPOCOMP06', Status.when(this.checkConceptosDoesNotHaveDescuento(comprobante)));
-            asserts.putStatus('TIPOCOMP07', Status.when(this.isZero(comprobante.attributes().get('SubTotal'))));
-            asserts.putStatus('TIPOCOMP08', Status.when(this.isZero(comprobante.attributes().get('Total'))));
+            asserts.putStatus('TIPOCOMP07', Status.when(this.isZero(comprobante.get('SubTotal'))));
+            asserts.putStatus('TIPOCOMP08', Status.when(this.isZero(comprobante.get('Total'))));
         }
 
         if ('I' === tipoComprobante || 'E' === tipoComprobante || 'N' === tipoComprobante) {
@@ -87,7 +87,7 @@ export class ComprobanteTipoDeComprobante extends AbstractDiscoverableVersion33 
         }
 
         if ('N' === tipoComprobante) {
-            asserts.putStatus('TIPOCOMP10', Status.when('MXN' === comprobante.attributes().get('Moneda')));
+            asserts.putStatus('TIPOCOMP10', Status.when('MXN' === comprobante.get('Moneda')));
         }
 
         return Promise.resolve(undefined);
@@ -95,7 +95,7 @@ export class ComprobanteTipoDeComprobante extends AbstractDiscoverableVersion33 
 
     protected checkConceptosDoesNotHaveDescuento(comprobante: CNodeInterface): boolean {
         for (const concepto of comprobante.searchNodes('cfdi:Conceptos', 'cfdi:Concepto')) {
-            if (concepto.attributes().has('Descuento')) {
+            if (concepto.offsetExists('Descuento')) {
                 return false;
             }
         }
@@ -104,7 +104,7 @@ export class ComprobanteTipoDeComprobante extends AbstractDiscoverableVersion33 
 
     protected checkConceptosValorUnitarioIsGreaterThanZero(comprobante: CNodeInterface): boolean {
         for (const concepto of comprobante.searchNodes('cfdi:Conceptos', 'cfdi:Concepto')) {
-            if (!this.isGreaterThanZero(concepto.attributes().get('ValorUnitario'))) {
+            if (!this.isGreaterThanZero(concepto.get('ValorUnitario'))) {
                 return false;
             }
         }

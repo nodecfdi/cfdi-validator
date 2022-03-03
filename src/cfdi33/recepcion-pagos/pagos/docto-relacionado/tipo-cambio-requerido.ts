@@ -15,12 +15,12 @@ export class TipoCambioRequerido extends AbstractDoctoRelacionadoValidator {
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
         const pago = this.getPago();
-        const currencyIsEqual = pago.attributes().get('MonedaP') === docto.attributes().get('MonedaDR');
-        if (!(currencyIsEqual ? !docto.attributes().has('TipoCambioDR') : docto.attributes().has('TipoCambioDR'))) {
+        const currencyIsEqual = pago.get('MonedaP') === docto.get('MonedaDR');
+        if (!(currencyIsEqual ? !docto.offsetExists('TipoCambioDR') : docto.offsetExists('TipoCambioDR'))) {
             throw this.exception(
-                `Moneda pago: "${pago.attributes().get('MonedaP')}", Moneda documento: "${docto
-                    .attributes()
-                    .get('MonedaDR')}", Tipo cambio docto: "${docto.attributes().get('TipoCambioDR')}"`
+                `Moneda pago: "${pago.get('MonedaP')}", Moneda documento: "${docto.get(
+                    'MonedaDR'
+                )}", Tipo cambio docto: "${docto.get('TipoCambioDR')}"`
             );
         }
         return true;

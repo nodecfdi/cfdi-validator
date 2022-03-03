@@ -11,11 +11,9 @@ export class MontoDecimals extends AbstractPagoValidator {
     protected title = 'En un pago, el monto debe tener hasta la cantidad de decimales que soporte la moneda (CRP208)';
 
     public validatePago(pago: CNodeInterface): boolean {
-        const currency = this.createCurrencyDecimals(pago.attributes().get('MonedaP') || '');
-        if (!currency.doesNotExceedDecimals(pago.attributes().get('Monto') || '')) {
-            throw new ValidatePagoException(
-                `Monto: "${pago.attributes().get('Monto')}", MaxDecimals: "${currency.decimals()}"`
-            );
+        const currency = this.createCurrencyDecimals(pago.get('MonedaP'));
+        if (!currency.doesNotExceedDecimals(pago.get('Monto'))) {
+            throw new ValidatePagoException(`Monto: "${pago.get('Monto')}", MaxDecimals: "${currency.decimals()}"`);
         }
 
         return true;

@@ -14,14 +14,14 @@ export class BancoOrdenanteRfcProhibido extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if ('' === pago.attributes().get('FormaDePagoP')) {
+        if ('' === pago.get('FormaDePagoP')) {
             throw new ValidatePagoException('No está establecida la forma de pago');
         }
-        const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        const payment = this.createPaymentType(pago.get('FormaDePagoP'));
 
         // si NO es bancarizado y está establecido el RFC del Emisor de la cuenta ordenante
-        if (!payment.allowSenderRfc() && pago.attributes().has('RfcEmisorCtaOrd')) {
-            throw new ValidatePagoException(`Bancarizado: Si, Rfc: "${pago.attributes().get('RfcEmisorCtaOrd')}"`);
+        if (!payment.allowSenderRfc() && pago.offsetExists('RfcEmisorCtaOrd')) {
+            throw new ValidatePagoException(`Bancarizado: Si, Rfc: "${pago.get('RfcEmisorCtaOrd')}"`);
         }
 
         return true;

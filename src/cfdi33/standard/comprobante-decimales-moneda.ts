@@ -37,7 +37,7 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
         this.registerAsserts();
 
         try {
-            this._currency = CurrencyDecimals.newFromKnownCurrencies(comprobante.attributes().get('Moneda') || '');
+            this._currency = CurrencyDecimals.newFromKnownCurrencies(comprobante.get('Moneda'));
         } catch (e) {
             this._asserts.get('MONDEC01').setExplanation((e as Error).message);
             return Promise.resolve();
@@ -60,17 +60,17 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
         return this._asserts.putStatus(
             code,
             Status.when(this.checkValue(node, attribute, required)),
-            `Valor: "${node
-                .attributes()
-                .get(attribute)}", Moneda: "${this._currency.currency()}" - ${this._currency.decimals()} decimales`
+            `Valor: "${node.get(
+                attribute
+            )}", Moneda: "${this._currency.currency()}" - ${this._currency.decimals()} decimales`
         );
     }
 
     private checkValue(node: CNodeInterface, attribute: string, required: boolean): boolean {
-        if (required && !node.attributes().has(attribute)) {
+        if (required && !node.offsetExists(attribute)) {
             return false;
         }
-        return this._currency.doesNotExceedDecimals(node.attributes().get(attribute) || '');
+        return this._currency.doesNotExceedDecimals(node.get(attribute));
     }
 
     public static createDiscovered(): ValidatorInterface {

@@ -16,9 +16,9 @@ export class BancoOrdenanteRfcCorrecto extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (pago.attributes().has('RfcEmisorCtaOrd')) {
+        if (pago.offsetExists('RfcEmisorCtaOrd')) {
             try {
-                Rfc.checkIsValid(pago.attributes().get('RfcEmisorCtaOrd') || '', Rfc.DISALLOW_GENERIC);
+                Rfc.checkIsValid(pago.get('RfcEmisorCtaOrd'), Rfc.DISALLOW_GENERIC);
             } catch (e) {
                 throw new ValidatePagoException((e as Error).message);
             }

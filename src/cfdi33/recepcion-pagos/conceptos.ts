@@ -57,55 +57,51 @@ export class Conceptos extends AbstractRecepcionPagos10 {
         if (0 !== conceptoCount) {
             throw new Error(`Se esperaba encontrar ningún hijo de concepto, se encontraron ${conceptoCount}`);
         }
-        if (Conceptos.REQUIRED_CLAVEPRODSERV !== concepto.attributes().get('ClaveProdServ')) {
+        if (Conceptos.REQUIRED_CLAVEPRODSERV !== concepto.get('ClaveProdServ')) {
             throw new Error(
                 `La clave del producto o servicio debe ser "${
                     Conceptos.REQUIRED_CLAVEPRODSERV
-                }" y se registró "${concepto.attributes().get('ClaveProdServ')}"`
+                }" y se registró "${concepto.get('ClaveProdServ')}"`
             );
         }
-        if (concepto.attributes().has('NoIdentificacion')) {
+        if (concepto.offsetExists('NoIdentificacion')) {
             throw new Error('No debe existir el número de identificación');
         }
-        if (Conceptos.REQUIRED_CANTIDAD !== concepto.attributes().get('Cantidad')) {
+        if (Conceptos.REQUIRED_CANTIDAD !== concepto.get('Cantidad')) {
             throw new Error(
-                `La cantidad debe ser "${Conceptos.REQUIRED_CANTIDAD}" y se registró ${concepto
-                    .attributes()
-                    .get('Cantidad')}`
+                `La cantidad debe ser "${Conceptos.REQUIRED_CANTIDAD}" y se registró ${concepto.get('Cantidad')}`
             );
         }
-        if (Conceptos.REQUIRED_CLAVEUNIDAD !== concepto.attributes().get('ClaveUnidad')) {
+        if (Conceptos.REQUIRED_CLAVEUNIDAD !== concepto.get('ClaveUnidad')) {
             throw new Error(
-                `La clave de unidad debe ser "${Conceptos.REQUIRED_CLAVEUNIDAD}" y se registró ${concepto
-                    .attributes()
-                    .get('ClaveUnidad')}`
+                `La clave de unidad debe ser "${Conceptos.REQUIRED_CLAVEUNIDAD}" y se registró ${concepto.get(
+                    'ClaveUnidad'
+                )}`
             );
         }
-        if (concepto.attributes().has('Unidad')) {
+        if (concepto.offsetExists('Unidad')) {
             throw new Error('No debe existir la unidad');
         }
-        if (Conceptos.REQUIRED_DESCRIPCION !== concepto.attributes().get('Descripcion')) {
+        if (Conceptos.REQUIRED_DESCRIPCION !== concepto.get('Descripcion')) {
             throw new Error(
-                `La descripción debe ser "${Conceptos.REQUIRED_DESCRIPCION}" y se registró "${concepto
-                    .attributes()
-                    .get('Descripcion')}"`
+                `La descripción debe ser "${Conceptos.REQUIRED_DESCRIPCION}" y se registró "${concepto.get(
+                    'Descripcion'
+                )}"`
             );
         }
-        if (Conceptos.REQUIRED_VALORUNITARIO !== concepto.attributes().get('ValorUnitario')) {
+        if (Conceptos.REQUIRED_VALORUNITARIO !== concepto.get('ValorUnitario')) {
             throw new Error(
-                `El valor unitario debe ser "${Conceptos.REQUIRED_VALORUNITARIO}" y se registró "${concepto
-                    .attributes()
-                    .get('ValorUnitario')}"`
+                `El valor unitario debe ser "${Conceptos.REQUIRED_VALORUNITARIO}" y se registró "${concepto.get(
+                    'ValorUnitario'
+                )}"`
             );
         }
-        if (Conceptos.REQUIRED_IMPORTE !== concepto.attributes().get('Importe')) {
+        if (Conceptos.REQUIRED_IMPORTE !== concepto.get('Importe')) {
             throw new Error(
-                `El importe debe ser "${Conceptos.REQUIRED_IMPORTE}" y se registró "${concepto
-                    .attributes()
-                    .get('Importe')}"`
+                `El importe debe ser "${Conceptos.REQUIRED_IMPORTE}" y se registró "${concepto.get('Importe')}"`
             );
         }
-        if (concepto.attributes().has('Descuento')) {
+        if (concepto.offsetExists('Descuento')) {
             throw new Error('No debe existir descuento');
         }
     }

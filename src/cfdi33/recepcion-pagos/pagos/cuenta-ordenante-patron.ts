@@ -12,13 +12,11 @@ export class CuentaOrdenantePatron extends AbstractPagoValidator {
 
     public validatePago(pago: CNodeInterface): boolean {
         // Solo validar si está establecida la cuenta ordenante
-        if (pago.attributes().has('CtaOrdenante')) {
-            const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        if (pago.offsetExists('CtaOrdenante')) {
+            const payment = this.createPaymentType(pago.get('FormaDePagoP'));
             const pattern = payment.senderAccountPattern();
-            if (!pago.attributes().get('CtaOrdenante')?.match(pattern)) {
-                throw new ValidatePagoException(
-                    `Cuenta: "${pago.attributes().get('CtaOrdenante')}". Patrón "${pattern}"`
-                );
+            if (!pago.get('CtaOrdenante').match(pattern)) {
+                throw new ValidatePagoException(`Cuenta: "${pago.get('CtaOrdenante')}". Patrón "${pattern}"`);
             }
         }
         return true;

@@ -17,13 +17,13 @@ class ImportePagadoValor extends AbstractDoctoRelacionadoValidator {
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
         let value: number;
-        if (docto.attributes().has('ImpPagado')) {
-            value = parseFloat(docto.attributes().get('ImpPagado') || '');
+        if (docto.offsetExists('ImpPagado')) {
+            value = parseFloat(docto.attributes().get('ImpPagado') || '0');
         } else {
             value = this.calculateDocumentAmount(docto, this.getPago());
         }
         if (!this.isGreaterThan(value, 0)) {
-            throw this.exception(`ImpPagado: ${docto.attributes().get('ImpPagado')}, valor: ${value}`);
+            throw this.exception(`ImpPagado: ${docto.get('ImpPagado')}, valor: ${value}`);
         }
         return true;
     }

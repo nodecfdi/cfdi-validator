@@ -40,18 +40,18 @@ export class ReceptorResidenciaFiscal extends AbstractDiscoverableVersion33 {
             receptor = new CNode('cfdi:Receptor');
         }
 
-        if ('XEXX010101000' !== receptor.attributes().get('Rfc')) {
-            asserts.putStatus('RESFISC01', Status.when(!receptor.attributes().has('ResidenciaFiscal')));
+        if ('XEXX010101000' !== receptor.get('Rfc')) {
+            asserts.putStatus('RESFISC01', Status.when(!receptor.offsetExists('ResidenciaFiscal')));
         }
 
-        const existsComercioExterior = !!comprobante.searchNode('cfdi:Complemento', 'cce11:ComercioExterrior');
+        const existsComercioExterior =
+            comprobante.searchNode('cfdi:Complemento', 'cce11:ComercioExterior') !== undefined;
         const isValidResidenciaFiscal =
-            '' !== receptor.attributes().get('ResidenciaFiscal') &&
-            'MEX' !== receptor.attributes().get('ResidenciaFiscal');
+            '' !== receptor.get('ResidenciaFiscal') && 'MEX' !== receptor.get('ResidenciaFiscal');
         if (existsComercioExterior) {
             asserts.putStatus('RESFISC02', Status.when(isValidResidenciaFiscal));
         }
-        if (receptor.attributes().has('NumRegIdTrib')) {
+        if (receptor.offsetExists('NumRegIdTrib')) {
             asserts.putStatus('RESFISC03', Status.when(isValidResidenciaFiscal));
         }
 

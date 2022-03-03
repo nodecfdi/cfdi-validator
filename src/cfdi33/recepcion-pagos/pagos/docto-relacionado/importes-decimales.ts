@@ -14,25 +14,18 @@ export class ImportesDecimales extends AbstractDoctoRelacionadoValidator {
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        const currency = this.createCurrencyDecimals(docto.attributes().get('MonedaDR') || '');
-        if (!currency.doesNotExceedDecimals(docto.attributes().get('ImpSaldoAnt') || '0')) {
-            throw this.exception(
-                `ImpSaldoAnt "${docto.attributes().get('ImpSaldoAnt')}", Decimales: ${currency.decimals()}`
-            );
+        const currency = this.createCurrencyDecimals(docto.get('MonedaDR'));
+        if (!currency.doesNotExceedDecimals(docto.get('ImpSaldoAnt') || '0')) {
+            throw this.exception(`ImpSaldoAnt "${docto.get('ImpSaldoAnt')}", Decimales: ${currency.decimals()}`);
         }
 
-        if (
-            docto.attributes().has('ImpPagado') &&
-            !currency.doesNotExceedDecimals(docto.attributes().get('ImpPagado') || '0')
-        ) {
-            throw this.exception(
-                `ImpPagado: "${docto.attributes().get('ImpPagado')}", Decimales: ${currency.decimals()}`
-            );
+        if (docto.offsetExists('ImpPagado') && !currency.doesNotExceedDecimals(docto.get('ImpPagado') || '0')) {
+            throw this.exception(`ImpPagado: "${docto.get('ImpPagado')}", Decimales: ${currency.decimals()}`);
         }
 
-        if (!currency.doesNotExceedDecimals(docto.attributes().get('ImpSaldoInsoluto') || '0')) {
+        if (!currency.doesNotExceedDecimals(docto.get('ImpSaldoInsoluto') || '0')) {
             throw this.exception(
-                `ImpSaldoInsoluto: "${docto.attributes().get('ImpSaldoInsoluto')}", Decimales: ${currency.decimals()}`
+                `ImpSaldoInsoluto: "${docto.get('ImpSaldoInsoluto')}", Decimales: ${currency.decimals()}`
             );
         }
         return true;

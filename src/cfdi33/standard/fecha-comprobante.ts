@@ -53,8 +53,8 @@ export class FechaComprobante extends AbstractDiscoverableVersion33 {
     }
 
     public validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
-        const fechaSource = comprobante.attributes().get('Fecha');
-        const hasFormat = AssertFechaFormat.assertFormat(asserts, 'FECHA01', 'del comprobante', fechaSource || '');
+        const fechaSource = comprobante.get('Fecha');
+        const hasFormat = AssertFechaFormat.assertFormat(asserts, 'FECHA01', 'del comprobante', fechaSource);
         const assertBetween = asserts.put(
             'FECHA02',
             'La fecha existe en el comprobante y es mayor que 2017-07-01 y menor que el futuro'
@@ -63,8 +63,8 @@ export class FechaComprobante extends AbstractDiscoverableVersion33 {
             return Promise.resolve();
         }
 
-        const exists = comprobante.attributes().has('Fecha');
-        const testDate = '' !== fechaSource ? DateTime.fromISO(fechaSource || '').toMillis() : 0;
+        const exists = comprobante.offsetExists('Fecha');
+        const testDate = '' !== fechaSource ? DateTime.fromISO(fechaSource).toMillis() : 0;
 
         const minimumDate = this.getMinimumDate();
         const maximumDate = this.getMaximumDate();

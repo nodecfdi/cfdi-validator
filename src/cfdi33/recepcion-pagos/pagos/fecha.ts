@@ -12,8 +12,8 @@ export class Fecha extends AbstractPagoValidator {
     protected title = 'En un pago la fecha debe cumplir con el formato específico';
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (!AssertFechaFormat.hasFormat(pago.attributes().get('FechaPago') || '')) {
-            throw new ValidatePagoException(`FechaPago: "${pago.attributes().get('FechaPago')}"`);
+        if (!AssertFechaFormat.hasFormat(pago.get('FechaPago'))) {
+            throw new ValidatePagoException(`FechaPago: "${pago.get('FechaPago')}"`);
         }
 
         return true;

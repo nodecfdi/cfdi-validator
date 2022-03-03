@@ -11,8 +11,8 @@ export class MonedaPago extends AbstractPagoValidator {
     protected title = 'En un pago, la moneda debe existir y no puede ser "XXX" (CRP202)';
 
     public validatePago(pago: CNodeInterface): boolean {
-        if ('' === pago.attributes().get('MonedaP') || 'XXX' === pago.attributes().get('MonedaP')) {
-            throw new ValidatePagoException(`Moneda: "${pago.attributes().get('MonedaP')}"`);
+        if ('' === pago.get('MonedaP') || 'XXX' === pago.get('MonedaP')) {
+            throw new ValidatePagoException(`Moneda: "${pago.get('MonedaP')}"`);
         }
 
         return true;

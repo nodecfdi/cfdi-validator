@@ -21,9 +21,9 @@ class MontoGreaterOrEqualThanSumOfDocuments extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const currency = this.createCurrencyDecimals(pago.attributes().get('MonedaP') || '');
+        const currency = this.createCurrencyDecimals(pago.get('MonedaP'));
         const sumOfDocuments = this.calculateSumOfDocuments(pago, currency);
-        const pagoAmount = parseFloat(pago.attributes().get('Monto') || '0');
+        const pagoAmount = parseFloat(pago.get('Monto') || '0');
         if (this.isGreaterThan(sumOfDocuments, pagoAmount)) {
             throw new ValidatePagoException(`Monto del pago: "${pagoAmount}", Suma de documentos: "${sumOfDocuments}"`);
         }
@@ -35,7 +35,7 @@ class MontoGreaterOrEqualThanSumOfDocuments extends AbstractPagoValidator {
         let sumOfDocuments = 0;
         const documents = pago.searchNodes('pago10:DoctoRelacionado');
         documents.forEach((document) => {
-            let exchangeRate = parseFloat(document.attributes().get('TipoCambioDR') || '0');
+            let exchangeRate = parseFloat(document.get('TipoCambioDR') || '0');
             if (this.isEqual(exchangeRate, 0)) {
                 exchangeRate = 1;
             }

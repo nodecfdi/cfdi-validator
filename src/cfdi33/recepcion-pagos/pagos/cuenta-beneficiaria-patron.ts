@@ -15,13 +15,11 @@ export class CuentaBeneficiariaPatron extends AbstractPagoValidator {
 
     public validatePago(pago: CNodeInterface): boolean {
         // solo validar si está establecida la cuenta ordenante
-        if (pago.attributes().has('CtaBeneficiario')) {
-            const payment = this.createPaymentType(pago.attributes().get('FormaDePagoP') || '');
+        if (pago.offsetExists('CtaBeneficiario')) {
+            const payment = this.createPaymentType(pago.get('FormaDePagoP'));
             const pattern = payment.receiverAccountPattern();
-            if (!pago.attributes().get('CtaBeneficiario')?.match(pattern)) {
-                throw new ValidatePagoException(
-                    `Cuenta: "${pago.attributes().get('CtaOrdenante')}". Patrón: "${pattern}"`
-                );
+            if (!pago.get('CtaBeneficiario').match(pattern)) {
+                throw new ValidatePagoException(`Cuenta: "${pago.get('CtaOrdenante')}". Patrón: "${pattern}"`);
             }
         }
         return true;

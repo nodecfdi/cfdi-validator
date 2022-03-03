@@ -36,8 +36,8 @@ export class ComprobanteImpuestos extends AbstractDiscoverableVersion33 {
             return Promise.resolve();
         }
 
-        const existsTotalTrasladados = nodeImpuestos.attributes().has('TotalImpuestosTrasladados');
-        const existsTotalRetenidos = nodeImpuestos.attributes().has('TotalImpuestosRetenidos');
+        const existsTotalTrasladados = nodeImpuestos.offsetExists('TotalImpuestosTrasladados');
+        const existsTotalRetenidos = nodeImpuestos.offsetExists('TotalImpuestosRetenidos');
 
         asserts.putStatus('COMPIMPUESTOSC01', Status.when(existsTotalTrasladados || existsTotalRetenidos));
 

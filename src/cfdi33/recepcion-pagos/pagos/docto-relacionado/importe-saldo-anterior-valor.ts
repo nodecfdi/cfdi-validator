@@ -10,9 +10,9 @@ export class ImporteSaldoAnteriorValor extends AbstractDoctoRelacionadoValidator
     protected title = 'En un documento relacionado, el importe del saldo anterior debe ser mayor a cero (CRP221)';
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        const value = parseFloat(docto.attributes().get('ImpSaldoAnt') || '0');
+        const value = parseFloat(docto.get('ImpSaldoAnt') || '0');
         if (!this.isGreaterThan(value, 0)) {
-            throw this.exception(`ImpSaldoAnt: ${docto.attributes().get('ImpSaldoAnt')}`);
+            throw this.exception(`ImpSaldoAnt: ${docto.get('ImpSaldoAnt')}`);
         }
 
         return true;

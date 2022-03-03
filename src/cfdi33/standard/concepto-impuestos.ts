@@ -115,21 +115,21 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
     }
 
     protected impuestoHasBaseGreaterThanZero(impuesto: CNodeInterface): boolean {
-        if (!impuesto.attributes().has('Base')) {
+        if (!impuesto.offsetExists('Base')) {
             return false;
         }
-        if (isNaN(Number(impuesto.attributes().get('Base')))) {
+        if (isNaN(Number(impuesto.get('Base')))) {
             return false;
         }
-        return parseFloat(impuesto.attributes().get('Base') || '0') >= 0.000001;
+        return parseFloat(impuesto.get('Base') || '0') >= 0.000001;
     }
 
     protected trasladoHasTipoFactorExento(traslado: CNodeInterface): boolean {
-        if ('Exento' === traslado.attributes().get('TipoFactor')) {
-            if (traslado.attributes().has('TasaOCuota')) {
+        if ('Exento' === traslado.get('TipoFactor')) {
+            if (traslado.offsetExists('TasaOCuota')) {
                 return false;
             }
-            if (traslado.attributes().has('Importe')) {
+            if (traslado.offsetExists('Importe')) {
                 return false;
             }
         }
@@ -137,11 +137,11 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
     }
 
     protected trasladoHasTipoFactorTasaOCuota(traslado: CNodeInterface): boolean {
-        if ('Tasa' === traslado.attributes().get('TipoFactor') || 'Cuota' === traslado.attributes().get('TipoFactor')) {
-            if ('' === traslado.attributes().get('TasaOCuota')) {
+        if ('Tasa' === traslado.get('TipoFactor') || 'Cuota' === traslado.get('TipoFactor')) {
+            if ('' === traslado.get('TasaOCuota')) {
                 return false;
             }
-            if ('' === traslado.attributes().get('Importe')) {
+            if ('' === traslado.get('Importe')) {
                 return false;
             }
         }

@@ -19,7 +19,7 @@ describe('FechaComprobante', () => {
         const validator = new FechaComprobante();
 
         expect(validator.canValidateCfdiVersion('3.3')).toBeTruthy();
-        expect(validator.getMaximumDate()).toBe(expectedMaxTime + 1);
+        expect([0, 1, 2]).toContain(Math.abs(validator.getMaximumDate() - expectedMaxTime));
         expect(validator.getTolerance()).toBe(expectedTolerance);
     });
 

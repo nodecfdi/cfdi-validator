@@ -15,14 +15,9 @@ export class BancoOrdenanteNombreRequerido extends AbstractPagoValidator {
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        if (
-            Rfc.RFC_FOREIGN === pago.attributes().get('RfcEmisorCtaOrd') &&
-            '' === pago.attributes().get('NomBancoOrdExt')
-        ) {
+        if (Rfc.RFC_FOREIGN === pago.get('RfcEmisorCtaOrd') && '' === pago.get('NomBancoOrdExt')) {
             throw new ValidatePagoException(
-                `Rfc: "${pago.attributes().get('RfcEmisorCtaOrd')}", Nombre "${pago
-                    .attributes()
-                    .get('NomBancoOrdExt')}"`
+                `Rfc: "${pago.get('RfcEmisorCtaOrd')}", Nombre "${pago.get('NomBancoOrdExt')}"`
             );
         }
         return true;

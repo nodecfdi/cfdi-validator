@@ -22,7 +22,7 @@ describe('samples', () => {
             expect(existsSync(sampleFile)).toBeTruthy();
 
             const validator = new CfdiValidator33();
-            const asserts = await validator.validateXml(readFileSync(sampleFile, 'binary'));
+            const asserts = await validator.validateXml(readFileSync(sampleFile, 'utf-8'));
 
             // remove this assertions because we are using manipulated cfdi
             asserts.removeByCode('SELLO08');
@@ -43,7 +43,7 @@ describe('samples', () => {
         expect(existsSync(sampleFile)).toBeTruthy();
 
         const validator = new CfdiValidator33();
-        const asserts = await validator.validateXml(readFileSync(sampleFile, 'binary'));
+        const asserts = await validator.validateXml(readFileSync(sampleFile, 'utf-8'));
 
         // remove this tests! we are using manipulated cfdi
         asserts.removeByCode('SELLO08');

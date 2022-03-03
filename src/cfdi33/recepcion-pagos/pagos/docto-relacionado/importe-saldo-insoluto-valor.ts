@@ -20,17 +20,17 @@ class ImporteSaldoInsolutoValor extends AbstractDoctoRelacionadoValidator {
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
-        const value = parseFloat(docto.attributes().get('ImpSaldoInsoluto') || '0');
+        const value = parseFloat(docto.get('ImpSaldoInsoluto') || '0');
         if (!this.isEqual(0, value) && !this.isGreaterThan(value, 0)) {
-            throw this.exception(`ImpSaldoInsoluto: ${docto.attributes().get('ImpSaldoInsoluto')}`);
+            throw this.exception(`ImpSaldoInsoluto: ${docto.get('ImpSaldoInsoluto')}`);
         }
 
         const expected =
-            parseFloat(docto.attributes().get('ImpSaldoAnt') || '0') -
+            parseFloat(docto.get('ImpSaldoAnt') || '0') -
             this.calculateDocumentAmount(docto, this.getPago());
         if (!this.isEqual(value, expected)) {
             throw this.exception(
-                `ImpSaldoInsoluto: ${docto.attributes().get('ImpSaldoInsoluto')}, Esperado: ${expected}`
+                `ImpSaldoInsoluto: ${docto.get('ImpSaldoInsoluto')}, Esperado: ${expected}`
             );
         }
         return true;

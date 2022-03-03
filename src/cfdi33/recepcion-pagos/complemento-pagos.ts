@@ -29,21 +29,21 @@ export class ComplementoPagos extends AbstractDiscoverableVersion33 {
             pagos10 = new CNode('pago10:Pagos'); // avoid accessing a null object
         }
 
-        const isTipoPago = 'P' === comprobante.attributes().get('TipoDeComprobante');
+        const isTipoPago = 'P' === comprobante.get('TipoDeComprobante');
 
         asserts.putStatus(
             'COMPPAG01',
             Status.when(!(isTipoPago ? !pagosExists : pagosExists)),
-            `Tipo de comprobante: "${comprobante.attributes().get('TipoDeComprobante')}", Complemento: "${
+            `Tipo de comprobante: "${comprobante.get('TipoDeComprobante')}", Complemento: "${
                 pagosExists ? 'existe' : 'no existe'
             }"`
         );
 
         if (pagosExists) {
-            asserts.putStatus('COMPPAG02', Status.when('1.0' === pagos10.attributes().get('Version')));
+            asserts.putStatus('COMPPAG02', Status.when('1.0' === pagos10.get('Version')));
         }
         if (isTipoPago) {
-            asserts.putStatus('COMPPAG03', Status.when('3.3' === comprobante.attributes().get('Version')));
+            asserts.putStatus('COMPPAG03', Status.when('3.3' === comprobante.get('Version')));
         }
 
         asserts.putStatus('COMPPAG04', Status.when(!pagos10.searchNode('pago10:Impuestos')));

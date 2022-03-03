@@ -12,10 +12,10 @@ export abstract class AbstractRecepcionPagos10 extends AbstractVersion33 {
         // do not run anything if not found
         const pagos10 = comprobante.searchNode('cfdi:Complemento', 'pago10:Pagos');
         if (
-            '3.3' !== comprobante.attributes().get('Version') ||
-            'P' !== comprobante.attributes().get('TipoDeComprobante') ||
+            '3.3' !== comprobante.get('Version') ||
+            'P' !== comprobante.get('TipoDeComprobante') ||
             !pagos10 ||
-            '1.0' !== pagos10.attributes().get('Version')
+            '1.0' !== pagos10.get('Version')
         ) {
             return Promise.resolve();
         }

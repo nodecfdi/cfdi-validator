@@ -6,8 +6,10 @@ describe('MontoBetweenIntervalSumOfDocuments', () => {
     const { Pago } = Pagos10;
     const providerValidWithRandomAmounts = (): number[][] => {
         const randomValues: number[][] = [];
+        const min = 1;
+        const max = 99999999;
         for (let i = 0; i < 20; i++) {
-            randomValues.push([(Math.random() * (1 - 99999999) + 99999999) / 100]);
+            randomValues.push([(Math.floor(Math.random() * (max - min + 1)) + min) / 100]);
         }
         return randomValues;
     };

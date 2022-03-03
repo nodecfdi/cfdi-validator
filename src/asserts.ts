@@ -27,7 +27,7 @@ export class Asserts {
     ): Assert {
         let assert: Assert;
         if (!this.exists(code)) {
-            assert = new Assert(code, title ?? '', status, explanation ?? '');
+            assert = new Assert(code, title || '', status, explanation || '');
             this.add(assert);
             return assert;
         }
