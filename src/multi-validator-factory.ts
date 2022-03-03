@@ -1,6 +1,7 @@
 import { MultiValidator } from './multi-validator';
 import { XmlFollowSchema } from './xml/xml-follow-schema';
 import { ValidatorInterface } from './contracts/validator-interface';
+import { XmlDefinition } from './cfdi40/xml/xml-definition';
 
 export class MultiValidatorFactory {
     public async newCreated33(): Promise<MultiValidator> {
@@ -39,10 +40,27 @@ export class MultiValidatorFactory {
         ];
         multiValidator.addMulti(...standardFiles);
         multiValidator.addMulti(...recepcionFiles);
-        return multiValidator;
+        return Promise.resolve(multiValidator);
     }
 
     public newReceived33(): Promise<MultiValidator> {
         return this.newCreated33();
+    }
+
+    public async newCreated40(): Promise<MultiValidator> {
+        const multiValidator = new MultiValidator('4.0');
+        multiValidator.add(new XmlFollowSchema());
+        multiValidator.add(new XmlDefinition());
+        const standardFiles = [
+            new (await import('./cfdi40/standard/sello-digital-certificado')).SelloDigitalCertificado(),
+            new (await import('./cfdi40/standard/timbre-fiscal-digital-sello')).TimbreFiscalDigitalSello(),
+            new (await import('./cfdi40/standard/timbre-fiscal-digital-version')).TimbreFiscalDigitalVersion(),
+        ];
+        multiValidator.addMulti(...standardFiles);
+        return Promise.resolve(multiValidator);
+    }
+
+    public newReceived40(): Promise<MultiValidator> {
+        return this.newCreated40();
     }
 }

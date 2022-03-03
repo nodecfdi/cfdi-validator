@@ -1,0 +1,82 @@
+import { useValidateBaseTestCase } from '../validate-base-test-case';
+import { Cfdi40 } from '@nodecfdi/cfdiutils-elements';
+import { Status } from '../../../src/status';
+import { Asserts } from '../../../src/asserts';
+import { ValidatorInterface } from '../../../src/contracts/validator-interface';
+import { Assert } from '../../../src/assert';
+import { XmlResolver } from '@nodecfdi/cfdiutils-core';
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { Hydrater } from '../../../src/hydrater';
+
+const useValidate40TestCase = (): {
+    runValidate: () => Promise<void>;
+    setComprobante: (comprobante: CNodeInterface) => void;
+    getComprobante40: () => Cfdi40.Comprobante;
+    assertStatusEqualsCode: (expected: Status, code: string) => void;
+    assertStatusEqualsAssert: (expected: Status, assert: Assert) => void;
+    assertStatusEqualsStatus: (expected: Status, current: Status) => void;
+    getAsserts: () => Asserts;
+    setValidator: (validator: ValidatorInterface) => void;
+    getAssertByCodeOrFail: (code: string) => Assert;
+    utilAsset(file: string): string;
+    newResolver(): XmlResolver;
+    setupCfdiFile(cfdiFile: string): void;
+    getComprobante(): CNodeInterface;
+    getHydrater(): Hydrater;
+    getValidator(): ValidatorInterface;
+    setUpCertificado(
+        comprobanteAttributes?: Record<string, unknown>,
+        emisorAttributes?: Record<string, unknown>,
+        certificateFile?: string
+    ): void;
+} => {
+    const {
+        runValidate,
+        assertStatusEqualsCode,
+        setComprobante,
+        getComprobante,
+        getAsserts,
+        setValidator,
+        assertStatusEqualsAssert,
+        getAssertByCodeOrFail,
+        assertStatusEqualsStatus,
+        utilAsset,
+        newResolver,
+        setupCfdiFile,
+        getHydrater,
+        setUpCertificado,
+        getValidator,
+    } = useValidateBaseTestCase();
+
+    beforeEach(() => {
+        setComprobante(new Cfdi40.Comprobante());
+    });
+
+    const getComprobante40 = (): Cfdi40.Comprobante => {
+        const comprobante = getComprobante();
+        if (comprobante instanceof Cfdi40.Comprobante) {
+            return comprobante;
+        }
+        throw new Error(`The current comprobante node is not a ${Cfdi40.Comprobante.name}`);
+    };
+
+    return {
+        runValidate,
+        getComprobante40,
+        assertStatusEqualsCode,
+        getAsserts,
+        setValidator,
+        assertStatusEqualsAssert,
+        getAssertByCodeOrFail,
+        assertStatusEqualsStatus,
+        utilAsset,
+        newResolver,
+        setComprobante,
+        setupCfdiFile,
+        getComprobante,
+        getHydrater,
+        setUpCertificado,
+        getValidator,
+    };
+};
+export { useValidate40TestCase };

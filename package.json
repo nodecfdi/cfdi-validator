@@ -58,7 +58,7 @@
     },
     "dependencies": {
         "@nodecfdi/cfdiutils-common": "^1.0.1",
-        "@nodecfdi/cfdiutils-core": "^0.6.0",
+        "@nodecfdi/cfdiutils-core": "^0.6.1",
         "@nodecfdi/cfdiutils-elements": "^1.1.1",
         "@nodecfdi/credentials": "^1.2.0",
         "@nodecfdi/rfc": "^1.2.1",
