@@ -24,14 +24,14 @@ describe('CfdiValidator33', () => {
         const asserts = await validator.validateXml('<not-a-cfdi/>');
 
         expect(asserts.hasErrors()).toBeTruthy();
-    });
+    }, 30000);
 
     test('validate with incorrect node', async () => {
         const validator = new CfdiValidator33();
         const asserts = await validator.validateNode(new CNode('not-a-cfdi'));
 
         expect(asserts.hasErrors()).toBeTruthy();
-    });
+    }, 30000);
 
     test('validate with correct data', async () => {
         const cfdiFile = utilAsset('cfdi33-valid.xml');
@@ -44,7 +44,7 @@ describe('CfdiValidator33', () => {
         // We are not creating the SelloSAT for cfdi33-valid.xml file
         asserts.removeByCode('TFDSELLO01');
         expect(asserts.hasErrors()).toBeFalsy();
-    });
+    }, 30000);
 
     test('validate throws error if empty content', async () => {
         const validator = new CfdiValidator33();
@@ -56,7 +56,7 @@ describe('CfdiValidator33', () => {
             expect(e).toBeInstanceOf(Error);
             expect((e as Error).message).toContain('empty');
         }
-    });
+    }, 30000);
 
     test('validate cfdi33 real', async () => {
         const cfdiFile = utilAsset('cfdi33-real.xml');
@@ -67,5 +67,5 @@ describe('CfdiValidator33', () => {
         const asserts = await validator.validate(sourceRaw, cfdi);
 
         expect(asserts.hasErrors()).toBeFalsy();
-    });
+    }, 30000);
 });
