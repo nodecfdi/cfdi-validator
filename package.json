@@ -30,7 +30,7 @@
         "generate": "rimraf build && rimraf dist && yarn build && yarn build:types && yarn docs && rimraf build",
         "build:types": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
         "lint": "eslint --ext .js,.ts .",
-        "test": "jest",
+        "test": "jest --maxWorkers=1",
         "docs": "typedoc src --out docs"
     },
     "devDependencies": {
@@ -58,7 +58,7 @@
     },
     "dependencies": {
         "@nodecfdi/cfdiutils-common": "^1.0.1",
-        "@nodecfdi/cfdiutils-core": "^0.5.0",
+        "@nodecfdi/cfdiutils-core": "^0.6.0",
         "@nodecfdi/cfdiutils-elements": "^1.1.1",
         "@nodecfdi/credentials": "^1.2.0",
         "@nodecfdi/rfc": "^1.2.1",
