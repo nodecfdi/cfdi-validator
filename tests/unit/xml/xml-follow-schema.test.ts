@@ -22,7 +22,7 @@ describe('XmlFollowSchema', () => {
         await runValidate();
 
         assertStatusEqualsCode(Status.ok(), 'XSD01');
-    });
+    }, 30000);
 
     test('with missing element', async () => {
         const xmlContent = readFileSync(utilAsset('cfdi33-real.xml'), 'binary');
@@ -38,7 +38,7 @@ describe('XmlFollowSchema', () => {
 
         assertStatusEqualsCode(Status.error(), 'XSD01');
         expect(getAsserts().get('XSD01').getExplanation()).toContain('Emisor');
-    });
+    }, 30000);
 
     test('with xsd uri not found', async () => {
         let xmlContent = readFileSync(utilAsset('cfdi33-real.xml'), 'binary');
@@ -51,5 +51,5 @@ describe('XmlFollowSchema', () => {
         await runValidate();
 
         assertStatusEqualsCode(Status.error(), 'XSD01');
-    });
+    }, 30000);
 });

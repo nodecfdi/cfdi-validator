@@ -66,7 +66,7 @@ class XmlFollowSchema
             // this call will change the value, not insert a new entry
             schemas.insert(new Schema(schema.getNamespace(), localPath));
         }
-        return schemas;
+        return Promise.resolve(schemas);
     }
 }
 
