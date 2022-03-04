@@ -19,6 +19,9 @@ jobs:
             -   name: Checkout repo
                 uses: actions/checkout@v2
 
+            -   name: Install libsaxonb-java on linux
+                run: sudo apt-get install -y -qq libsaxonb-java
+
             -   name: Use Node ${{ matrix.node }}
                 uses: actions/setup-node@v2
                 with:
