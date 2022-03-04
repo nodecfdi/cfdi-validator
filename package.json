@@ -4,7 +4,6 @@
     "description": "Librería para contener las validaciones que aplican a un cfdi",
     "main": "dist/cfdi-validator.cjs.js",
     "module": "dist/cfdi-validator.esm.js",
-    "browser": "dist/cfdi-validator.umd.js",
     "types": "dist/cfdi-validator.d.ts",
     "files": [
         "dist"
