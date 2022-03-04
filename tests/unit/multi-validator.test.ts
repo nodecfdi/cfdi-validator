@@ -1,13 +1,9 @@
 import { useTestCase } from '../test-case';
-import { MultiValidator } from '../../src/multi-validator';
+import { Asserts, Hydrater, MultiValidator, Status, ValidatorInterface } from '../../src';
 import { ImplementationValidatorInterface } from '../fake-objects/implementation-validator-interface';
-import { Asserts } from '../../src/asserts';
-import { Status } from '../../src/status';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Hydrater } from '../../src/hydrater';
 import { ImplementationRequireXmlResolverInterface } from '../fake-objects/implementation-require-xml-resolver-interface';
 import { ImplementationRequireXmlStringInterface } from '../fake-objects/implementation-require-xml-string-interface';
-import { ValidatorInterface } from '../../src/contracts/validator-interface';
 
 describe('MultiValidator', () => {
     const { newResolver } = useTestCase();

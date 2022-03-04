@@ -1,10 +1,9 @@
-import { MultiValidatorFactory } from '../../src/multi-validator-factory';
-import { XmlFollowSchema } from '../../src/xml/xml-follow-schema';
+import { MultiValidatorFactory, XmlFollowSchema } from '../../src';
 
 describe('MultiValidatorFactory', () => {
-    test('created33 contains at least xsd validator', async () => {
+    test('created33 contains at least xsd validator', () => {
         const factory = new MultiValidatorFactory();
-        const validator = await factory.newCreated33();
+        const validator = factory.newCreated33();
 
         expect(validator.canValidateCfdiVersion('3.2')).toBeFalsy();
         expect(validator.canValidateCfdiVersion('3.3')).toBeTruthy();
@@ -19,9 +18,9 @@ describe('MultiValidatorFactory', () => {
         expect(hasXmlFollowSchema).toBeTruthy();
     });
 
-    test('received33 contains at least xsd validator', async () => {
+    test('received33 contains at least xsd validator', () => {
         const factory = new MultiValidatorFactory();
-        const validator = await factory.newReceived33();
+        const validator = factory.newReceived33();
 
         expect(validator.canValidateCfdiVersion('3.2')).toBeFalsy();
         expect(validator.canValidateCfdiVersion('3.3')).toBeTruthy();

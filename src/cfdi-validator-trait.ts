@@ -10,7 +10,7 @@ interface CfdiValidatorTrait extends XmlResolverPropertyTrait, XsltBuilderProper
 abstract class CfdiValidatorTrait {
     @use(XsltBuilderPropertyTrait, XmlResolverPropertyTrait) protected this: unknown;
 
-    protected abstract createVersionedMultiValidator(): Promise<MultiValidator>;
+    protected abstract createVersionedMultiValidator(): MultiValidator;
 
     /**
      * Validate and return the asserts from the validation process.
@@ -25,7 +25,7 @@ abstract class CfdiValidatorTrait {
             throw new Error('The xml string to validate cannot be empty');
         }
 
-        const validator = await this.createVersionedMultiValidator();
+        const validator = this.createVersionedMultiValidator();
 
         const hydrater = new Hydrater();
         hydrater.setXmlString(xmlString);
