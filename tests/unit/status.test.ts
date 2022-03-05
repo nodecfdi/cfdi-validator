@@ -1,4 +1,4 @@
-import { Status, StatusLvl } from '../../src/status';
+import { Status, StatusLvl } from '../../src';
 
 describe('Status', () => {
     test('construct with invalid code', () => {

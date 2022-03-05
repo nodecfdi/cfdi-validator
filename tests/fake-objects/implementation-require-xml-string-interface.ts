@@ -1,6 +1,5 @@
-import { RequireXmlStringInterface } from '../../src/contracts/require-xml-string-interface';
+import { RequireXmlStringInterface, XmlStringPropertyTrait } from '../../src';
 import { use } from 'typescript-mix';
-import { XmlStringPropertyTrait } from '../../src/traits/xml-string-property-trait';
 import { ImplementationValidatorInterface } from './implementation-validator-interface';
 
 interface ImplementationRequireXmlStringInterface extends XmlStringPropertyTrait, ImplementationValidatorInterface {}

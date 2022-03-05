@@ -1,5 +1,5 @@
 import { ImplementationValidatorInterface } from './implementation-validator-interface';
-import { RequireXmlResolverInterface } from '../../src/contracts/require-xml-resolver-interface';
+import { RequireXmlResolverInterface } from '../../src';
 import { use } from 'typescript-mix';
 import { XmlResolverPropertyTrait } from '@nodecfdi/cfdiutils-core';
 

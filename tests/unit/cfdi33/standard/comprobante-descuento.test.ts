@@ -1,6 +1,6 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { ComprobanteDescuento } from '../../../../src/cfdi33/standard/comprobante-descuento';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ComprobanteDescuento', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();

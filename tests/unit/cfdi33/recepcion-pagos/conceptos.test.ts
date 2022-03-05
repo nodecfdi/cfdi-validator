@@ -1,7 +1,7 @@
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
 import { Cfdi33 } from '@nodecfdi/cfdiutils-elements';
 import { Conceptos } from '../../../../src/cfdi33/recepcion-pagos/conceptos';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
 
 describe('Conceptos', () => {

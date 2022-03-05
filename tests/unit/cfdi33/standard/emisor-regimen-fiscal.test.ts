@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { EmisorRegimenFiscal } from '../../../../src/cfdi33/standard/emisor-regimen-fiscal';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('EmisorRegimenFiscal', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();

@@ -2,7 +2,7 @@ import { useValidate33TestCase } from '../validate33-test-case';
 import { ReceptorRfc } from '../../../../src/cfdi33/standard/receptor-rfc';
 import { Rfc } from '@nodecfdi/rfc';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ReceptorRfc', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();

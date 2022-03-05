@@ -1,12 +1,8 @@
 import { useValidateBaseTestCase } from '../validate-base-test-case';
 import { Cfdi40 } from '@nodecfdi/cfdiutils-elements';
-import { Status } from '../../../src/status';
-import { Asserts } from '../../../src/asserts';
-import { ValidatorInterface } from '../../../src/contracts/validator-interface';
-import { Assert } from '../../../src/assert';
+import { Asserts, Hydrater, Status, ValidatorInterface, Assert } from '../../../src';
 import { XmlResolver } from '@nodecfdi/cfdiutils-core';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
-import { Hydrater } from '../../../src/hydrater';
 
 const useValidate40TestCase = (): {
     runValidate: () => Promise<void>;

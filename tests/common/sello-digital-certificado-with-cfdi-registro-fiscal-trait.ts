@@ -1,4 +1,4 @@
-import { Status } from '../../src/status';
+import { Status } from '../../src';
 import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Tfd11 } from '@nodecfdi/cfdiutils-elements';
 

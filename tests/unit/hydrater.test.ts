@@ -1,5 +1,5 @@
 import { useTestCase } from '../test-case';
-import { Hydrater } from '../../src/hydrater';
+import { Hydrater } from '../../src';
 import { ImplementationRequireXmlStringInterface } from '../fake-objects/implementation-require-xml-string-interface';
 import { ImplementationRequireXmlResolverInterface } from '../fake-objects/implementation-require-xml-resolver-interface';
 

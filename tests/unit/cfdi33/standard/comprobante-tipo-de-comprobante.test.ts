@@ -1,6 +1,6 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { ComprobanteTipoDeComprobante } from '../../../../src/cfdi33/standard/comprobante-tipo-de-comprobante';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
 
 describe('ComprobanteTipoDeComprobante', () => {

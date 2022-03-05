@@ -1,9 +1,7 @@
 import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Tfd11 } from '@nodecfdi/cfdiutils-elements';
-import { Status } from '../../src/status';
+import { Asserts, Status, ValidatorInterface } from '../../src';
 import { TimbreFiscalDigitalSello } from '../../src/cfdi33/standard/timbre-fiscal-digital-sello';
-import { Asserts } from '../../src/asserts';
-import { ValidatorInterface } from '../../src/contracts/validator-interface';
 
 const useTimbreFiscalDigital11SelloTestTrait = (
     runValidate: () => Promise<void>,

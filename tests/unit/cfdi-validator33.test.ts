@@ -1,4 +1,4 @@
-import { CfdiValidator33 } from '../../src/cfdi-validator33';
+import { CfdiValidator33 } from '../../src';
 import { useTestCase } from '../test-case';
 import { CNode, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { readFileSync } from 'fs';

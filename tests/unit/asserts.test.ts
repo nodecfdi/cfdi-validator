@@ -1,6 +1,4 @@
-import { Asserts } from '../../src/asserts';
-import { Assert } from '../../src/assert';
-import { Status } from '../../src/status';
+import { Status, Asserts, Assert } from '../../src';
 
 describe('Asserts', () => {
     test('constructor', () => {

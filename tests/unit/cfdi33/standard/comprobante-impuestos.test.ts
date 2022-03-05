@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { ComprobanteImpuestos } from '../../../../src/cfdi33/standard/comprobante-impuestos';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ComprobanteImpuestos', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComprobante33 } = useValidate33TestCase();

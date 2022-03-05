@@ -1,6 +1,6 @@
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
 import { ComprobantePagos } from '../../../../src/cfdi33/recepcion-pagos/comprobante-pagos';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
 
 describe('ComprobantePagos', () => {

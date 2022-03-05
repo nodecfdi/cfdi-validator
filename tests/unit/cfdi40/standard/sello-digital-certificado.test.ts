@@ -1,6 +1,6 @@
 import { useValidate40TestCase } from '../validate40-test-case';
 import { SelloDigitalCertificado } from '../../../../src/cfdi40/standard/sello-digital-certificado';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('SelloDigitalCertificado 40', () => {
     const {

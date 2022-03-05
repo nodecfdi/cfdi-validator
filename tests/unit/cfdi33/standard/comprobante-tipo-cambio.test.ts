@@ -1,6 +1,6 @@
 import { ComprobanteTipoCambio } from '../../../../src/cfdi33/standard/comprobante-tipo-cambio';
 import { useValidate33TestCase } from '../validate33-test-case';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ComprobanteTipoCambio', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();

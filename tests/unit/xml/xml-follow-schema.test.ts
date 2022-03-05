@@ -1,8 +1,7 @@
 import { useValidate33TestCase } from '../cfdi33/validate33-test-case';
-import { XmlFollowSchema } from '../../../src/xml/xml-follow-schema';
+import { Status, XmlFollowSchema } from '../../../src';
 import { readFileSync } from 'fs';
 import { XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../src/status';
 
 describe('XmlFollowSchema', () => {
     const { setValidator, newResolver, utilAsset, setComprobante, runValidate, assertStatusEqualsCode, getAsserts } =

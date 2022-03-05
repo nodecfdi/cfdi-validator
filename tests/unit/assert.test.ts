@@ -1,5 +1,4 @@
-import { Assert } from '../../src/assert';
-import { Status, StatusLvl } from '../../src/status';
+import { Status, StatusLvl, Assert } from '../../src';
 
 describe('Assert', () => {
     test('constructor', () => {

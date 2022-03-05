@@ -1,7 +1,6 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { SumasConceptosComprobanteImpuestos } from '../../../../src/cfdi33/standard/sumas-conceptos-comprobante-impuestos';
-import { AbstractDiscoverableVersion33 } from '../../../../src/cfdi33/abstracts/abstract-discoverable-version33';
-import { Status } from '../../../../src/status';
+import { AbstractDiscoverableVersion33, Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
 
 describe('SumasConceptosComprobanteImpuestos', () => {

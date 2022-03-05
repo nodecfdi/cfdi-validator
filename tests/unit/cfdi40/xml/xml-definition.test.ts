@@ -1,6 +1,6 @@
 import { useValidate40TestCase } from '../validate40-test-case';
 import { XmlDefinition } from '../../../../src/cfdi40/xml/xml-definition';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
 
 describe('XmlDefinition', () => {

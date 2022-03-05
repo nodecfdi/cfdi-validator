@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { ReceptorResidenciaFiscal } from '../../../../src/cfdi33/standard/receptor-residencia-fiscal';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ReceptorResidenciaFiscal', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();

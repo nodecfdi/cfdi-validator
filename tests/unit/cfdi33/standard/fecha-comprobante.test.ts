@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { FechaComprobante } from '../../../../src/cfdi33/standard/fecha-comprobante';
 import { DateTime } from 'luxon';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('FechaComprobante', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();

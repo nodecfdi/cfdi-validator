@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { EmisorRfc } from '../../../../src/cfdi33/standard/emisor-rfc';
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 import { Rfc } from '@nodecfdi/rfc';
 
 describe('Emisor Rfc', () => {

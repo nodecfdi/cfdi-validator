@@ -1,6 +1,6 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { SelloDigitalCertificado } from '../../../../src/cfdi33/standard/sello-digital-certificado';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('SelloDigitalCertificado', () => {
     const {

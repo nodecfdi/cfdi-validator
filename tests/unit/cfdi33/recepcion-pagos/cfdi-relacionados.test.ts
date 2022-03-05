@@ -1,6 +1,6 @@
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
 import { CfdiRelacionados } from '../../../../src/cfdi33/recepcion-pagos/cfdi-relacionados';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('CfdiRelacionados', () => {
     const { runValidate, assertStatusEqualsCode, getComprobante33, setValidator } =

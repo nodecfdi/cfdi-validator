@@ -1,7 +1,7 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { ConceptoImpuestos } from '../../../../src/cfdi33/standard/concepto-impuestos';
 import { Cfdi33 } from '@nodecfdi/cfdiutils-elements';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('ConceptoImpuestos', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();

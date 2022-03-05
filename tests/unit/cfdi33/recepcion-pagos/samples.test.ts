@@ -1,7 +1,6 @@
 import { useTestCase } from '../../../test-case';
 import { existsSync, readFileSync } from 'fs';
-import { CfdiValidator33 } from '../../../../src/cfdi-validator33';
-import { Status } from '../../../../src/status';
+import { CfdiValidator33, Status } from '../../../../src';
 
 describe('samples', () => {
     const { utilAsset } = useTestCase();

@@ -1,11 +1,7 @@
-import { ValidatorInterface } from '../../src/contracts/validator-interface';
+import { ValidatorInterface, Assert, Status, Asserts, Hydrater } from '../../src';
 import { CNode, CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
-import { Asserts } from '../../src/asserts';
-import { Assert } from '../../src/assert';
-import { Status } from '../../src/status';
 import { useTestCase } from '../test-case';
 import { SaxonbCliBuilder, XmlResolver } from '@nodecfdi/cfdiutils-core';
-import { Hydrater } from '../../src/hydrater';
 import { readFileSync } from 'fs';
 import { Certificate } from '@nodecfdi/credentials';
 

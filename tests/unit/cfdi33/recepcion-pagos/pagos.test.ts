@@ -1,6 +1,6 @@
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
 import { Pagos } from '../../../../src/cfdi33/recepcion-pagos/pagos';
-import { Status } from '../../../../src/status';
+import { Status } from '../../../../src';
 
 describe('Pagos', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComplemento } = useValidateComplementoPagosTestCase();

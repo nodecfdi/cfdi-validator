@@ -1,8 +1,8 @@
 import { Cfdi33, Pagos10 } from '@nodecfdi/cfdiutils-elements';
 import { useValidate33TestCase } from '../validate33-test-case';
-import { Status } from '../../../../src/status';
-import { ValidatorInterface } from '../../../../src/contracts/validator-interface';
-import { Assert } from '../../../../src/assert';
+import { Status } from '../../../../src';
+import { ValidatorInterface } from '../../../../src';
+import { Assert } from '../../../../src';
 
 const useValidateComplementoPagosTestCase = (): {
     runValidate: () => Promise<void>;
