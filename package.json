@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdi-validator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Librería para contener las validaciones que aplican a un cfdi",
     "main": "dist/cfdi-validator.cjs.js",
     "module": "dist/cfdi-validator.esm.js",
@@ -50,7 +50,7 @@
         "jest": "^27.5.1",
         "mkdirp": "^1.0.4",
         "prettier": "^2.5.1",
-        "rollup": "^2.69.0",
+        "rollup": "^2.69.1",
         "ts-jest": "^27.1.3",
         "ts-node": "^10.6.0",
         "tslib": "^2.3.1",
@@ -63,7 +63,7 @@
         "@nodecfdi/cfdiutils-elements": "^1.1.1",
         "@nodecfdi/credentials": "^1.2.0",
         "@nodecfdi/rfc": "^1.2.1",
-        "@nodecfdi/xml-schema-validator": "^1.0.0",
+        "@nodecfdi/xml-schema-validator": "^1.0.1",
         "luxon": "^2.3.1",
         "temp": "^0.9.4",
         "typescript-mix": "^3.1.3"
