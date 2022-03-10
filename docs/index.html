@@ -67,6 +67,24 @@ de título del aseguramiento podría ser: El CFDI tiene una moneda definida y qu
 <p>Cada Assert cuenta con un código, un título y una explicación de la prueba o aseguramiento y es posible tener acceso a
 ellos.</p>
 
+<a href="#status" id="status" style="color: inherit; text-decoration: none;">
+  <h2>Status</h2>
+</a>
+<p>Esta es una clase de tipo &quot;value object&quot; por lo que solamente se puede crear una instancia con un valor y no modificar.</p>
+<p>Un objeto <code>Status</code> puede contener uno de cuatro valores:</p>
+<ul>
+<li>error: Existe un fallo y se debe considerar que el CFDI es inválido y debería ser rechazado.</li>
+<li>warning: Existe un fallo pero se desconoce si esto es correcto o incorrecto.</li>
+<li>ok: Se realizó la prueba y no se encontró fallo.</li>
+<li>none: Ninguno de los estados anteriores, úsese para describir que la prueba no se realizó.</li>
+</ul>
+
+<a href="#asserts" id="asserts" style="color: inherit; text-decoration: none;">
+  <h2>Asserts</h2>
+</a>
+<p><code>Asserts</code> es una colección de objetos de tipo <code>Assert</code>. Esta colección no permite que existan dos <code>Assert</code> con el mismo
+código, cuando se encuentra que se quiere escribir un <code>Assert</code> con el mismo código entonces el previo es sobreescrito.</p>
+
 <a href="#requisitos" id="requisitos" style="color: inherit; text-decoration: none;">
   <h2>Requisitos</h2>
 </a>

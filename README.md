@@ -94,6 +94,22 @@ de título del aseguramiento podría ser: El CFDI tiene una moneda definida y qu
 Cada Assert cuenta con un código, un título y una explicación de la prueba o aseguramiento y es posible tener acceso a
 ellos.
 
+## Status
+
+Esta es una clase de tipo "value object" por lo que solamente se puede crear una instancia con un valor y no modificar.
+
+Un objeto `Status` puede contener uno de cuatro valores:
+
+- error: Existe un fallo y se debe considerar que el CFDI es inválido y debería ser rechazado.
+- warning: Existe un fallo pero se desconoce si esto es correcto o incorrecto.
+- ok: Se realizó la prueba y no se encontró fallo.
+- none: Ninguno de los estados anteriores, úsese para describir que la prueba no se realizó.
+
+## Asserts
+
+`Asserts` es una colección de objetos de tipo `Assert`. Esta colección no permite que existan dos `Assert` con el mismo
+código, cuando se encuentra que se quiere escribir un `Assert` con el mismo código entonces el previo es sobreescrito.
+
 ## Requisitos
 
 Asegúrate de que tengas los requerimientos para [node-gyp](https://github.com/TooTallNate/node-gyp#installation). No
