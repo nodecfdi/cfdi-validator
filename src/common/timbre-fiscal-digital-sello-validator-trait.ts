@@ -24,7 +24,7 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
         );
 
         if (!this.hasXmlResolver()) {
-            assert.setExplanation('No se puede hacer la validación porque carece de un objeto resolverdor');
+            assert.setExplanation('No se puede hacer la validación porque carece de un objeto resolvedor');
             return Promise.resolve(undefined);
         }
 
