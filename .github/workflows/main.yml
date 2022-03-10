@@ -27,18 +27,10 @@ jobs:
                 with:
                     node-version: ${{ matrix.node }}
 
-            -   name: Setup yarn
-                run: npm install -g yarn
-
-            -   name: SetupCache
-                if: ${{ !env.ACT }}
-                uses: actions/cache@v2
+            -   name: Install deps and build (with cache)
+                uses: bahmutov/npm-install@v1
                 with:
-                    path: '**/node_modules'
-                    key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-            -   name: Install packages
-                run: yarn install --no-lockfile
+                    useLockFile: false
                 env:
                     npm_config_build_from_source: true
 
