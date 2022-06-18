@@ -1,5 +1,11 @@
 # @nodecfdi/cfdi-validator ChangeLog
 
+## 1.0.3
+- Update list of regimenes (check latest updates on 14/06/2022)
+- Update Rule "REGFIS01" with new regimenes
+- Update dependencies
+- Fix test FechaComprobante with expected epsilon difference data
+
 ## 1.0.2
 
 - Update dependencies

@@ -114,4 +114,3 @@ código, cuando se encuentra que se quiere escribir un `Assert` con el mismo có
 
 Asegúrate de que tengas los requerimientos para [node-gyp](https://github.com/TooTallNate/node-gyp#installation). No
 necesitas instalar manualmente node-gyp, viene dentro de las dependencias de node.
-
