@@ -21,23 +21,24 @@ export class EmisorRegimenFiscal extends AbstractDiscoverableVersion33 {
         let validCodes: string[];
 
         if (12 === length) {
-            validCodes = ['601', '603', '609', '620', '623', '624', '628', '607', '610', '622', '626'];
+            validCodes = ['601', '603', '609', '610', '620', '622', '623', '624', '626', '628'];
         } else if (13 === length) {
             validCodes = [
                 '605',
                 '606',
+                '607',
                 '608',
+                '610',
                 '611',
                 '612',
                 '614',
+                '615',
                 '616',
                 '621',
+                '625',
+                '626',
                 '629',
                 '630',
-                '615',
-                '610',
-                '622',
-                '626',
             ];
         } else {
             validCodes = [];
