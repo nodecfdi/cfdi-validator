@@ -1,6 +1,7 @@
 # @nodecfdi/cfdi-validator ChangeLog
 
 ## 1.0.3
+
 - Update list of regimenes (check latest updates on 14/06/2022)
 - Update Rule "REGFIS01" with new regimenes
 - Update dependencies
@@ -19,6 +20,6 @@
 - Update path for test, short path
 - Update docs, on readme for best usage
 
-# 1.0.0
+## 1.0.0
 
 - First release
