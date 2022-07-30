@@ -48,7 +48,7 @@ abstract class SelloDigitalCertificadoValidatorTrait extends Mixin(
         } catch (e) {
             this._asserts.putStatus('SELLO01', Status.error(), (e as Error).message);
 
-            return Promise.resolve(undefined);
+            return Promise.resolve();
         }
         this._certificado = certificado;
         this._asserts.putStatus('SELLO01', Status.ok());
