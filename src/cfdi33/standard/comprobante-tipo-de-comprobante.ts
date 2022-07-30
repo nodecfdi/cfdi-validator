@@ -1,6 +1,5 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -127,9 +126,5 @@ export class ComprobanteTipoDeComprobante extends AbstractDiscoverableVersion33 
         }
 
         return Math.abs(parseFloat(value)) > 0.0000001;
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobanteTipoDeComprobante();
     }
 }

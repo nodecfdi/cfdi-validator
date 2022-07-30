@@ -1,7 +1,6 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { Asserts } from '../../asserts';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Status } from '../../status';
 
 /**
@@ -26,9 +25,5 @@ export class ComprobanteFormaPago extends AbstractDiscoverableVersion33 {
         }
 
         return Promise.resolve();
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobanteFormaPago();
     }
 }

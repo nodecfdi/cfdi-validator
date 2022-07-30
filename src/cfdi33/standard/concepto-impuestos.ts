@@ -1,6 +1,5 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -150,9 +149,5 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
         }
 
         return true;
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ConceptoImpuestos();
     }
 }

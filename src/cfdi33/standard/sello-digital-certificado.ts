@@ -3,7 +3,6 @@ import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverabl
 import { RequireXmlResolverInterface } from '../../contracts/require-xml-resolver-interface';
 import { RequireXsltBuilderInterface } from '../../contracts/require-xslt-builder-interface';
 import { RequireXmlStringInterface } from '../../contracts/require-xml-string-interface';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { SelloDigitalCertificadoValidatorTrait } from '../../common/sello-digital-certificado-validator-trait';
 
 /**
@@ -21,11 +20,6 @@ import { SelloDigitalCertificadoValidatorTrait } from '../../common/sello-digita
  */
 class SelloDigitalCertificado
     extends Mixin(AbstractDiscoverableVersion33, SelloDigitalCertificadoValidatorTrait)
-    implements RequireXmlStringInterface, RequireXmlResolverInterface, RequireXsltBuilderInterface
-{
-    public static createDiscovered(): ValidatorInterface {
-        return new SelloDigitalCertificado();
-    }
-}
+    implements RequireXmlStringInterface, RequireXmlResolverInterface, RequireXsltBuilderInterface {}
 
 export { SelloDigitalCertificado };

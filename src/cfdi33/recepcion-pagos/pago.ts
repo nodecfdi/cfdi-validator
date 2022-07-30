@@ -1,6 +1,5 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { AbstractPagoValidator } from './pagos/abstract-pago-validator';
 import { Fecha } from './pagos/fecha';
@@ -144,9 +143,5 @@ export class Pago extends AbstractRecepcionPagos10 {
             .padStart(2, '0')}`;
         this.setPagoStatus(code, pagoIndex, errorStatus);
         this._asserts.put(doctoCode, assert.getTitle(), errorStatus, explanation);
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new Pago();
     }
 }

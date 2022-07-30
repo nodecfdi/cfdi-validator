@@ -3,7 +3,6 @@ import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverabl
 import { RequireXmlResolverInterface } from '../../contracts/require-xml-resolver-interface';
 import { RequireXsltBuilderInterface } from '../../contracts/require-xslt-builder-interface';
 import { TimbreFiscalDigitalSelloValidatorTrait } from '../../common/timbre-fiscal-digital-sello-validator-trait';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 
 /**
  * TimbreFiscalDigitalSello
@@ -13,11 +12,6 @@ import { ValidatorInterface } from '../../contracts/validator-interface';
  */
 class TimbreFiscalDigitalSello
     extends Mixin(AbstractDiscoverableVersion33, TimbreFiscalDigitalSelloValidatorTrait)
-    implements RequireXmlResolverInterface, RequireXsltBuilderInterface
-{
-    public static createDiscovered(): ValidatorInterface {
-        return new TimbreFiscalDigitalSello();
-    }
-}
+    implements RequireXmlResolverInterface, RequireXsltBuilderInterface {}
 
 export { TimbreFiscalDigitalSello };

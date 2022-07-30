@@ -1,7 +1,6 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { SumasConceptos } from '@nodecfdi/cfdiutils-elements';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -264,9 +263,5 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
         }
 
         return Math.abs(first - second) <= delta;
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new SumasConceptosComprobanteImpuestos();
     }
 }

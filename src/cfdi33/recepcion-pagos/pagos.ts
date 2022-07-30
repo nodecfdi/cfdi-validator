@@ -2,7 +2,6 @@ import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 
 /**
  * Pagos - Válida el contenido del nodo del complemento de pago
@@ -20,9 +19,5 @@ export class Pagos extends AbstractRecepcionPagos10 {
         );
 
         return Promise.resolve();
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new Pagos();
     }
 }

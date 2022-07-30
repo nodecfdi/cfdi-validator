@@ -1,6 +1,5 @@
 import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Assert } from '../../assert';
 import { Status } from '../../status';
@@ -75,9 +74,5 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
         }
 
         return this._currency.doesNotExceedDecimals(node.get(attribute));
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobanteDecimalesMoneda();
     }
 }

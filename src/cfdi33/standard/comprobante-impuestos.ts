@@ -1,6 +1,5 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -48,9 +47,5 @@ export class ComprobanteImpuestos extends AbstractDiscoverableVersion33 {
         asserts.putStatus('COMPIMPUESTOSC03', Status.when(!(hasRetenciones && !existsTotalRetenidos)));
 
         return Promise.resolve();
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobanteImpuestos();
     }
 }

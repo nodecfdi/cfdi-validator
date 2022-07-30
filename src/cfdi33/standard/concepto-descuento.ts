@@ -1,6 +1,5 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -45,9 +44,5 @@ export class ConceptoDescuento extends AbstractDiscoverableVersion33 {
         const importe = parseFloat(concepto.get('Importe') || '0');
 
         return !(descuento >= 0 && descuento <= importe);
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ConceptoDescuento();
     }
 }

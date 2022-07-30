@@ -1,6 +1,5 @@
 import { Mixin } from 'ts-mixer';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { TimbreFiscalDigitalVersionValidatorTrait } from '../../common/timbre-fiscal-digital-version-validator-trait';
 
 /**
@@ -12,10 +11,6 @@ import { TimbreFiscalDigitalVersionValidatorTrait } from '../../common/timbre-fi
 class TimbreFiscalDigitalVersion extends Mixin(
     AbstractDiscoverableVersion33,
     TimbreFiscalDigitalVersionValidatorTrait
-) {
-    public static createDiscovered(): ValidatorInterface {
-        return new TimbreFiscalDigitalVersion();
-    }
-}
+) {}
 
 export { TimbreFiscalDigitalVersion };

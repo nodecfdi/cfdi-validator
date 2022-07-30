@@ -1,7 +1,6 @@
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Rfc } from '@nodecfdi/rfc';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -28,9 +27,5 @@ export class ReceptorRfc extends AbstractDiscoverableVersion33 {
         assert.setStatus(Status.ok());
 
         return Promise.resolve();
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new ReceptorRfc();
     }
 }
