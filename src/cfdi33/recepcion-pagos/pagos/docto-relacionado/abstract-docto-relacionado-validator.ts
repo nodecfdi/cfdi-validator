@@ -1,9 +1,10 @@
-import { AbstractPagoValidator } from '../abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from '../abstract-pago-validator';
 import { ValidateDoctoException } from './validate-docto-exception';
 
 export abstract class AbstractDoctoRelacionadoValidator extends AbstractPagoValidator {
     private _pago!: CNodeInterface;
+
     private _index!: number;
 
     public abstract validateDoctoRelacionado(docto: CNodeInterface): boolean;
@@ -12,6 +13,7 @@ export abstract class AbstractDoctoRelacionadoValidator extends AbstractPagoVali
         const exception = new ValidateDoctoException(message);
         exception.setIndex(this.getIndex());
         exception.setValidatorCode(this.getCode());
+
         return exception;
     }
 

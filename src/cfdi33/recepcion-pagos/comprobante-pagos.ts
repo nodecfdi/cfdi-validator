@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -75,6 +75,7 @@ export class ComprobantePagos extends AbstractRecepcionPagos10 {
             'No se debe registrar el apartado de Impuesto en el CFDI (CRP122)',
             Status.when(0 === comprobante.searchNodes('cfdi:Impuestos').length)
         );
+
         return Promise.resolve();
     }
 

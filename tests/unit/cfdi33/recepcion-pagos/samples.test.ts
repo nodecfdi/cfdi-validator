@@ -1,9 +1,16 @@
-import { useTestCase } from '../../../test-case';
 import { existsSync, readFileSync } from 'fs';
-import { CfdiValidator33, Status } from '../../../../src';
+import { install } from '@nodecfdi/cfdiutils-common';
+import { DOMParser, XMLSerializer, DOMImplementation } from '@xmldom/xmldom';
+import { useTestCase } from '../../../test-case';
+import { CfdiValidator33 } from '~/cfdi-validator33';
+import { Status } from '~/status';
 
 describe('samples', () => {
     const { utilAsset } = useTestCase();
+
+    beforeAll(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
 
     test.each([
         ['sample-factura123.xml'],
@@ -13,7 +20,7 @@ describe('samples', () => {
         ['sample-validacfd02.xml'],
         ['sample-validacfd03.xml'],
         ['sample-validacfd04.xml'],
-        ['sample-validacfd05.xml'],
+        ['sample-validacfd05.xml']
     ])(
         'samples files',
         async (sampleName) => {
@@ -58,7 +65,7 @@ describe('samples', () => {
             'PAGO18-00',
             'PAGO28', // ImporteSaldoInsolutoValor
             'PAGO28-00',
-            'PAGO28-00-00',
+            'PAGO28-00-00'
         ];
         expectedErrorCodes.forEach((expectedErrorCode) => {
             expect(asserts.get(expectedErrorCode).getStatus().equalsTo(Status.error())).toBeTruthy();

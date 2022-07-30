@@ -1,16 +1,16 @@
-import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 
 /**
  * PAGO25: En un documento relacionado, el tipo de cambio debe tener el valor "1"
  *         cuando la moneda del documento es MXN y diferente de la moneda del pago (CRP220)
  */
 export class TipoCambioValor extends AbstractDoctoRelacionadoValidator {
-    protected code = 'PAGO25';
+    protected override code = 'PAGO25';
 
-    protected title = [
+    protected override title = [
         'En un documento relacionado, el tipo de cambio debe tener el valor "1"',
-        ' cuando la moneda del documento es MXN y diferente de la moneda del pago (CRP220)',
+        ' cuando la moneda del documento es MXN y diferente de la moneda del pago (CRP220)'
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
@@ -27,6 +27,7 @@ export class TipoCambioValor extends AbstractDoctoRelacionadoValidator {
                 )}", Tipo cambio docto: "${docto.get('TipoCambioDR')}"`
             );
         }
+
         return true;
     }
 }

@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -17,7 +17,7 @@ export class ConceptoDescuento extends AbstractDiscoverableVersion33 {
             'CONCEPDESC01',
             [
                 'Si existe el atributo descuento en el concepto,',
-                ' entonces debe ser menor o igual que el importe y mayor o igual que cero (CFDI33151)',
+                ' entonces debe ser menor o igual que el importe y mayor o igual que cero (CFDI33151)'
             ].join('')
         );
         let checked = 0;
@@ -34,7 +34,7 @@ export class ConceptoDescuento extends AbstractDiscoverableVersion33 {
             asserts.putStatus('CONCEPDESC01', Status.ok(), `Revisados ${checked} conceptos`);
         }
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     public conceptoHasInvalidDiscount(concepto: CNodeInterface): boolean {
@@ -43,6 +43,7 @@ export class ConceptoDescuento extends AbstractDiscoverableVersion33 {
         }
         const descuento = parseFloat(concepto.get('Descuento') || '0');
         const importe = parseFloat(concepto.get('Importe') || '0');
+
         return !(descuento >= 0 && descuento <= importe);
     }
 

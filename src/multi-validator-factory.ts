@@ -54,7 +54,7 @@ export class MultiValidatorFactory {
             new SelloDigitalCertificado(),
             new SumasConceptosComprobanteImpuestos(),
             new TimbreFiscalDigitalSello(),
-            new TimbreFiscalDigitalVersion(),
+            new TimbreFiscalDigitalVersion()
         ];
         const recepcionFiles: ValidatorInterface[] = [
             new CfdiRelacionados(),
@@ -63,10 +63,11 @@ export class MultiValidatorFactory {
             new Conceptos(),
             new Pago(),
             new Pagos(),
-            new UsoCfdi(),
+            new UsoCfdi()
         ];
         multiValidator.addMulti(...standardFiles);
         multiValidator.addMulti(...recepcionFiles);
+
         return multiValidator;
     }
 
@@ -81,9 +82,10 @@ export class MultiValidatorFactory {
         const standardFiles = [
             new SelloDigitalCertificado40(),
             new TimbreFiscalDigitalSello40(),
-            new TimbreFiscalDigitalVersion40(),
+            new TimbreFiscalDigitalVersion40()
         ];
         multiValidator.addMulti(...standardFiles);
+
         return multiValidator;
     }
 

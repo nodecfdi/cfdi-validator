@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -20,6 +20,7 @@ export class CfdiRelacionados extends AbstractRecepcionPagos10 {
             Status.when('04' === cfdiRelacionados.get('TipoRelacion')),
             `Tipo de relación: "${cfdiRelacionados.get('TipoRelacion')}"`
         );
+
         return Promise.resolve();
     }
 

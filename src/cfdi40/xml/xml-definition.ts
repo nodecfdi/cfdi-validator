@@ -1,5 +1,5 @@
-import { AbstractDiscoverableVersion40 } from '../abstracts/abstract-discoverable-version40';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion40 } from '../abstracts/abstract-discoverable-version40';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 import { ValidatorInterface } from '../../contracts/validator-interface';
@@ -35,7 +35,7 @@ export class XmlDefinition extends AbstractDiscoverableVersion40 {
             `Version: ${comprobante.get('Version')}`
         );
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

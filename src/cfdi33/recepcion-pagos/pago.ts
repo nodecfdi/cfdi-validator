@@ -1,3 +1,4 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
@@ -25,7 +26,6 @@ import { TipoCadenaPagoCadena } from './pagos/tipo-cadena-pago-cadena';
 import { TipoCadenaPagoSello } from './pagos/tipo-cadena-pago-sello';
 import { DoctoRelacionado } from './pagos/docto-relacionado';
 import { MontoGreaterOrEqualThanSumOfDocuments } from './pagos/monto-greater-or-equal-than-sum-of-documents';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { ValidateDoctoException } from './pagos/docto-relacionado/validate-docto-exception';
 import { ValidatePagoException } from './pagos/validate-pago-exception';
 import { Status } from '../../status';
@@ -69,7 +69,7 @@ export class Pago extends AbstractRecepcionPagos10 {
             new TipoCadenaPagoCadena(), // PAGO21
             new TipoCadenaPagoSello(), // PAGO22
             new DoctoRelacionado(), // PAGO23 ... PAGO29
-            new MontoGreaterOrEqualThanSumOfDocuments(), // PAGO30
+            new MontoGreaterOrEqualThanSumOfDocuments() // PAGO30
         ];
     }
 
@@ -77,6 +77,7 @@ export class Pago extends AbstractRecepcionPagos10 {
         if (!this._validators) {
             this._validators = this.createValidators();
         }
+
         return this._validators;
     }
 
@@ -115,6 +116,7 @@ export class Pago extends AbstractRecepcionPagos10 {
                 }
             });
         });
+
         return Promise.resolve();
     }
 

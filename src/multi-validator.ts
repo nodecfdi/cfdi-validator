@@ -1,10 +1,11 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { ValidatorInterface } from './contracts/validator-interface';
 import { Asserts } from './asserts';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Hydrater } from './hydrater';
 
 export class MultiValidator implements ValidatorInterface {
     private _validators: ValidatorInterface[] = [];
+
     private readonly _version: string;
 
     public get length(): number {
@@ -31,6 +32,7 @@ export class MultiValidator implements ValidatorInterface {
                 break;
             }
         }
+
         return Promise.resolve();
     }
 

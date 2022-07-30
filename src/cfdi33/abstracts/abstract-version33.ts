@@ -1,5 +1,5 @@
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 
 export abstract class AbstractVersion33 implements ValidatorInterface {

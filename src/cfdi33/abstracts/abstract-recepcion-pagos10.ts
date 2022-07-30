@@ -1,5 +1,5 @@
-import { AbstractVersion33 } from './abstract-version33';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractVersion33 } from './abstract-version33';
 import { Asserts } from '../../asserts';
 
 /**
@@ -19,6 +19,7 @@ export abstract class AbstractRecepcionPagos10 extends AbstractVersion33 {
         ) {
             return Promise.resolve();
         }
+
         return this.validateRecepcionPagos(comprobante, asserts);
     }
 }

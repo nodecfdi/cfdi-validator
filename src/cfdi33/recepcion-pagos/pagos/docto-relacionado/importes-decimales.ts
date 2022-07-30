@@ -1,16 +1,16 @@
-import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 
 /**
  * PAGO29: En un documento relacionado, los importes de importe pagado, saldo anterior y saldo insoluto
  *         deben tener hasta la cantidad de decimales que soporte la moneda (CRP222, CRP224, CRP225)
  */
 export class ImportesDecimales extends AbstractDoctoRelacionadoValidator {
-    protected code = 'PAGO29';
+    protected override code = 'PAGO29';
 
-    protected title = [
+    protected override title = [
         'En un documento relacionado, los importes de importe pagado, saldo anterior y saldo insoluto',
-        ' deben tener hasta la cantidad de decimales que soporte la moneda (CRP222, CRP224, CRP225)',
+        ' deben tener hasta la cantidad de decimales que soporte la moneda (CRP222, CRP224, CRP225)'
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
@@ -28,6 +28,7 @@ export class ImportesDecimales extends AbstractDoctoRelacionadoValidator {
                 `ImpSaldoInsoluto: "${docto.get('ImpSaldoInsoluto')}", Decimales: ${currency.decimals()}`
             );
         }
+
         return true;
     }
 }

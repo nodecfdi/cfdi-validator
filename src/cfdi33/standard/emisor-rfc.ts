@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Rfc } from '@nodecfdi/rfc';
 import { Status } from '../../status';
@@ -23,11 +23,12 @@ export class EmisorRfc extends AbstractDiscoverableVersion33 {
             Rfc.checkIsValid(emisorRfc, Rfc.DISALLOW_FOREIGN | Rfc.DISALLOW_GENERIC);
         } catch (e) {
             assert.setStatus(Status.error(), `Rfc: "${emisorRfc}". ${(e as Error).message}`);
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
         assert.setStatus(Status.ok());
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

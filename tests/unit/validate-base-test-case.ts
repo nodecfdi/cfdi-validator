@@ -1,9 +1,10 @@
-import { ValidatorInterface, Assert, Status, Asserts, Hydrater } from '../../src';
+/* eslint-disable @typescript-eslint/indent */
 import { CNode, CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
-import { useTestCase } from '../test-case';
 import { SaxonbCliBuilder, XmlResolver } from '@nodecfdi/cfdiutils-core';
 import { readFileSync } from 'fs';
 import { Certificate } from '@nodecfdi/credentials';
+import { ValidatorInterface, Assert, Status, Asserts, Hydrater } from '~/index';
+import { useTestCase } from '../test-case';
 
 const useValidateBaseTestCase = (): {
     runValidate: () => Promise<void>;
@@ -88,6 +89,7 @@ const useValidateBaseTestCase = (): {
         if (!_asserts.exists(code)) {
             throw new Error(`Did not receive actual status for code '${code}', it may not exists`);
         }
+
         return _asserts.get(code);
     };
 
@@ -96,7 +98,7 @@ const useValidateBaseTestCase = (): {
         expect(expected.equalsTo(actual)).toBeTruthy();
     };
 
-    const assertStatusEqualsStatus = (expected: Status, current: Status): void => {
+    const assertStatusEqualsStatus = (_expected: Status, current: Status): void => {
         expect(current).toStrictEqual(current);
     };
 
@@ -115,7 +117,7 @@ const useValidateBaseTestCase = (): {
         _comprobante.addAttributes({
             Certificado: certificado.pemAsOneLine(),
             NoCertificado: certificado.serialNumber().bytes(),
-            ...comprobanteAttributes,
+            ...comprobanteAttributes
         });
 
         let emisor = _comprobante.searchNode('cfdi:Emisor');
@@ -126,7 +128,7 @@ const useValidateBaseTestCase = (): {
         emisor.addAttributes({
             Nombre: certificado.legalName(),
             Rfc: certificado.rfc(),
-            ...emisorAttributes,
+            ...emisorAttributes
         });
     };
 
@@ -146,7 +148,7 @@ const useValidateBaseTestCase = (): {
         setupCfdiFile,
         getHydrater,
         setUpCertificado,
-        getValidator,
+        getValidator
     };
 };
 export { useValidateBaseTestCase };

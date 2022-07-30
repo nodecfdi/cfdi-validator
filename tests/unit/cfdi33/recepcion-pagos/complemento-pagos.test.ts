@@ -1,8 +1,9 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ComplementoPagos } from '../../../../src/cfdi33/recepcion-pagos/complemento-pagos';
+/* eslint-disable jest/expect-expect */
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ComplementoPagos } from '~/cfdi33/recepcion-pagos/complemento-pagos';
+import { Status } from '~/status';
 
 describe('ComplementoPagos', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();

@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteDescuento } from '../../../../src/cfdi33/standard/comprobante-descuento';
-import { Status } from '../../../../src';
+import { ComprobanteDescuento } from '~/cfdi33/standard/comprobante-descuento';
+import { Status } from '~/status';
 
 describe('ComprobanteDescuento', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -14,11 +15,11 @@ describe('ComprobanteDescuento', () => {
         ['1', '1'],
         ['0.000000', '0.000001'],
         ['0', '0'],
-        ['1.00', '1.01'],
+        ['1.00', '1.01']
     ])('valid cases', async (descuento, subtotal) => {
         getComprobante33().addAttributes({
             Descuento: descuento,
-            SubTotal: subtotal,
+            SubTotal: subtotal
         });
 
         await runValidate();
@@ -32,11 +33,11 @@ describe('ComprobanteDescuento', () => {
         ['5', null],
         ['0.000001', '0.000000'],
         ['-1', '5'],
-        ['-5', '5'],
+        ['-5', '5']
     ])('invalid cases', async (descuento: string, subtotal: string | null) => {
         getComprobante33().addAttributes({
             Descuento: descuento,
-            SubTotal: subtotal,
+            SubTotal: subtotal
         });
 
         await runValidate();
@@ -46,7 +47,7 @@ describe('ComprobanteDescuento', () => {
 
     test('node case', async () => {
         getComprobante33().addAttributes({
-            Descuento: null,
+            Descuento: null
         });
 
         await runValidate();

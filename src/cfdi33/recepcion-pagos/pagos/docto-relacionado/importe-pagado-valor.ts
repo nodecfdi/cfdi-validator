@@ -1,19 +1,16 @@
-import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
-import { use } from 'typescript-mix';
-import { CalculateDocumentAmountTrait } from '../../helpers/calculate-document-amount-trait';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { Mixin } from 'ts-mixer';
 
-interface ImportePagadoValor extends AbstractDoctoRelacionadoValidator, CalculateDocumentAmountTrait {}
+import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
+import { CalculateDocumentAmountTrait } from '../../helpers/calculate-document-amount-trait';
 
 /**
  * PAGO27: En un documento relacionado, el importe pagado debes ser mayor a cero (CRP223)
  */
-class ImportePagadoValor extends AbstractDoctoRelacionadoValidator {
-    @use(CalculateDocumentAmountTrait) private this: unknown;
+class ImportePagadoValor extends Mixin(AbstractDoctoRelacionadoValidator, CalculateDocumentAmountTrait) {
+    protected override code = 'PAGO27';
 
-    protected code = 'PAGO27';
-
-    protected title = 'En un documento relacionado, el importe pagado debe ser mayor a cero (CRP223)';
+    protected override title = 'En un documento relacionado, el importe pagado debe ser mayor a cero (CRP223)';
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
         let value: number;
@@ -25,6 +22,7 @@ class ImportePagadoValor extends AbstractDoctoRelacionadoValidator {
         if (!this.isGreaterThan(value, 0)) {
             throw this.exception(`ImpPagado: ${docto.get('ImpPagado')}, valor: ${value}`);
         }
+
         return true;
     }
 }

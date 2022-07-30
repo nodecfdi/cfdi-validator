@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -12,13 +12,14 @@ import { Status } from '../../status';
  */
 export class ComprobanteTotal extends AbstractDiscoverableVersion33 {
     public validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
-        const pattern = /^[0-9]+(\.[0-9]+)?$/;
+        const pattern = /^\d+(\.\d+)?$/;
         asserts.put(
             'TOTAL01',
             'El atributo Total existe, no está vacío y cumple con el patrón [0-9]+(.[0-9]+)?',
             Status.when('' !== comprobante.get('Total') && !!comprobante.get('Total').match(pattern))
         );
-        return Promise.resolve(undefined);
+
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

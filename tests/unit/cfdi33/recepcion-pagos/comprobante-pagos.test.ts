@@ -1,7 +1,8 @@
-import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
-import { ComprobantePagos } from '../../../../src/cfdi33/recepcion-pagos/comprobante-pagos';
-import { Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
+import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
+import { ComprobantePagos } from '~/cfdi33/recepcion-pagos/comprobante-pagos';
+import { Status } from '~/status';
 
 describe('ComprobantePagos', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } =
@@ -15,7 +16,7 @@ describe('ComprobantePagos', () => {
         comprobante.addAttributes({
             Moneda: 'XXX',
             SubTotal: '0',
-            Total: '0',
+            Total: '0'
         });
     });
 
@@ -36,7 +37,7 @@ describe('ComprobantePagos', () => {
 
     test('error with forma pago', async () => {
         getComprobante33().addAttributes({
-            FormaPago: '', // exists, even empty
+            FormaPago: '' // exists, even empty
         });
         await runValidate();
 
@@ -45,7 +46,7 @@ describe('ComprobantePagos', () => {
 
     test('error with condiciones de pago', async () => {
         getComprobante33().addAttributes({
-            CondicionesDePago: '', // exists, even empty
+            CondicionesDePago: '' // exists, even empty
         });
         await runValidate();
 
@@ -54,7 +55,7 @@ describe('ComprobantePagos', () => {
 
     test('error with metodo pago', async () => {
         getComprobante33().addAttributes({
-            MetodoPago: '', // exists, even empty
+            MetodoPago: '' // exists, even empty
         });
         await runValidate();
 
@@ -63,7 +64,7 @@ describe('ComprobantePagos', () => {
 
     test.each([[''], [null], ['MXN']])('error with moneda not XXX', async (input: string | null) => {
         getComprobante33().addAttributes({
-            Moneda: input,
+            Moneda: input
         });
         await runValidate();
 
@@ -72,7 +73,7 @@ describe('ComprobantePagos', () => {
 
     test('error with tipo cambio', async () => {
         getComprobante33().addAttributes({
-            TipoCambio: '', // exists, even empty
+            TipoCambio: '' // exists, even empty
         });
         await runValidate();
 
@@ -81,7 +82,7 @@ describe('ComprobantePagos', () => {
 
     test('error with descuento', async () => {
         getComprobante33().addAttributes({
-            Descuento: '', // exists, even empty
+            Descuento: '' // exists, even empty
         });
         await runValidate();
 
@@ -90,7 +91,7 @@ describe('ComprobantePagos', () => {
 
     test.each([[''], [null], ['0.0']])('error with subtotal not zero', async (input: string | null) => {
         getComprobante33().addAttributes({
-            SubTotal: input,
+            SubTotal: input
         });
         await runValidate();
 
@@ -99,7 +100,7 @@ describe('ComprobantePagos', () => {
 
     test.each([[''], [null], ['0.0']])('error with total not zero', async (input: string | null) => {
         getComprobante33().addAttributes({
-            Total: input,
+            Total: input
         });
         await runValidate();
 

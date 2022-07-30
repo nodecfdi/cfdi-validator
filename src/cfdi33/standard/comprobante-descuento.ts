@@ -1,5 +1,5 @@
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { Asserts } from '../../asserts';
 import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Status } from '../../status';
@@ -17,7 +17,7 @@ export class ComprobanteDescuento extends AbstractDiscoverableVersion33 {
             'DESCUENTO01',
             [
                 'Si existe el atributo descuento,',
-                ' entonces debe ser menor o igual que el subtotal y mayor o igual que cero (CFDI33109)',
+                ' entonces debe ser menor o igual que el subtotal y mayor o igual que cero (CFDI33109)'
             ].join('')
         );
         if (comprobante.offsetExists('Descuento')) {
@@ -29,7 +29,8 @@ export class ComprobanteDescuento extends AbstractDiscoverableVersion33 {
                 `Descuento: "${comprobante.get('Descuento')}", SubTotal: "${comprobante.get('SubTotal')}"`
             );
         }
-        return Promise.resolve(undefined);
+
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteImpuestos } from '../../../../src/cfdi33/standard/comprobante-impuestos';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ComprobanteImpuestos } from '~/cfdi33/standard/comprobante-impuestos';
+import { Status } from '~/status';
 
 describe('ComprobanteImpuestos', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComprobante33 } = useValidate33TestCase();
@@ -13,7 +14,7 @@ describe('ComprobanteImpuestos', () => {
     test.each([
         [true, false],
         [false, true],
-        [true, true],
+        [true, true]
     ])('valid impuestos', async (putTraslados, putRetenciones) => {
         const nodeImpuestos = new CNode('cfdi:Impuestos');
         if (putTraslados) {
@@ -54,7 +55,7 @@ describe('ComprobanteImpuestos', () => {
     test('valid total traslados without traslados nodes', async () => {
         getComprobante33().addChild(
             new CNode('cfdi:Impuestos', {
-                TotalImpuestosTrasladados: '',
+                TotalImpuestosTrasladados: ''
             })
         );
 
@@ -76,7 +77,7 @@ describe('ComprobanteImpuestos', () => {
     test('valid total traslados without retenciones nodes', async () => {
         getComprobante33().addChild(
             new CNode('cfdi:Impuestos', {
-                TotalImpuestosRetenidos: '',
+                TotalImpuestosRetenidos: ''
             })
         );
 

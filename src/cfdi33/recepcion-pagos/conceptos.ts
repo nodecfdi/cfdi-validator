@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -31,9 +31,11 @@ export class Conceptos extends AbstractRecepcionPagos10 {
             this.checkConceptos(comprobante);
         } catch (e) {
             assert.setStatus(Status.error(), (e as Error).message);
+
             return Promise.resolve();
         }
         assert.setStatus(Status.ok());
+
         return Promise.resolve();
     }
 

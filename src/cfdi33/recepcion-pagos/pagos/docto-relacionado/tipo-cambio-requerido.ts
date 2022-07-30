@@ -1,16 +1,16 @@
-import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 
 /**
  * PAGO24: En un documento relacionado, el tipo de cambio debe existir cuando la moneda del pago
  *         es diferente a la moneda del documento y viceversa (CRP218, CRP219)
  */
 export class TipoCambioRequerido extends AbstractDoctoRelacionadoValidator {
-    protected code = 'PAGO24';
+    protected override code = 'PAGO24';
 
-    protected title = [
+    protected override title = [
         'En un documento relacionado, el tipo de cambio debe existir cuando la moneda del pago',
-        ' es diferente a la moneda del documento y viceversa (CRP218, CRP219)',
+        ' es diferente a la moneda del documento y viceversa (CRP218, CRP219)'
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
@@ -23,6 +23,7 @@ export class TipoCambioRequerido extends AbstractDoctoRelacionadoValidator {
                 )}", Tipo cambio docto: "${docto.get('TipoCambioDR')}"`
             );
         }
+
         return true;
     }
 }

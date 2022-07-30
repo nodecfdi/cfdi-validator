@@ -1,5 +1,5 @@
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
-import { Pago } from '../../../../src/cfdi33/recepcion-pagos/pago';
+import { Pago } from '~/cfdi33/recepcion-pagos/pago';
 
 describe('Pago', () => {
     const { setValidator } = useValidateComplementoPagosTestCase();

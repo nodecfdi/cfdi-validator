@@ -3,7 +3,7 @@ import {
     XmlResolver,
     XmlResolverPropertyInterface,
     XsltBuilderInterface,
-    XsltBuilderPropertyInterface,
+    XsltBuilderPropertyInterface
 } from '@nodecfdi/cfdiutils-core';
 import { CfdiValidatorTrait } from './cfdi-validator-trait';
 import { MultiValidator } from './multi-validator';
@@ -14,8 +14,8 @@ class CfdiValidator33 extends CfdiValidatorTrait implements XmlResolverPropertyI
      * This class uses a default XmlResolver if not provided or null.
      * If you really want to remove the XmlResolver then use the method setXmlResolver after construction.
      *
-     * @param xmlResolver
-     * @param xsltBuilder
+     * @param xmlResolver -
+     * @param xsltBuilder -
      */
     constructor(xmlResolver: XmlResolver | null = null, xsltBuilder: XsltBuilderInterface | null = null) {
         super();
@@ -25,6 +25,7 @@ class CfdiValidator33 extends CfdiValidatorTrait implements XmlResolverPropertyI
 
     protected createVersionedMultiValidator(): MultiValidator {
         const factory = new MultiValidatorFactory();
+
         return factory.newReceived33();
     }
 }

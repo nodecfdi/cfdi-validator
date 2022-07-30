@@ -1,6 +1,6 @@
+import { DateTime } from 'luxon';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
-import { DateTime } from 'luxon';
 
 export class AssertFechaFormat {
     public static assertFormat(asserts: Asserts, code: string, label: string, text: string): boolean {
@@ -11,6 +11,7 @@ export class AssertFechaFormat {
             Status.when(hasFormat),
             `Contenido del campo: "${text}"`
         );
+
         return hasFormat;
     }
 
@@ -22,6 +23,7 @@ export class AssertFechaFormat {
             const rawDate = DateTime.fromISO(format);
             const value = rawDate.toMillis();
             const expectedFormat = DateTime.fromMillis(value).toFormat("yyyy-LL-dd'T'HH:mm:ss");
+
             return expectedFormat === format;
         } catch (e) {
             return false;

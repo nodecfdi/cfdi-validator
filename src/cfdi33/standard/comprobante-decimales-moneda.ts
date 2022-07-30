@@ -1,7 +1,7 @@
+import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
-import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
 import { Assert } from '../../assert';
 import { Status } from '../../status';
 
@@ -17,6 +17,7 @@ import { Status } from '../../status';
  */
 export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
     private _asserts!: Asserts;
+
     private _currency!: CurrencyDecimals;
 
     private registerAsserts(): void {
@@ -25,7 +26,7 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
             MONDEC02: 'El descuento del comprobante no contiene más de los decimales de la moneda (CFDI33111)',
             MONDEC03: 'El total del comprobante no contiene más de los decimales de la moneda',
             MONDEC04: 'El total de impuestos trasladados no contiene más de los decimales de la moneda (CFDI33182)',
-            MONDEC05: 'El total de impuestos retenidos no contiene más de los decimales de la moneda (CFDI33180)',
+            MONDEC05: 'El total de impuestos retenidos no contiene más de los decimales de la moneda (CFDI33180)'
         };
         Object.entries(asserts).forEach(([code, title]) => {
             this._asserts.put(code, title);
@@ -40,6 +41,7 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
             this._currency = CurrencyDecimals.newFromKnownCurrencies(comprobante.get('Moneda'));
         } catch (e) {
             this._asserts.get('MONDEC01').setExplanation((e as Error).message);
+
             return Promise.resolve();
         }
 
@@ -53,6 +55,7 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
             this.validateValue('MONDEC04', impuestos, 'TotalImpuestosTrasladados');
             this.validateValue('MONDEC05', impuestos, 'TotalImpuestosRetenidos');
         }
+
         return Promise.resolve();
     }
 
@@ -70,6 +73,7 @@ export class ComprobanteDecimalesMoneda extends AbstractDiscoverableVersion33 {
         if (required && !node.offsetExists(attribute)) {
             return false;
         }
+
         return this._currency.doesNotExceedDecimals(node.get(attribute));
     }
 

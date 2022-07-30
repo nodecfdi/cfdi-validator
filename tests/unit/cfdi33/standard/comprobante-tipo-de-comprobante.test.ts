@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteTipoDeComprobante } from '../../../../src/cfdi33/standard/comprobante-tipo-de-comprobante';
-import { Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ComprobanteTipoDeComprobante } from '~/cfdi33/standard/comprobante-tipo-de-comprobante';
+import { Status } from '~/status';
 
 describe('ComprobanteTipoDeComprobante', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -12,7 +13,7 @@ describe('ComprobanteTipoDeComprobante', () => {
 
     test.each([['T'], ['P'], ['N']])('valid TPN', async (tipoDeComprobante) => {
         getComprobante33().addAttributes({
-            TipoDeComprobante: tipoDeComprobante,
+            TipoDeComprobante: tipoDeComprobante
         });
 
         await runValidate();
@@ -26,7 +27,7 @@ describe('ComprobanteTipoDeComprobante', () => {
             TipoDeComprobante: tipoDeComprobante,
             CondicionesDePago: '',
             FormaPago: '',
-            MetodoPago: '',
+            MetodoPago: ''
         });
         getComprobante33().addChild(new CNode('cfdi:Impuestos'));
 
@@ -42,7 +43,7 @@ describe('ComprobanteTipoDeComprobante', () => {
             FormaPago: null, // set to null to make clear that it must not exist
             MetodoPago: null, // set to null to make clear that it must not exist
             SubTotal: '0',
-            Total: '0.00',
+            Total: '0.00'
         });
 
         await runValidate();
@@ -59,7 +60,7 @@ describe('ComprobanteTipoDeComprobante', () => {
         getComprobante33().addAttributes({
             TipoDeComprobante: tipoDeComprobante,
             FormaPago: '',
-            MetodoPago: '',
+            MetodoPago: ''
         });
 
         await runValidate();
@@ -71,7 +72,7 @@ describe('ComprobanteTipoDeComprobante', () => {
     test.each([['T'], ['P']])('invalid TP descuentos', async (tipoDeComprobante) => {
         getComprobante33().addAttributes({
             TipoDeComprobante: tipoDeComprobante,
-            Descuento: '',
+            Descuento: ''
         });
         getComprobante33().addChild(
             new CNode('cfdi:Conceptos', {}, [new CNode('cfdi:Concepto'), new CNode('cfdi:Concepto', { Descuento: '' })])
@@ -92,13 +93,14 @@ describe('ComprobanteTipoDeComprobante', () => {
                 provider.push([tipoDeComprobante, subtotal]);
             });
         });
+
         return provider;
     };
 
     test.each(providerToNonZero())('invalid subtotal', async (tipoDeComprobante, subtotal) => {
         getComprobante33().addAttributes({
             TipoDeComprobante: tipoDeComprobante,
-            SubTotal: subtotal,
+            SubTotal: subtotal
         });
 
         await runValidate();
@@ -109,7 +111,7 @@ describe('ComprobanteTipoDeComprobante', () => {
     test.each(providerToNonZero())('invalid total', async (tipoDeComprobante, total) => {
         getComprobante33().addAttributes({
             TipoDeComprobante: tipoDeComprobante,
-            Total: total,
+            Total: total
         });
 
         await runValidate();
@@ -119,12 +121,12 @@ describe('ComprobanteTipoDeComprobante', () => {
 
     test.each([['I'], ['E'], ['N']])('valid IEN valor unitario greater than zero %s', async (tipoDeComprobante) => {
         getComprobante33().addAttributes({
-            TipoDeComprobante: tipoDeComprobante,
+            TipoDeComprobante: tipoDeComprobante
         });
         getComprobante33().addChild(
             new CNode('cfdi:Conceptos', {}, [
                 new CNode('cfdi:Concepto', { ValorUnitario: '123.45' }),
-                new CNode('cfdi:Concepto', { ValorUnitario: '0.000001' }),
+                new CNode('cfdi:Concepto', { ValorUnitario: '0.000001' })
             ])
         );
 
@@ -142,6 +144,7 @@ describe('ComprobanteTipoDeComprobante', () => {
                 provider.push([tipoDeComprobante, wrongUnit]);
             });
         });
+
         return provider;
     };
 
@@ -149,12 +152,12 @@ describe('ComprobanteTipoDeComprobante', () => {
         'invalid IEN valor unitario greater than zero',
         async (tipoDeComprobante, wrongUnitValue) => {
             getComprobante33().addAttributes({
-                TipoDeComprobante: tipoDeComprobante,
+                TipoDeComprobante: tipoDeComprobante
             });
             getComprobante33().addChild(
                 new CNode('cfdi:Conceptos', {}, [
                     new CNode('cfdi:Concepto', { ValorUnitario: '123.45' }),
-                    new CNode('cfdi:Concepto', { ValorUnitario: wrongUnitValue }),
+                    new CNode('cfdi:Concepto', { ValorUnitario: wrongUnitValue })
                 ])
             );
 

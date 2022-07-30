@@ -1,16 +1,16 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO06: En un pago, el tipo de cambio debe ser numérico, no debe exceder 6 decimales y debe ser mayor a "0.000001"
  */
 export class TipoCambioValue extends AbstractPagoValidator {
-    protected code = 'PAGO06';
+    protected override code = 'PAGO06';
 
-    protected title = [
+    protected override title = [
         'En un pago, el tipo de cambio debe ser numérico,',
-        ' no debe exceder 6 decimales y debe ser mayor a "0.000001"',
+        ' no debe exceder 6 decimales y debe ser mayor a "0.000001"'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {

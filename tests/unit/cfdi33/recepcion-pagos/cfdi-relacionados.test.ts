@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
-import { CfdiRelacionados } from '../../../../src/cfdi33/recepcion-pagos/cfdi-relacionados';
-import { Status } from '../../../../src';
+import { CfdiRelacionados } from '~/cfdi33/recepcion-pagos/cfdi-relacionados';
+import { Status } from '~/status';
 
 describe('CfdiRelacionados', () => {
     const { runValidate, assertStatusEqualsCode, getComprobante33, setValidator } =
@@ -13,7 +14,7 @@ describe('CfdiRelacionados', () => {
     test('valid tipo relacion', async () => {
         const comprobante = getComprobante33();
         comprobante.addCfdiRelacionados({
-            TipoRelacion: '04',
+            TipoRelacion: '04'
         });
 
         await runValidate();
@@ -24,7 +25,7 @@ describe('CfdiRelacionados', () => {
     test('invalid tipo relacion', async () => {
         const comprobante = getComprobante33();
         comprobante.addCfdiRelacionados({
-            TipoRelacion: 'XX',
+            TipoRelacion: 'XX'
         });
 
         await runValidate();

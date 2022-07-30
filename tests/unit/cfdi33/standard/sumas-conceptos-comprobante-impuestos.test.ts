@@ -1,7 +1,9 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { SumasConceptosComprobanteImpuestos } from '../../../../src/cfdi33/standard/sumas-conceptos-comprobante-impuestos';
-import { AbstractDiscoverableVersion33, Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { SumasConceptosComprobanteImpuestos } from '~/cfdi33/standard/sumas-conceptos-comprobante-impuestos';
+import { AbstractDiscoverableVersion33 } from '~/cfdi33/abstracts/abstract-discoverable-version33';
+import { Status } from '~/status';
 
 describe('SumasConceptosComprobanteImpuestos', () => {
     const {
@@ -11,7 +13,7 @@ describe('SumasConceptosComprobanteImpuestos', () => {
         assertStatusEqualsAssert,
         assertStatusEqualsCode,
         setupCfdiFile,
-        getComprobante,
+        getComprobante
     } = useValidate33TestCase();
 
     let validator: SumasConceptosComprobanteImpuestos;
@@ -151,7 +153,7 @@ describe('SumasConceptosComprobanteImpuestos', () => {
                     Impuesto: 'XXX',
                     TipoFactor: '0.050000',
                     TasaOCuota: 'tasa',
-                    Importe: '50.00',
+                    Importe: '50.00'
                 })
             );
         }
@@ -214,7 +216,7 @@ describe('SumasConceptosComprobanteImpuestos', () => {
                     Impuesto: 'XXX',
                     TipoFactor: '0.050000',
                     TasaOCuota: 'tasa',
-                    Importe: '50.00',
+                    Importe: '50.00'
                 })
             );
         }
@@ -229,13 +231,13 @@ describe('SumasConceptosComprobanteImpuestos', () => {
         ['equal', '12345.678', '12345.678', Status.ok()],
         ['less', '12345.677', '12345.678', Status.ok()],
         ['empty', '', '12345.678', Status.ok()],
-        ['zeros', '0.00', '0.00', Status.ok()],
+        ['zeros', '0.00', '0.00', Status.ok()]
     ])(
         'validate descuento less or equal than subtotal %s',
-        async (name: string, descuento: string, subtotal: string, expected: Status) => {
+        async (_name: string, descuento: string, subtotal: string, expected: Status) => {
             getComprobante().addAttributes({
                 SubTotal: subtotal,
-                Descuento: descuento,
+                Descuento: descuento
             });
 
             await runValidate();

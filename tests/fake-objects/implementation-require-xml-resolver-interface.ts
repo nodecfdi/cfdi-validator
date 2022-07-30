@@ -1,17 +1,10 @@
-import { ImplementationValidatorInterface } from './implementation-validator-interface';
-import { RequireXmlResolverInterface } from '../../src';
-import { use } from 'typescript-mix';
 import { XmlResolverPropertyTrait } from '@nodecfdi/cfdiutils-core';
-
-interface ImplementationRequireXmlResolverInterface
-    extends XmlResolverPropertyTrait,
-        ImplementationValidatorInterface {}
+import { Mixin } from 'ts-mixer';
+import { ImplementationValidatorInterface } from './implementation-validator-interface';
+import { RequireXmlResolverInterface } from '~/contracts/require-xml-resolver-interface';
 
 class ImplementationRequireXmlResolverInterface
-    extends ImplementationValidatorInterface
-    implements RequireXmlResolverInterface
-{
-    @use(XmlResolverPropertyTrait) protected this: unknown;
-}
+    extends Mixin(ImplementationValidatorInterface, XmlResolverPropertyTrait)
+    implements RequireXmlResolverInterface {}
 
 export { ImplementationRequireXmlResolverInterface };

@@ -1,4 +1,4 @@
-import { MultiValidatorFactory, XmlFollowSchema } from '../../src';
+import { MultiValidatorFactory, XmlFollowSchema } from '~/index';
 
 describe('MultiValidatorFactory', () => {
     test('created33 contains at least xsd validator', () => {

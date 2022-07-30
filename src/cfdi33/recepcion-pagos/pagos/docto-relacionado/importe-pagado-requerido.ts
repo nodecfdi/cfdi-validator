@@ -1,16 +1,16 @@
-import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDoctoRelacionadoValidator } from './abstract-docto-relacionado-validator';
 
 /**
  * PAGO30: En un documento relacionado, el importe pagado es requerido cuando
  *         el tipo de cambio existe o existe más de un documento relacionado (CRP235)
  */
 export class ImportePagadoRequerido extends AbstractDoctoRelacionadoValidator {
-    protected code = 'PAGO30';
+    protected override code = 'PAGO30';
 
-    protected title = [
+    protected override title = [
         'En un documento relacionado, el importe pagado es requerido cuando',
-        ' el tipo de cambio existe o existe más de un documento relacionado (CRP235)',
+        ' el tipo de cambio existe o existe más de un documento relacionado (CRP235)'
     ].join('');
 
     public validateDoctoRelacionado(docto: CNodeInterface): boolean {
@@ -23,6 +23,7 @@ export class ImportePagadoRequerido extends AbstractDoctoRelacionadoValidator {
                 throw this.exception('No hay importe pagado y existe el tipo de cambio del documento');
             }
         }
+
         return true;
     }
 }

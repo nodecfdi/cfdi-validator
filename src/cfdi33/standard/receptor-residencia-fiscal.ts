@@ -1,6 +1,6 @@
+import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -20,12 +20,12 @@ export class ReceptorResidenciaFiscal extends AbstractDiscoverableVersion33 {
             RESFISC01: 'Si el RFC no es XEXX010101000, entonces la residencia fiscal no debe existir (CFDI33134)',
             RESFISC02: [
                 'Si el RFC sí es XEXX010101000 y existe el complemento de comercio exterior,',
-                ' entonces la residencia fiscal debe establecerse y no puede ser "MEX" (CFDI33135 y CFDI33136)',
+                ' entonces la residencia fiscal debe establecerse y no puede ser "MEX" (CFDI33135 y CFDI33136)'
             ].join(''),
             RESFISC03: [
                 'Si el RFC sí es XEXX010101000 y se registró el número de registro de identificación fiscal,',
-                ' entonces la residencia fiscal debe establecerse y no puede ser "MEX" (CFDI33135 y CFDI33136)',
-            ].join(''),
+                ' entonces la residencia fiscal debe establecerse y no puede ser "MEX" (CFDI33135 y CFDI33136)'
+            ].join('')
         };
         Object.entries(assertsDescriptions).forEach(([code, title]) => {
             asserts.put(code, title);
@@ -55,7 +55,7 @@ export class ReceptorResidenciaFiscal extends AbstractDiscoverableVersion33 {
             asserts.putStatus('RESFISC03', Status.when(isValidResidenciaFiscal));
         }
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

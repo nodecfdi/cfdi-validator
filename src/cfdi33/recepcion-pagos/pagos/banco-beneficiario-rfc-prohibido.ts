@@ -1,5 +1,5 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
@@ -7,11 +7,11 @@ import { ValidatePagoException } from './validate-pago-exception';
  *         el RFC del banco de la cuenta beneficiaria no debe existir (CRP214)
  */
 export class BancoBeneficiarioRfcProhibido extends AbstractPagoValidator {
-    protected code = 'PAGO16';
+    protected override code = 'PAGO16';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando la forma de pago no sea 02, 03, 04, 05, 28, 29 o 99',
-        ' el RFC del banco de la cuenta beneficiaria no debe existir (CRP214)',
+        ' el RFC del banco de la cuenta beneficiaria no debe existir (CRP214)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {

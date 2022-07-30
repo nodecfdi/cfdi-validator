@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteTotal } from '../../../../src/cfdi33/standard/comprobante-total';
-import { Status } from '../../../../src';
+import { ComprobanteTotal } from '~/cfdi33/standard/comprobante-total';
+import { Status } from '~/status';
 
 describe('ComprobanteTotal', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -13,7 +14,7 @@ describe('ComprobanteTotal', () => {
         'total with invalid value',
         async (value: string | null) => {
             getComprobante33().addAttributes({
-                Total: value,
+                Total: value
             });
 
             await runValidate();
@@ -24,7 +25,7 @@ describe('ComprobanteTotal', () => {
 
     test.each([['0'], ['0.0'], ['123.45']])('total with correct value', async (value: string | null) => {
         getComprobante33().addAttributes({
-            Total: value,
+            Total: value
         });
 
         await runValidate();

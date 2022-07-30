@@ -1,6 +1,6 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -16,9 +16,11 @@ export class UsoCfdi extends AbstractRecepcionPagos10 {
         const receptor = comprobante.searchNode('cfdi:Receptor');
         if (!receptor) {
             assert.setStatus(Status.error(), 'No se encontró el nodo Receptor');
+
             return Promise.resolve();
         }
         assert.setStatus(Status.when('P01' === receptor.get('UsoCFDI')), `Uso CFDI: "${receptor.get('UsoCFDI')}"`);
+
         return Promise.resolve();
     }
 

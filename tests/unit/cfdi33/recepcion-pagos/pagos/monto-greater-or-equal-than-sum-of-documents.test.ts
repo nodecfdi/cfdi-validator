@@ -1,6 +1,6 @@
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { MontoGreaterOrEqualThanSumOfDocuments } from '../../../../../src/cfdi33/recepcion-pagos/pagos/monto-greater-or-equal-than-sum-of-documents';
-import { ValidatePagoException } from '../../../../../src/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
+import { MontoGreaterOrEqualThanSumOfDocuments } from '~/cfdi33/recepcion-pagos/pagos/monto-greater-or-equal-than-sum-of-documents';
+import { ValidatePagoException } from '~/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
 
 describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
     const { Pago, DoctoRelacionado } = Pagos10;
@@ -8,13 +8,13 @@ describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
     test('valid', () => {
         const pago = new Pago({
             MonedaP: 'USD',
-            Monto: '123.45',
+            Monto: '123.45'
         });
         pago.multiDoctoRelacionado(
             ...[
                 { ImpPagado: '50.00' }, // 50.00
                 { MonedaDR: 'EUR', TipoCambioDR: '0.5', ImpPagado: '25.00' }, // 25.00 / 0.5 => 50
-                { MonedaDR: 'MXN', TipoCambioDR: '18.7894', ImpPagado: '440.61' }, // 440.61 / 18.7894 => 23.45
+                { MonedaDR: 'MXN', TipoCambioDR: '18.7894', ImpPagado: '440.61' } // 440.61 / 18.7894 => 23.45
             ]
         );
         const validator = new MontoGreaterOrEqualThanSumOfDocuments();
@@ -25,30 +25,27 @@ describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
     test('invalid', () => {
         const pago = new Pago({
             MonedaP: 'USD',
-            Monto: '123.45',
+            Monto: '123.45'
         });
         pago.multiDoctoRelacionado(
             ...[
                 { ImpPagado: '50.00' }, // 50.00
                 { MonedaDR: 'EUR', TipoCambioDR: '0.5', ImpPagado: '25.01' }, // 25.00 / 0.5 => 50.02
-                { MonedaDR: 'MXN', TipoCambioDR: '18.7894', ImpPagado: '440.61' }, // 440.61 / 18.7894 => 23.45
+                { MonedaDR: 'MXN', TipoCambioDR: '18.7894', ImpPagado: '440.61' } // 440.61 / 18.7894 => 23.45
             ]
         );
         const validator = new MontoGreaterOrEqualThanSumOfDocuments();
 
-        expect.hasAssertions();
-        try {
-            validator.validatePago(pago);
-        } catch (e) {
-            expect(e).toBeInstanceOf(ValidatePagoException);
-        }
+        const t = (): boolean => validator.validatePago(pago);
+
+        expect(t).toThrow(ValidatePagoException);
     });
 
     test('calculate document amount when is set', () => {
         const validator = new MontoGreaterOrEqualThanSumOfDocuments();
         const amount = validator.calculateDocumentAmount(
             new DoctoRelacionado({
-                ImpPagado: '123.45',
+                ImpPagado: '123.45'
             }),
             new Pago()
         );
@@ -58,7 +55,7 @@ describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
 
     test('calculate document amount when is undefined', () => {
         const pago = new Pago({
-            Monto: '123.45',
+            Monto: '123.45'
         });
         const docto = pago.addDoctoRelacionado();
         const validator = new MontoGreaterOrEqualThanSumOfDocuments();
@@ -69,7 +66,7 @@ describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
 
     test('calculate document amount when is undefined with exchange rate', () => {
         const pago = new Pago({
-            Monto: '123.45',
+            Monto: '123.45'
         });
         const docto = pago.addDoctoRelacionado({ TipoCambioDR: 'EUR' });
         const validator = new MontoGreaterOrEqualThanSumOfDocuments();
@@ -80,7 +77,7 @@ describe('MontoGreaterOrEqualThanSumOfDocuments', () => {
 
     test('calculate document amount when is undefined with more documents', () => {
         const pago = new Pago({
-            Monto: '123.45',
+            Monto: '123.45'
         });
         pago.addDoctoRelacionado(); // first
         const docto = pago.addDoctoRelacionado(); // second

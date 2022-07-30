@@ -1,14 +1,14 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO03: En un pago, la forma de pago debe existir y no puede ser "99" (CRP201)
  */
 export class FormaDePago extends AbstractPagoValidator {
-    protected code = 'PAGO03';
+    protected override code = 'PAGO03';
 
-    protected title = 'En un pago, la forma de pago debe existir y no puede ser "99" (CRP201)';
+    protected override title = 'En un pago, la forma de pago debe existir y no puede ser "99" (CRP201)';
 
     public validatePago(pago: CNodeInterface): boolean {
         try {
@@ -21,6 +21,7 @@ export class FormaDePago extends AbstractPagoValidator {
                 `FormaDePagoP: "${pago.get('FormaDePagoP')}" ${(e as ValidatePagoException).message}`
             );
         }
+
         return true;
     }
 }

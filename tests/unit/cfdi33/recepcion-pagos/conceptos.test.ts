@@ -1,8 +1,9 @@
-import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
+/* eslint-disable jest/expect-expect */
 import { Cfdi33 } from '@nodecfdi/cfdiutils-elements';
-import { Conceptos } from '../../../../src/cfdi33/recepcion-pagos/conceptos';
-import { Status } from '../../../../src';
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
+import { Conceptos } from '~/cfdi33/recepcion-pagos/conceptos';
+import { Status } from '~/status';
 
 describe('Conceptos', () => {
     const {
@@ -11,7 +12,7 @@ describe('Conceptos', () => {
         runValidate,
         assertStatusEqualsCode,
         getAssertByCodeOrFail,
-        assertStatusEqualsAssert,
+        assertStatusEqualsAssert
     } = useValidateComplementoPagosTestCase();
     let concepto: Cfdi33.Concepto;
 
@@ -26,7 +27,7 @@ describe('Conceptos', () => {
             Descripcion: Conceptos.REQUIRED_DESCRIPCION,
             Cantidad: Conceptos.REQUIRED_CANTIDAD,
             ValorUnitario: Conceptos.REQUIRED_VALORUNITARIO,
-            Importe: Conceptos.REQUIRED_IMPORTE,
+            Importe: Conceptos.REQUIRED_IMPORTE
         });
     });
 
@@ -101,6 +102,7 @@ describe('Conceptos', () => {
                 result.push([attribute, value]);
             });
         });
+
         return result;
     };
 

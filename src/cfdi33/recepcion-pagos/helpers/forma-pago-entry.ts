@@ -12,13 +12,21 @@ export interface FormaPagoEntryInterface {
 
 export class FormaPagoEntry {
     private readonly _key: string;
+
     private readonly _description: string;
+
     private readonly _allowSenderRfc: boolean;
+
     private readonly _allowSenderAccount: boolean;
+
     private readonly _senderAccountPattern: RegExp;
+
     private readonly _allowReceiverRfc: boolean;
+
     private readonly _allowReceiverAccount: boolean;
+
     private readonly _receiverAccountPattern: RegExp;
+
     private readonly _allowPaymentSignature: boolean;
 
     constructor(entry: FormaPagoEntryInterface) {
@@ -43,6 +51,7 @@ export class FormaPagoEntry {
         if (!allowed || !pattern) {
             return /^$/;
         }
+
         return pattern;
     }
 

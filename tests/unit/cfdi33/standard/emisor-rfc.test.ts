@@ -1,8 +1,9 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { EmisorRfc } from '../../../../src/cfdi33/standard/emisor-rfc';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src';
 import { Rfc } from '@nodecfdi/rfc';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { EmisorRfc } from '~/cfdi33/standard/emisor-rfc';
+import { Status } from '~/status';
 
 describe('Emisor Rfc', () => {
     const { setValidator, runValidate, getComprobante33, getAsserts, assertStatusEqualsCode } = useValidate33TestCase();
@@ -13,11 +14,11 @@ describe('Emisor Rfc', () => {
 
     test.each([
         ['person', 'COSC8001137NA'],
-        ['moral', 'DIM8701081LA'],
-    ])('valid cases %s', async (name: string, rfc: string) => {
+        ['moral', 'DIM8701081LA']
+    ])('valid cases %s', async (_name: string, rfc: string) => {
         getComprobante33().addChild(
             new CNode('cfdi:Emisor', {
-                Rfc: rfc,
+                Rfc: rfc
             })
         );
 
@@ -32,11 +33,11 @@ describe('Emisor Rfc', () => {
         ['empty', ''],
         ['wrong', 'COSC8099137NA'],
         ['generic', Rfc.RFC_GENERIC],
-        ['foreign', Rfc.RFC_FOREIGN],
-    ])('valid cases %s', async (name: string, rfc: string | null) => {
+        ['foreign', Rfc.RFC_FOREIGN]
+    ])('valid cases %s', async (_name: string, rfc: string | null) => {
         getComprobante33().addChild(
             new CNode('cfdi:Emisor', {
-                Rfc: rfc,
+                Rfc: rfc
             })
         );
 

@@ -1,7 +1,7 @@
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { DateTime } from 'luxon';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
+import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Asserts } from '../../asserts';
 import { AssertFechaFormat } from '../utils/assert-fecha-format';
 import { Status } from '../../status';
@@ -29,7 +29,7 @@ export class FechaComprobante extends AbstractDiscoverableVersion33 {
             second: 0,
             month: 7,
             day: 1,
-            year: 2017,
+            year: 2017
         }).toMillis();
     }
 
@@ -37,6 +37,7 @@ export class FechaComprobante extends AbstractDiscoverableVersion33 {
         if (this._maximumDate === undefined || isNaN(Number(this._maximumDate))) {
             return Date.now() + this.getTolerance();
         }
+
         return this._maximumDate;
     }
 
@@ -76,7 +77,7 @@ export class FechaComprobante extends AbstractDiscoverableVersion33 {
             ).toFormat('yyyy-LL-dd HH:mm:ss')}`
         );
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     public static createDiscovered(): ValidatorInterface {

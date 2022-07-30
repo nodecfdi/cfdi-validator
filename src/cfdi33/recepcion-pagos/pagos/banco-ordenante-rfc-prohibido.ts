@@ -1,16 +1,16 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO12: En un pago, cuando la forma de pago no sea bancarizada el RFC del banco emisor no debe existir (CRP238)
  */
 export class BancoOrdenanteRfcProhibido extends AbstractPagoValidator {
-    protected code = 'PAGO12';
+    protected override code = 'PAGO12';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando la forma de pago no sea bancarizada',
-        ' el RFC del banco emisor no debe existir (CRP238)',
+        ' el RFC del banco emisor no debe existir (CRP238)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {

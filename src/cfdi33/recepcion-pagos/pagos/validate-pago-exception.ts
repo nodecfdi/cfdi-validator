@@ -9,6 +9,7 @@ export class ValidatePagoException extends Error {
 
     public setStatus(status: Status): ValidatePagoException {
         this._status = status;
+
         return this;
     }
 }

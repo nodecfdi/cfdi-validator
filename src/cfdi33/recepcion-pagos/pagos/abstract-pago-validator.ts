@@ -1,12 +1,13 @@
+import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../../asserts';
 import { Status } from '../../../status';
-import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
 import { FormaPagoEntry } from '../helpers/forma-pago-entry';
 import { FormaPagoCatalog } from '../helpers/forma-pago-catalog';
 import { ValidatePagoException } from './validate-pago-exception';
 
 export abstract class AbstractPagoValidator {
     protected code = '';
+
     protected title = '';
 
     public getCode(): string {
@@ -24,9 +25,9 @@ export abstract class AbstractPagoValidator {
     /**
      * In this method is where all validations must occur
      *
-     * @param pago
-     * @throws {ValidatePagoException} Then validation fails
-     * @throws {Error} In the implementer if it does not return TRUE
+     * @param pago -
+     * @throws ValidatePagoException Then validation fails
+     * @throws Error In the implementer if it does not return TRUE
      */
     public abstract validatePago(pago: CNodeInterface): boolean;
 

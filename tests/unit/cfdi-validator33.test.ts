@@ -1,10 +1,16 @@
-import { CfdiValidator33 } from '../../src';
-import { useTestCase } from '../test-case';
-import { CNode, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { CNode, install, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { readFileSync } from 'fs';
+import { CfdiValidator33 } from '~/cfdi-validator33';
+import { Asserts } from '~/asserts';
+import { useTestCase } from '../test-case';
 
 describe('CfdiValidator33', () => {
     const { newResolver, utilAsset } = useTestCase();
+
+    beforeAll(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
 
     test('construct without arguments', () => {
         const validator = new CfdiValidator33();
@@ -49,13 +55,10 @@ describe('CfdiValidator33', () => {
     test('validate throws error if empty content', async () => {
         const validator = new CfdiValidator33();
 
-        expect.hasAssertions();
-        try {
-            await validator.validate('', new CNode('root'));
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain('empty');
-        }
+        const t = (): Promise<Asserts> => validator.validate('', new CNode('root'));
+
+        await expect(t).rejects.toBeInstanceOf(Error);
+        await expect(t).rejects.toThrow('empty');
     }, 30000);
 
     test('validate cfdi33 real', async () => {

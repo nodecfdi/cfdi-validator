@@ -1,8 +1,8 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { SumasConceptos } from '@nodecfdi/cfdiutils-elements';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { ValidatorInterface } from '../../contracts/validator-interface';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../../asserts';
-import { SumasConceptos } from '@nodecfdi/cfdiutils-elements';
 import { Status } from '../../status';
 
 /**
@@ -37,7 +37,9 @@ import { Status } from '../../status';
  */
 export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVersion33 {
     private _comprobante!: CNodeInterface;
+
     private _asserts!: Asserts;
+
     private _sumasConceptos!: SumasConceptos;
 
     private registerAsserts(): void {
@@ -53,7 +55,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             SUMAS09: 'Todos los impuestos retenidos existen en el comprobante',
             SUMAS10: 'Todos los valores de los impuestos retenidos conciden con el comprobante',
             SUMAS11: 'No existen más nodos de impuestos trasladados en el comprobante de los que se han calculado',
-            SUMAS12: 'El cálculo del descuento debe ser menor o igual al cálculo del subtotal',
+            SUMAS12: 'El cálculo del descuento debe ser menor o igual al cálculo del subtotal'
         };
         Object.entries(asserts).forEach(([code, title]) => {
             this._asserts.put(code, title);
@@ -75,7 +77,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
         this.validateRetencionesMatch();
         this.validateDescuentoLessOrEqualThanSubTotal();
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     private validateSubTotal(): void {
@@ -228,6 +230,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             label = `${label} Tasa o cuota ${expected['TasaOCuota']}`;
         }
         this._asserts.put(code, `El importe del impuesto ${label} es igual a el importe del nodo`);
+
         return this.validateValues(
             code,
             'Calculado',
@@ -251,6 +254,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
             Status.when(condition, errorStatus),
             `${expectedLabel}: ${expectedValue}, ${compareLabel}: ${compareValue}`
         );
+
         return condition;
     }
 
@@ -258,6 +262,7 @@ export class SumasConceptosComprobanteImpuestos extends AbstractDiscoverableVers
         if (null === delta) {
             delta = 0.000001;
         }
+
         return Math.abs(first - second) <= delta;
     }
 

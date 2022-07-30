@@ -1,8 +1,10 @@
-import { useValidateBaseTestCase } from '../validate-base-test-case';
+/* eslint-disable @typescript-eslint/indent */
 import { Cfdi40 } from '@nodecfdi/cfdiutils-elements';
-import { Asserts, Hydrater, Status, ValidatorInterface, Assert } from '../../../src';
 import { XmlResolver } from '@nodecfdi/cfdiutils-core';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { CNodeInterface, install } from '@nodecfdi/cfdiutils-common';
+import { DOMImplementation, DOMParser, XMLSerializer } from '@xmldom/xmldom';
+import { useValidateBaseTestCase } from '../validate-base-test-case';
+import { Asserts, Hydrater, Status, ValidatorInterface, Assert } from '~/index';
 
 const useValidate40TestCase = (): {
     runValidate: () => Promise<void>;
@@ -41,8 +43,12 @@ const useValidate40TestCase = (): {
         setupCfdiFile,
         getHydrater,
         setUpCertificado,
-        getValidator,
+        getValidator
     } = useValidateBaseTestCase();
+
+    beforeAll(() => {
+        install(new DOMParser(), new XMLSerializer(), new DOMImplementation());
+    });
 
     beforeEach(() => {
         setComprobante(new Cfdi40.Comprobante());
@@ -72,7 +78,7 @@ const useValidate40TestCase = (): {
         getComprobante,
         getHydrater,
         setUpCertificado,
-        getValidator,
+        getValidator
     };
 };
 export { useValidate40TestCase };

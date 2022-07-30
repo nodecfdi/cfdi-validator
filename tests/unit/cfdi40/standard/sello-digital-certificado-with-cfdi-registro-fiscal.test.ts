@@ -1,5 +1,5 @@
 import { useValidate40TestCase } from '../validate40-test-case';
-import { SelloDigitalCertificado } from '../../../../src/cfdi40/standard/sello-digital-certificado';
+import { SelloDigitalCertificado } from '~/cfdi40/standard/sello-digital-certificado';
 import { useSelloDigitalCertificadoWithCfdiRegistroFiscalTrait } from '../../../common/sello-digital-certificado-with-cfdi-registro-fiscal-trait';
 
 describe('SelloDigitalCertificado with CfdiRegistroFiscal 40', () => {
@@ -10,7 +10,7 @@ describe('SelloDigitalCertificado with CfdiRegistroFiscal 40', () => {
         setUpCertificado,
         runValidate,
         assertStatusEqualsCode,
-        getComprobante,
+        getComprobante
     } = useValidate40TestCase();
     beforeEach(() => {
         const validator = new SelloDigitalCertificado();
@@ -22,7 +22,7 @@ describe('SelloDigitalCertificado with CfdiRegistroFiscal 40', () => {
             {},
             {
                 Nombre: 'CARLOS CORTES SOTO',
-                Rfc: 'COSC8001137NA',
+                Rfc: 'COSC8001137NA'
             },
             certfile
         );

@@ -1,4 +1,4 @@
-import { DoctoRelacionado } from '../../../../../src/cfdi33/recepcion-pagos/pagos/docto-relacionado';
+import { DoctoRelacionado } from '~/cfdi33/recepcion-pagos/pagos/docto-relacionado';
 
 describe('DoctoRelacionado', () => {
     test('validators codes', () => {

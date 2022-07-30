@@ -1,7 +1,11 @@
+/* eslint-disable jest/no-export */
+/* eslint-disable jest/expect-expect */
 import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Tfd11 } from '@nodecfdi/cfdiutils-elements';
-import { Asserts, Status, ValidatorInterface } from '../../src';
-import { TimbreFiscalDigitalSello } from '../../src/cfdi33/standard/timbre-fiscal-digital-sello';
+import { Asserts } from '~/asserts';
+import { Status } from '~/status';
+import { ValidatorInterface } from '~/contracts/validator-interface';
+import { TimbreFiscalDigitalSello } from '~/cfdi33/standard/timbre-fiscal-digital-sello';
 
 const useTimbreFiscalDigital11SelloTestTrait = (
     runValidate: () => Promise<void>,
@@ -48,7 +52,7 @@ const useTimbreFiscalDigital11SelloTestTrait = (
             SelloCFD: selloCfdi,
             FechaTimbrado: '2018-01-12T08:17:54',
             RfcProvCertif: 'DCD090706E42',
-            UUID: 'CEE4BE01-ADFA-4DEB-8421-ADD60F0BEDAC',
+            UUID: 'CEE4BE01-ADFA-4DEB-8421-ADD60F0BEDAC'
         });
         getComprobante().addChild(new CNode('cfdi:Complemento', {}, [tfd]));
 
@@ -155,7 +159,7 @@ const useTimbreFiscalDigital11SelloTestTrait = (
             SelloCFD: selloCfdi,
             FechaTimbrado: '2018-01-12T08:17:53', // this was 54 seconds
             RfcProvCertif: 'DCD090706E42',
-            UUID: 'CEE4BE01-ADFA-4DEB-8421-ADD60F0BEDAC',
+            UUID: 'CEE4BE01-ADFA-4DEB-8421-ADD60F0BEDAC'
         });
         getComprobante().addChild(new CNode('cfdi:Complemento', {}, [tfd]));
 

@@ -1,5 +1,5 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
@@ -7,11 +7,11 @@ import { ValidatePagoException } from './validate-pago-exception';
  *         la cuenta beneficiaria no debe existir (CRP215)
  */
 export class CuentaBeneficiariaProhibida extends AbstractPagoValidator {
-    protected code = 'PAGO17';
+    protected override code = 'PAGO17';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando la forma de pago no sea 02, 03, 04, 05, 28, 29 o 99',
-        ' la cuenta beneficiaria no debe existir (CRP215)',
+        ' la cuenta beneficiaria no debe existir (CRP215)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -23,6 +23,7 @@ export class CuentaBeneficiariaProhibida extends AbstractPagoValidator {
                 `Forma de pago: "${pago.get('FormaDePagoP')}", Cuenta: "${pago.get('CtaBeneficiario')}"`
             );
         }
+
         return true;
     }
 }

@@ -1,12 +1,12 @@
-import { CalculateDocumentAmountUse } from './calculate-document-amount-use';
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
+import { CalculateDocumentAmountUse } from './calculate-document-amount-use';
 
 describe('CalculateDocumentAmountTrait', () => {
     test('calculate document amount when is set', () => {
         const validador = new CalculateDocumentAmountUse();
         const amount = validador.calculateDocumentAmount(
             new Pagos10.DoctoRelacionado({
-                ImpPagado: '123.45',
+                ImpPagado: '123.45'
             }),
             new Pagos10.Pago()
         );

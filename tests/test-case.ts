@@ -1,7 +1,6 @@
 import { join, basename, dirname } from 'path';
 import { SatCertificateNumber, XmlResolver } from '@nodecfdi/cfdiutils-core';
-import { copyFileSync, existsSync, statSync } from 'fs';
-import mkdirp from 'mkdirp';
+import { copyFileSync, existsSync, mkdirSync, lstatSync } from 'fs';
 
 const useTestCase = (): {
     utilAsset(file: string): string;
@@ -9,7 +8,7 @@ const useTestCase = (): {
     installCertificate(cerFile: string): string;
 } => {
     const utilAsset = (file: string): string => {
-        return join(__dirname, 'assets', file);
+        return join(__dirname, '_files', file);
     };
 
     const newResolver = (): XmlResolver => {
@@ -17,38 +16,37 @@ const useTestCase = (): {
     };
 
     const installCertificate = (cerFile: string): string => {
-        const certificateNumber = basename(cerFile).substring(0, 20);
+        const certificateNumber = basename(cerFile, '.cer').substring(0, 20);
         const satCertificateNumber = new SatCertificateNumber(certificateNumber);
 
         const cerRetriever = newResolver().newCerRetriever();
 
         const installationPath = cerRetriever.buildPath(satCertificateNumber.remoteUrl());
-
         if (existsSync(installationPath)) {
             return installationPath;
         }
 
         const installationDir = dirname(installationPath);
         if (!existsSync(installationDir)) {
-            mkdirp.sync(installationDir);
+            mkdirSync(installationDir, { recursive: true });
         }
-        const stats = statSync(installationDir);
-        if (!stats.isDirectory()) {
+        if (!lstatSync(installationDir).isDirectory()) {
             throw new Error(`Cannot create installation dir ${installationDir}`);
         }
 
         try {
             copyFileSync(cerFile, installationPath);
         } catch (e) {
-            throw new Error(`Cannot install ${cerFile} into ${installationPath}`);
+            throw new Error(`Cannot install ${cerFile} into ${installationPath} error: ${(e as Error).message}`);
         }
+
         return installationPath;
     };
 
     return {
         utilAsset,
         newResolver,
-        installCertificate,
+        installCertificate
     };
 };
 export { useTestCase };

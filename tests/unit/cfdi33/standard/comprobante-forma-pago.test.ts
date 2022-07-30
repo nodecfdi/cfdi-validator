@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteFormaPago } from '../../../../src/cfdi33/standard/comprobante-forma-pago';
-import { Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ComprobanteFormaPago } from '~/cfdi33/standard/comprobante-forma-pago';
+import { Status } from '~/status';
 
 describe('ComprobanteFormaPago', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComprobante33 } = useValidate33TestCase();

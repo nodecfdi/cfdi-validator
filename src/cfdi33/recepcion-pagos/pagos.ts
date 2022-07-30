@@ -1,5 +1,5 @@
-import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractRecepcionPagos10 } from '../abstracts/abstract-recepcion-pagos10';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 import { ValidatorInterface } from '../../contracts/validator-interface';
@@ -18,6 +18,7 @@ export class Pagos extends AbstractRecepcionPagos10 {
             Status.when(pagoCollection.length > 0),
             'Debe existir al menos un pago en el complemento de pagos'
         );
+
         return Promise.resolve();
     }
 
