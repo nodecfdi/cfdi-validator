@@ -36,8 +36,8 @@ class MontoBetweenIntervalSumOfDocuments extends Mixin(AbstractPagoValidator, Ca
         const values = documents.map((document) => this.calculateDocumentAmountBounds(document, pago));
 
         return {
-            lower: values.reduce((a, b) => a + (b['lower'] || 0), 0),
-            upper: values.reduce((a, b) => a + (b['upper'] || 0), 0)
+            lower: values.reduce((a, b) => a + b['lower'], 0),
+            upper: values.reduce((a, b) => a + b['upper'], 0)
         };
     }
 
@@ -50,7 +50,7 @@ class MontoBetweenIntervalSumOfDocuments extends Mixin(AbstractPagoValidator, Ca
         const tipoCambioDR = doctoRelacionado.get('TipoCambioDR');
         let exchangeRate = 1;
         if ('' !== tipoCambioDR && pago.get('MonedaP') !== pago.get('MonedaDR')) {
-            exchangeRate = parseFloat(tipoCambioDR || '0');
+            exchangeRate = parseFloat(tipoCambioDR);
         }
         const numDecimalsAmount = this.getNumDecimals(`${impPagado}`);
         const numDecimalsExchangeRate = this.getNumDecimals(`${tipoCambioDR}`);

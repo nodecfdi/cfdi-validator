@@ -83,16 +83,4 @@ export class MultiValidator implements ValidatorInterface {
     public [Symbol.iterator](): IterableIterator<ValidatorInterface> {
         return this._validators[Symbol.iterator]();
     }
-
-    public entries(): IterableIterator<[number, ValidatorInterface]> {
-        return this._validators.entries();
-    }
-
-    public keys(): IterableIterator<number> {
-        return this._validators.keys();
-    }
-
-    public values(): IterableIterator<ValidatorInterface> {
-        return this._validators.values();
-    }
 }

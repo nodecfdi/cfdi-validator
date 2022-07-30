@@ -98,7 +98,7 @@ export class Pago extends AbstractRecepcionPagos10 {
             validators.forEach((validator) => {
                 try {
                     if (!validator.validatePago(pagoNode)) {
-                        throw new Error(`The validation of pago ${index} ${validator.constructor.name} retrun false`);
+                        throw new Error(`The validation of pago ${index} ${validator.constructor.name} return false`);
                     }
                 } catch (e) {
                     if (e instanceof ValidateDoctoException) {

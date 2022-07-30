@@ -122,7 +122,7 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
             return false;
         }
 
-        return parseFloat(impuesto.get('Base') || '0') >= 0.000001;
+        return parseFloat(impuesto.get('Base')) >= 0.000001;
     }
 
     protected trasladoHasTipoFactorExento(traslado: CNodeInterface): boolean {
