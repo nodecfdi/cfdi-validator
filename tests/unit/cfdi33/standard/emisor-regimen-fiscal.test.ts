@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { EmisorRegimenFiscal } from '../../../../src/cfdi33/standard/emisor-regimen-fiscal';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { EmisorRegimenFiscal } from '~/cfdi33/standard/emisor-regimen-fiscal';
+import { Status } from '~/status';
 
 describe('EmisorRegimenFiscal', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -40,12 +41,12 @@ describe('EmisorRegimenFiscal', () => {
         ['AAAA010101AAA', '615'],
         ['ÑAAA010101AAA', '605'], // with Ñ
         ['AAA010000AAA', '601'], // RFC inválido, regimen válido persona moral
-        ['AAAA010000AAA', '605'], // RFC inválido, regimen válido persona física
+        ['AAAA010000AAA', '605'] // RFC inválido, regimen válido persona física
     ])('valid cases %s %s', async (emisorRfc, regimenFiscal) => {
         getComprobante33().addChild(
             new CNode('cfdi:Emisor', {
                 RegimenFiscal: regimenFiscal,
-                Rfc: emisorRfc,
+                Rfc: emisorRfc
             })
         );
 
@@ -61,12 +62,12 @@ describe('EmisorRegimenFiscal', () => {
         ['', ''], // RFC vacío, regimen vacío
         [null, ''], // sin RFC, regimen vacío
         [null, '630'], // sin RFC, con regimen
-        [null, null], // sin RFC, sin regimen
+        [null, null] // sin RFC, sin regimen
     ])('invalid cases', async (emisorRfc: string | null, regimenFiscal: string | null) => {
         getComprobante33().addChild(
             new CNode('cfdi:Emisor', {
                 RegimenFiscal: regimenFiscal,
-                Rfc: emisorRfc,
+                Rfc: emisorRfc
             })
         );
 

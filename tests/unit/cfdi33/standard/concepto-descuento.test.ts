@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidate33TestCase } from '../validate33-test-case';
-import { ConceptoDescuento } from '../../../../src/cfdi33/standard/concepto-descuento';
-import { Status } from '../../../../src';
+import { ConceptoDescuento } from '~/cfdi33/standard/concepto-descuento';
+import { Status } from '~/status';
 
 describe('ConceptoDescuento', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -17,11 +18,11 @@ describe('ConceptoDescuento', () => {
         ['1', '1'],
         ['0.000000', '0.000001'],
         ['0', '0'],
-        ['1.00', '1.01'],
+        ['1.00', '1.01']
     ])('valid cases', async (descuento, importe) => {
         getComprobante33().addConcepto({
             Descuento: descuento,
-            Importe: importe,
+            Importe: importe
         });
 
         await runValidate();
@@ -34,15 +35,15 @@ describe('ConceptoDescuento', () => {
         ['5', null],
         ['0.000001', '0.000000'],
         ['-1', '5'],
-        ['-5', '5'],
+        ['-5', '5']
     ])('invalid cases', async (descuento: string, importe: string | null) => {
         getComprobante33().addConcepto({
             Descuento: '1',
-            Importe: '2',
+            Importe: '2'
         });
         const concepto = getComprobante33().addConcepto({
             Descuento: descuento,
-            Importe: importe,
+            Importe: importe
         });
 
         expect(validator.conceptoHasInvalidDiscount(concepto)).toBeTruthy();

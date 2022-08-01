@@ -1,10 +1,6 @@
-import { use } from 'typescript-mix';
-import { CalculateDocumentAmountTrait } from '../../../../../src/cfdi33/recepcion-pagos/helpers/calculate-document-amount-trait';
+import { Mixin } from 'ts-mixer';
+import { CalculateDocumentAmountTrait } from '~/cfdi33/recepcion-pagos/helpers/calculate-document-amount-trait';
 
-interface CalculateDocumentAmountUse extends CalculateDocumentAmountTrait {}
-
-class CalculateDocumentAmountUse {
-    @use(CalculateDocumentAmountTrait) private this: unknown;
-}
+class CalculateDocumentAmountUse extends Mixin(CalculateDocumentAmountTrait) {}
 
 export { CalculateDocumentAmountUse };

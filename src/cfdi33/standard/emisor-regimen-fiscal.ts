@@ -1,6 +1,5 @@
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
@@ -38,7 +37,7 @@ export class EmisorRegimenFiscal extends AbstractDiscoverableVersion33 {
                 '625',
                 '626',
                 '629',
-                '630',
+                '630'
             ];
         } else {
             validCodes = [];
@@ -51,10 +50,6 @@ export class EmisorRegimenFiscal extends AbstractDiscoverableVersion33 {
             `Rfc: "${emisorRfc}", Regimen Fiscal: "${regimenFiscal}"`
         );
 
-        return Promise.resolve(undefined);
-    }
-
-    public static createDiscovered(): ValidatorInterface {
-        return new EmisorRegimenFiscal();
+        return Promise.resolve();
     }
 }

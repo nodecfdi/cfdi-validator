@@ -1,22 +1,21 @@
-import { CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
-import { Asserts } from '../asserts';
-import { use } from 'typescript-mix';
 import {
     SatCertificateNumber,
     TfdCadenaDeOrigen,
     XmlResolver,
     XmlResolverPropertyTrait,
-    XsltBuilderPropertyTrait,
+    XsltBuilderPropertyTrait
 } from '@nodecfdi/cfdiutils-core';
-import { Status } from '../status';
+import { CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { Certificate } from '@nodecfdi/credentials';
 import { cleanupSync, openSync } from 'temp';
+import { Mixin } from 'ts-mixer';
+import { Asserts } from '../asserts';
+import { Status } from '../status';
 
-interface TimbreFiscalDigitalSelloValidatorTrait extends XmlResolverPropertyTrait, XsltBuilderPropertyTrait {}
-
-abstract class TimbreFiscalDigitalSelloValidatorTrait {
-    @use(XmlResolverPropertyTrait, XsltBuilderPropertyTrait) protected this: unknown;
-
+abstract class TimbreFiscalDigitalSelloValidatorTrait extends Mixin(
+    XmlResolverPropertyTrait,
+    XsltBuilderPropertyTrait
+) {
     public async validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         const assert = asserts.put(
             'TFDSELLO01',
@@ -25,18 +24,21 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
 
         if (!this.hasXmlResolver()) {
             assert.setExplanation('No se puede hacer la validación porque carece de un objeto resolvedor');
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         const tfd = comprobante.searchNode('cfdi:Complemento', 'tfd:TimbreFiscalDigital');
         if (!tfd) {
             assert.setExplanation('El CFDI no contiene un Timbre Fiscal Digital');
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         if ('1.1' !== tfd.get('Version')) {
             assert.setExplanation('La versión del timbre fiscal digital no es 1.1');
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         const validationSellosMatch = comprobante.get('Sello') !== tfd.get('SelloCFD');
@@ -45,7 +47,8 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
                 Status.error(),
                 'El atributo SelloCFD del Timbre Fiscal Digital no coincide con el atributo Sello del Comprobante'
             );
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         const certificadoSAT = tfd.get('NoCertificadoSAT');
@@ -54,7 +57,8 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
                 Status.error(),
                 `El atributo NoCertificadoSAT con el valor "${certificadoSAT}" no es valido`
             );
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         let certificado: Certificate;
@@ -76,7 +80,8 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
                 Status.error(),
                 `No se ha podido obtener el certificado ${certificadoSAT}: ${(e as Error).message}`
             );
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
 
         const tfdCadenaOrigen = new TfdCadenaDeOrigen(resolver, this.getXsltBuilder());
@@ -91,14 +96,15 @@ abstract class TimbreFiscalDigitalSelloValidatorTrait {
                 Status.error(),
                 [
                     'La verificación del timbrado fue negativa,',
-                    ' posiblemente el CFDI fue modificado después de general el sello',
+                    ' posiblemente el CFDI fue modificado después de general el sello'
                 ].join('')
             );
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
         assert.setStatus(Status.ok());
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 }
 

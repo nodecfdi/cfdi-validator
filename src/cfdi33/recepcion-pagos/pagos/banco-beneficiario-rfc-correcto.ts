@@ -1,18 +1,18 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
-import { ValidatePagoException } from './validate-pago-exception';
 import { Rfc } from '@nodecfdi/rfc';
+import { AbstractPagoValidator } from './abstract-pago-validator';
+import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO15: En un pago, cuando el RFC del banco emisor de la cuenta beneficiaria existe
  *         debe ser válido y diferente de "XAXX010101000"
  */
 export class BancoBeneficiarioRfcCorrecto extends AbstractPagoValidator {
-    protected code = 'PAGO15';
+    protected override code = 'PAGO15';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando el RFC del banco emisor de la cuenta beneficiaria existe',
-        ' debe ser válido y diferente de "XAXX010101000"',
+        ' debe ser válido y diferente de "XAXX010101000"'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -23,6 +23,7 @@ export class BancoBeneficiarioRfcCorrecto extends AbstractPagoValidator {
                 throw new ValidatePagoException((e as Error).message);
             }
         }
+
         return true;
     }
 }

@@ -1,6 +1,27 @@
 # @nodecfdi/cfdi-validator ChangeLog
 
+## 1.1.0
+
+### DOM agnostic
+
+- Added support to DOM Agnostic
+- Update dependencies
+
+### CI
+
+- Update workflow for use pnpm and better test coverage
+- Added Sonarcloud for better continuous code quality
+
+### Build
+
+- Replace rollup bundle to microbundle for generation of library
+
+### Docs
+
+- Update readme with examples and usages
+
 ## 1.0.3
+
 - Update list of regimenes (check latest updates on 14/06/2022)
 - Update Rule "REGFIS01" with new regimenes
 - Update dependencies
@@ -19,6 +40,6 @@
 - Update path for test, short path
 - Update docs, on readme for best usage
 
-# 1.0.0
+## 1.0.0
 
 - First release

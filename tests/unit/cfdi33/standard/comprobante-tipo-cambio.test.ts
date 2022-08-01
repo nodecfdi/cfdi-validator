@@ -1,6 +1,7 @@
-import { ComprobanteTipoCambio } from '../../../../src/cfdi33/standard/comprobante-tipo-cambio';
+/* eslint-disable jest/expect-expect */
 import { useValidate33TestCase } from '../validate33-test-case';
-import { Status } from '../../../../src';
+import { ComprobanteTipoCambio } from '~/cfdi33/standard/comprobante-tipo-cambio';
+import { Status } from '~/status';
 
 describe('ComprobanteTipoCambio', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode } = useValidate33TestCase();
@@ -18,11 +19,11 @@ describe('ComprobanteTipoCambio', () => {
         ['USD', '20', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
         ['USD', '0005.10000', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
         ['USD', '123456789012345678.0', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
-        ['USD', '0.123456', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
+        ['USD', '0.123456', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']]
     ])('moneda with valid values', async (moneda: string, tipoCambio: string | null, ok: string, nones: string[]) => {
         getComprobante33().addAttributes({
             Moneda: moneda,
-            TipoCambio: tipoCambio,
+            TipoCambio: tipoCambio
         });
 
         await runValidate();
@@ -40,11 +41,11 @@ describe('ComprobanteTipoCambio', () => {
         [null, '18.9000'],
         ['', null],
         ['', ''],
-        ['', '18.9000'],
+        ['', '18.9000']
     ])('no moneda or empty', async (moneda: string | null, tipoCambio: string | null) => {
         getComprobante33().addAttributes({
             Moneda: moneda,
-            TipoCambio: tipoCambio,
+            TipoCambio: tipoCambio
         });
 
         await runValidate();
@@ -70,13 +71,13 @@ describe('ComprobanteTipoCambio', () => {
         ['USD', '0.', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
         ['USD', '.0', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
         ['USD', '0..0', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
-        ['USD', '0.0.0', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']],
+        ['USD', '0.0.0', 'TIPOCAMBIO04', ['TIPOCAMBIO02', 'TIPOCAMBIO03']]
     ])(
         'moneda with invalid values',
         async (moneda: string, tipoCambio: string | null, error: string, nones: string[]) => {
             getComprobante33().addAttributes({
                 Moneda: moneda,
-                TipoCambio: tipoCambio,
+                TipoCambio: tipoCambio
             });
 
             await runValidate();

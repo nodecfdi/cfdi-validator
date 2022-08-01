@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidateComplementoPagosTestCase } from './validate-complemento-pagos-test-case';
-import { Pagos } from '../../../../src/cfdi33/recepcion-pagos/pagos';
-import { Status } from '../../../../src';
+import { Pagos } from '~/cfdi33/recepcion-pagos/pagos';
+import { Status } from '~/status';
 
 describe('Pagos', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComplemento } = useValidateComplementoPagosTestCase();

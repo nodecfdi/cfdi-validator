@@ -1,5 +1,5 @@
 import { useValidate33TestCase } from '../validate33-test-case';
-import { TimbreFiscalDigitalVersion } from '../../../../src/cfdi33/standard/timbre-fiscal-digital-version';
+import { TimbreFiscalDigitalVersion } from '~/cfdi33/standard/timbre-fiscal-digital-version';
 import { useTimbreFiscalDigital11VersionTestTrait } from '../../../common/timbre-fiscal-digital11-version-test-trait';
 
 describe('TimbreFiscalDigitalVersion', () => {

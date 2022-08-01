@@ -14,10 +14,10 @@ export class Asserts {
      * This will try to create a new assert or get and change assert with the same code
      * The new values are preserved, except if they are null
      *
-     * @param code
-     * @param title
-     * @param status
-     * @param explanation
+     * @param code -
+     * @param title -
+     * @param status -
+     * @param explanation -
      */
     public put(
         code: string,
@@ -29,6 +29,7 @@ export class Asserts {
         if (!this.exists(code)) {
             assert = new Assert(code, title || '', status, explanation || '');
             this.add(assert);
+
             return assert;
         }
         assert = this.get(code);
@@ -41,6 +42,7 @@ export class Asserts {
         if (explanation) {
             assert.setExplanation(explanation);
         }
+
         return assert;
     }
 
@@ -48,9 +50,9 @@ export class Asserts {
      * This will try to create a new assert or get and change assert with the same code
      * The new values are preserved, except if they are null
      *
-     * @param code
-     * @param status
-     * @param explanation
+     * @param code -
+     * @param status -
+     * @param explanation -
      */
     public putStatus(code: string, status: Status | null = null, explanation: string | null = null): Assert {
         return this.put(code, null, status, explanation);
@@ -60,8 +62,8 @@ export class Asserts {
      * Get and or set the flag that alerts about stop flow
      * Consider this flag as: "Something was found, you should not continue"
      *
-     * @param newValue Value of the flag, if null then will not change the flag
-     * @return the previous value of the flag
+     * @param newValue - Value of the flag, if null then will not change the flag
+     * @returns the previous value of the flag
      */
     public mustStop(newValue: boolean | null = null): boolean {
         if (null == newValue) {
@@ -69,6 +71,7 @@ export class Asserts {
         }
         const previous = this._mustStop;
         this._mustStop = newValue;
+
         return previous;
     }
 
@@ -90,6 +93,7 @@ export class Asserts {
                 return assert;
             }
         }
+
         return undefined;
     }
 
@@ -136,6 +140,7 @@ export class Asserts {
         if (index !== -1) {
             indexKey = [...this.keys()][index];
         }
+
         return indexKey;
     }
 

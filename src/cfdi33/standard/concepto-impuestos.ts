@@ -1,7 +1,6 @@
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { ValidatorInterface } from '../../contracts/validator-interface';
-import { Asserts } from '../../asserts';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
+import { Asserts } from '../../asserts';
 import { Status } from '../../status';
 
 /**
@@ -24,24 +23,24 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
             CONCEPIMPC01: 'El nodo impuestos de un concepto debe incluir traslados y/o retenciones (CFDI33152)',
             CONCEPIMPC02: [
                 'Los traslados de los impuestos de un concepto deben tener una base y ser mayor a cero',
-                ' (CFDI33154)',
+                ' (CFDI33154)'
             ].join(''),
             CONCEPIMPC03: [
                 'No se debe registrar la tasa o cuota ni el importe cuando el tipo de factor de traslado',
-                ' es exento (CFDI33157)',
+                ' es exento (CFDI33157)'
             ].join(''),
             CONCEPIMPC04: [
                 'Se debe registrar la tasa o cuota y el importe cuando el tipo de factor de traslado',
-                ' es tasa o cuota (CFDI33158)',
+                ' es tasa o cuota (CFDI33158)'
             ].join(''),
             CONCEPIMPC05: [
                 'Las retenciones de los impuestos de un concepto deben tener una base y ser mayor a cero',
-                '(CFDI33154)',
+                '(CFDI33154)'
             ].join(''),
             CONCEPIMPC06: [
                 'Las retenciones de los impuestos de un concepto deben tener un tipo de factor diferente',
-                ' de exento (CFDI33166)',
-            ].join(''),
+                ' de exento (CFDI33166)'
+            ].join('')
         };
         Object.entries(assertsDescriptions).forEach(([code, title]) => {
             asserts.put(code, title);
@@ -100,7 +99,7 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
         asserts.putStatus('CONCEPIMPC05', status05);
         asserts.putStatus('CONCEPIMPC06', status06);
 
-        return Promise.resolve(undefined);
+        return Promise.resolve();
     }
 
     protected conceptoImpuestosHasTrasladosOrRetenciones(concepto: CNodeInterface): boolean {
@@ -108,6 +107,7 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
         if (!impuestos) {
             return true;
         }
+
         return (
             impuestos.searchNodes('cfdi:Traslados', 'cfdi:Traslado').length !== 0 ||
             impuestos.searchNodes('cfdi:Retenciones', 'cfdi:Retencion').length !== 0
@@ -121,7 +121,8 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
         if (isNaN(Number(impuesto.get('Base')))) {
             return false;
         }
-        return parseFloat(impuesto.get('Base') || '0') >= 0.000001;
+
+        return parseFloat(impuesto.get('Base')) >= 0.000001;
     }
 
     protected trasladoHasTipoFactorExento(traslado: CNodeInterface): boolean {
@@ -133,6 +134,7 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -145,10 +147,7 @@ export class ConceptoImpuestos extends AbstractDiscoverableVersion33 {
                 return false;
             }
         }
-        return true;
-    }
 
-    public static createDiscovered(): ValidatorInterface {
-        return new ConceptoImpuestos();
+        return true;
     }
 }

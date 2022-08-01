@@ -1,23 +1,19 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
-import { use } from 'typescript-mix';
-import { CalculateDocumentAmountTrait } from '../helpers/calculate-document-amount-trait';
 import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
+import { Mixin } from 'ts-mixer';
+import { AbstractPagoValidator } from './abstract-pago-validator';
+import { CalculateDocumentAmountTrait } from '../helpers/calculate-document-amount-trait';
 import { ValidatePagoException } from './validate-pago-exception';
-
-interface MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator, CalculateDocumentAmountTrait {}
 
 /**
  * PAGO09: En un pago, el monto del pago debe encontrarse entre límites mínimo y máximo de la suma
  *         de los valores registrados en el importe pagado de los documentos relacionados (Guía llenado)
  */
-class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
-    @use(CalculateDocumentAmountTrait) private this: unknown;
+class MontoBetweenIntervalSumOfDocuments extends Mixin(AbstractPagoValidator, CalculateDocumentAmountTrait) {
+    protected override code = 'PAGO09';
 
-    protected code = 'PAGO09';
-
-    protected title = [
+    protected override title = [
         'En un pago, el monto del pago debe encontrarse entre límites mínimo y máximo de la suma',
-        ' de los valores registrados en el importe pagado de los documentos relacionados (Guía llenado)',
+        ' de los valores registrados en el importe pagado de los documentos relacionados (Guía llenado)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -38,9 +34,10 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
     public calculateDocumentsAmountBounds(pago: CNodeInterface): Record<string, number> {
         const documents = pago.searchNodes('pago10:DoctoRelacionado');
         const values = documents.map((document) => this.calculateDocumentAmountBounds(document, pago));
+
         return {
-            lower: values.reduce((a, b) => a + (b['lower'] || 0), 0),
-            upper: values.reduce((a, b) => a + (b['upper'] || 0), 0),
+            lower: values.reduce((a, b) => a + b['lower'], 0),
+            upper: values.reduce((a, b) => a + b['upper'], 0)
         };
     }
 
@@ -53,7 +50,7 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
         const tipoCambioDR = doctoRelacionado.get('TipoCambioDR');
         let exchangeRate = 1;
         if ('' !== tipoCambioDR && pago.get('MonedaP') !== pago.get('MonedaDR')) {
-            exchangeRate = parseFloat(tipoCambioDR || '0');
+            exchangeRate = parseFloat(tipoCambioDR);
         }
         const numDecimalsAmount = this.getNumDecimals(`${impPagado}`);
         const numDecimalsExchangeRate = this.getNumDecimals(`${tipoCambioDR}`);
@@ -61,7 +58,7 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
         if (0 === numDecimalsExchangeRate) {
             return {
                 lower: amount / exchangeRate,
-                upper: amount / exchangeRate,
+                upper: amount / exchangeRate
             };
         }
 
@@ -72,9 +69,10 @@ class MontoBetweenIntervalSumOfDocuments extends AbstractPagoValidator {
 
         const upperAmount = amount + 10 ** -numDecimalsAmount / almostTwo;
         const upperExchangeRate = exchangeRate - 10 ** -numDecimalsExchangeRate / 2;
+
         return {
             lower: lowerAmount / lowerExchangeRate,
-            upper: upperAmount / upperExchangeRate,
+            upper: upperAmount / upperExchangeRate
         };
     }
 

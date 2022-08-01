@@ -1,7 +1,6 @@
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { Asserts } from '../../asserts';
-import { ValidatorInterface } from '../../contracts/validator-interface';
 import { Status } from '../../status';
 
 /**
@@ -24,10 +23,7 @@ export class ComprobanteFormaPago extends AbstractDiscoverableVersion33 {
             const existsFormaPago = comprobante.offsetExists('FormaPago');
             assert.setStatus(Status.when(!existsFormaPago));
         }
-        return Promise.resolve(undefined);
-    }
 
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobanteFormaPago();
+        return Promise.resolve();
     }
 }

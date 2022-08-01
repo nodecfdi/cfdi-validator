@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ConceptoImpuestos } from '../../../../src/cfdi33/standard/concepto-impuestos';
+/* eslint-disable jest/expect-expect */
 import { Cfdi33 } from '@nodecfdi/cfdiutils-elements';
-import { Status } from '../../../../src';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ConceptoImpuestos } from '~/cfdi33/standard/concepto-impuestos';
+import { Status } from '~/status';
 
 describe('ConceptoImpuestos', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();
@@ -13,13 +14,13 @@ describe('ConceptoImpuestos', () => {
             .multiTraslado(
                 {
                     TipoFactor: 'Exento',
-                    Base: '123.45',
+                    Base: '123.45'
                 },
                 {
                     Base: '123.45',
                     TipoFactor: 'Tasa',
                     TasaOCuota: '0.160000',
-                    Importe: '19.75',
+                    Importe: '19.75'
                 }
             )
             .multiRetencion(
@@ -27,13 +28,14 @@ describe('ConceptoImpuestos', () => {
                     Base: '0.000001',
                     TipoFactor: 'Tasa',
                     TasaOCuota: '0.02',
-                    Importe: '1.23',
+                    Importe: '1.23'
                 },
                 {
                     Base: '123.45',
-                    TipoFactor: 'Cuota',
+                    TipoFactor: 'Cuota'
                 }
             );
+
         return comprobante;
     };
 
@@ -65,13 +67,13 @@ describe('ConceptoImpuestos', () => {
     test.each([
         ['1', '1'],
         [null, '1'],
-        ['1', null],
+        ['1', null]
     ])('traslado tipo factor exento invalid case', async (tasaOCuota: string | null, importe: string | null) => {
         const comprobante = validComprobante();
         comprobante.addConcepto().addTraslado({
             TipoFactor: 'Exento',
             TasaOCuota: tasaOCuota,
-            Importe: importe,
+            Importe: importe
         });
 
         await runValidate();
@@ -91,6 +93,7 @@ describe('ConceptoImpuestos', () => {
                 });
             });
         });
+
         return provider;
     };
 
@@ -101,7 +104,7 @@ describe('ConceptoImpuestos', () => {
             comprobante.addConcepto().addTraslado({
                 TipoFactor: tipoFactor,
                 TasaOCuota: tasaOCuota,
-                Importe: importe,
+                Importe: importe
             });
 
             await runValidate();

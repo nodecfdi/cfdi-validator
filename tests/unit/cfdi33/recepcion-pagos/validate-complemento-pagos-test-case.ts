@@ -1,8 +1,9 @@
+/* eslint-disable jest/no-export */
 import { Cfdi33, Pagos10 } from '@nodecfdi/cfdiutils-elements';
 import { useValidate33TestCase } from '../validate33-test-case';
-import { Status } from '../../../../src';
-import { ValidatorInterface } from '../../../../src';
-import { Assert } from '../../../../src';
+import { Status } from '~/status';
+import { ValidatorInterface } from '~/contracts/validator-interface';
+import { Assert } from '~/assert';
 
 const useValidateComplementoPagosTestCase = (): {
     runValidate: () => Promise<void>;
@@ -20,7 +21,7 @@ const useValidateComplementoPagosTestCase = (): {
         getAsserts,
         setValidator,
         assertStatusEqualsAssert,
-        getAssertByCodeOrFail,
+        getAssertByCodeOrFail
     } = useValidate33TestCase();
     let complemento: Pagos10.Pagos;
 
@@ -50,7 +51,7 @@ const useValidateComplementoPagosTestCase = (): {
         assertStatusEqualsCode,
         setValidator,
         assertStatusEqualsAssert,
-        getAssertByCodeOrFail,
+        getAssertByCodeOrFail
     };
 };
 export { useValidateComplementoPagosTestCase };

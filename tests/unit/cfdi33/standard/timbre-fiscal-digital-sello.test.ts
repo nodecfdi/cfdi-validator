@@ -1,6 +1,6 @@
 import { useValidate33TestCase } from '../validate33-test-case';
 import { useTimbreFiscalDigital11SelloTestTrait } from '../../../common/timbre-fiscal-digital11-sello-test-trait';
-import { TimbreFiscalDigitalSello } from '../../../../src/cfdi33/standard/timbre-fiscal-digital-sello';
+import { TimbreFiscalDigitalSello } from '~/cfdi33/standard/timbre-fiscal-digital-sello';
 
 describe('TimbreFiscalDigitalSello', () => {
     const { setValidator, getHydrater, runValidate, assertStatusEqualsCode, getComprobante, getAsserts, getValidator } =

@@ -1,5 +1,5 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
@@ -7,15 +7,15 @@ import { ValidatePagoException } from './validate-pago-exception';
  *         el certificado del pago y viceversa (CRP227 y CRP228)
  */
 export class TipoCadenaPagoCertificado extends AbstractPagoValidator {
-    protected code = 'PAGO20';
+    protected override code = 'PAGO20';
 
-    protected title = [
+    protected override title = [
         'En un pago, si existe el tipo de cadena de pago debe existir',
-        ' el certificado del pago y viceversa (CRP227 y CRP228)',
+        ' el certificado del pago y viceversa (CRP227 y CRP228)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
-        const notEmpty = '' !== pago.get('TipoCadPago') ? !('' !== pago.get('CertPago')) : '' !== pago.get('CertPago');
+        const notEmpty = '' !== pago.get('TipoCadPago') ? '' === pago.get('CertPago') : '' !== pago.get('CertPago');
         if (
             notEmpty ||
             (pago.offsetExists('TipoCadPago') ? !pago.offsetExists('CertPago') : pago.offsetExists('CertPago'))

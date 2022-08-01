@@ -1,10 +1,11 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { ValidatorInterface } from './contracts/validator-interface';
 import { Asserts } from './asserts';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Hydrater } from './hydrater';
 
 export class MultiValidator implements ValidatorInterface {
     private _validators: ValidatorInterface[] = [];
+
     private readonly _version: string;
 
     public get length(): number {
@@ -31,6 +32,7 @@ export class MultiValidator implements ValidatorInterface {
                 break;
             }
         }
+
         return Promise.resolve();
     }
 
@@ -80,17 +82,5 @@ export class MultiValidator implements ValidatorInterface {
     // Iterators of MultiValidator
     public [Symbol.iterator](): IterableIterator<ValidatorInterface> {
         return this._validators[Symbol.iterator]();
-    }
-
-    public entries(): IterableIterator<[number, ValidatorInterface]> {
-        return this._validators.entries();
-    }
-
-    public keys(): IterableIterator<number> {
-        return this._validators.keys();
-    }
-
-    public values(): IterableIterator<ValidatorInterface> {
-        return this._validators.values();
     }
 }

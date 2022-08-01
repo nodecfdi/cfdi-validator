@@ -1,21 +1,19 @@
-import { use } from 'typescript-mix';
 import { NodeCertificado, XmlResolverPropertyTrait, XsltBuilderPropertyTrait } from '@nodecfdi/cfdiutils-core';
-import { XmlStringPropertyTrait } from '../traits/xml-string-property-trait';
-import { Asserts } from '../asserts';
 import { Certificate } from '@nodecfdi/credentials';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../status';
 import { DateTime } from 'luxon';
+import { Mixin } from 'ts-mixer';
+import { XmlStringPropertyTrait } from '../traits/xml-string-property-trait';
+import { Asserts } from '../asserts';
+import { Status } from '../status';
 
-interface SelloDigitalCertificadoValidatorTrait
-    extends XmlResolverPropertyTrait,
-        XmlStringPropertyTrait,
-        XsltBuilderPropertyTrait {}
-
-abstract class SelloDigitalCertificadoValidatorTrait {
-    @use(XmlResolverPropertyTrait, XmlStringPropertyTrait, XsltBuilderPropertyTrait) protected this: unknown;
-
+abstract class SelloDigitalCertificadoValidatorTrait extends Mixin(
+    XmlResolverPropertyTrait,
+    XmlStringPropertyTrait,
+    XsltBuilderPropertyTrait
+) {
     private _asserts!: Asserts;
+
     private _certificado!: Certificate;
 
     private registerAsserts(): void {
@@ -27,7 +25,7 @@ abstract class SelloDigitalCertificadoValidatorTrait {
             SELLO05: 'La fecha del documento es mayor o igual a la fecha de inicio de vigencia del certificado',
             SELLO06: 'La fecha del documento menor o igual a la fecha de fin de vigencia del certificado',
             SELLO07: 'El sello del comprobante está en base 64',
-            SELLO08: 'El sello del comprobante coincide con el certificado y la cadena de origen generada',
+            SELLO08: 'El sello del comprobante coincide con el certificado y la cadena de origen generada'
         };
         Object.entries(asserts).forEach(([code, title]) => {
             this._asserts.put(code, title);
@@ -49,7 +47,8 @@ abstract class SelloDigitalCertificadoValidatorTrait {
             version = extractor.getVersion();
         } catch (e) {
             this._asserts.putStatus('SELLO01', Status.error(), (e as Error).message);
-            return Promise.resolve(undefined);
+
+            return Promise.resolve();
         }
         this._certificado = certificado;
         this._asserts.putStatus('SELLO01', Status.ok());
@@ -76,6 +75,7 @@ abstract class SelloDigitalCertificadoValidatorTrait {
 
     private async buildCadenaOrigen(version: string): Promise<string> {
         const xsltLocation = await this.getXmlResolver().resolveCadenaOrigenLocation(version);
+
         return this.getXsltBuilder().build(this.getXmlString(), xsltLocation);
     }
 
@@ -148,6 +148,7 @@ abstract class SelloDigitalCertificadoValidatorTrait {
             sello = false;
         }
         this._asserts.putStatus('SELLO07', Status.when(false !== sello));
+
         return sello || '';
     }
 
@@ -159,6 +160,7 @@ abstract class SelloDigitalCertificadoValidatorTrait {
         [' ', '-', ',', '.', '#', '&', "'", '"', '~', '¨', '^'].forEach((searchString) => {
             nombre = nombre.replace(searchString, '');
         });
+
         return nombre.toUpperCase();
     }
 }

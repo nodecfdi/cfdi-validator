@@ -1,16 +1,16 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO18: En un pago, cuando la cuenta beneficiaria existe debe cumplir con su patrón específico (CRP239)
  */
 export class CuentaBeneficiariaPatron extends AbstractPagoValidator {
-    protected code = 'PAGO18';
+    protected override code = 'PAGO18';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando la cuenta beneficiaria existe',
-        ' debe cumplir con su patrón específico (CRP213)',
+        ' debe cumplir con su patrón específico (CRP213)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -22,6 +22,7 @@ export class CuentaBeneficiariaPatron extends AbstractPagoValidator {
                 throw new ValidatePagoException(`Cuenta: "${pago.get('CtaOrdenante')}". Patrón: "${pattern}"`);
             }
         }
+
         return true;
     }
 }

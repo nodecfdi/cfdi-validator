@@ -1,3 +1,8 @@
+import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
+import { Asserts } from '../../asserts';
+import { Status } from '../../status';
+
 /**
  * ComplementoPagos
  *
@@ -8,13 +13,6 @@
  * - COMPPAG03: Si el tipo de comprobante es P su versión debe ser 3.3
  * - COMPPAG04: No debe existir el nodo impuestos del complemento de pagos (CRP237)
  */
-import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
-import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
-import { Asserts } from '../../asserts';
-import { Status } from '../../status';
-import { ValidatorInterface } from '../../contracts/validator-interface';
-import { ComprobantePagos } from './comprobante-pagos';
-
 export class ComplementoPagos extends AbstractDiscoverableVersion33 {
     public validate(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         asserts.put('COMPPAG01', 'El complemento de pagos debe existir si el tipo de comprobante es P y viceversa');
@@ -47,10 +45,7 @@ export class ComplementoPagos extends AbstractDiscoverableVersion33 {
         }
 
         asserts.putStatus('COMPPAG04', Status.when(!pagos10.searchNode('pago10:Impuestos')));
-        return Promise.resolve(undefined);
-    }
 
-    public static createDiscovered(): ValidatorInterface {
-        return new ComprobantePagos();
+        return Promise.resolve();
     }
 }

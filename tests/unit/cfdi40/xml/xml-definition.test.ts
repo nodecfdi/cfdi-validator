@@ -1,7 +1,8 @@
-import { useValidate40TestCase } from '../validate40-test-case';
-import { XmlDefinition } from '../../../../src/cfdi40/xml/xml-definition';
-import { Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate40TestCase } from '../validate40-test-case';
+import { XmlDefinition } from '~/cfdi40/xml/xml-definition';
+import { Status } from '~/status';
 
 describe('XmlDefinition', () => {
     const { setValidator, runValidate, assertStatusEqualsCode, getComprobante, setComprobante } =
@@ -21,7 +22,7 @@ describe('XmlDefinition', () => {
     test('incorrect definition namespace prefix', async () => {
         getComprobante().addAttributes({
             'xmlns:cfdi': null,
-            'xmls:cfdi4': 'http://www.sat.gob.mx/cfd/4',
+            'xmls:cfdi4': 'http://www.sat.gob.mx/cfd/4'
         });
 
         await runValidate();
@@ -31,7 +32,7 @@ describe('XmlDefinition', () => {
 
     test('incorrect definition namespace value', async () => {
         getComprobante().addAttributes({
-            'xmlns:cfdi': 'http://www.sat.gob.mx/cfd/40',
+            'xmlns:cfdi': 'http://www.sat.gob.mx/cfd/40'
         });
 
         await runValidate();
@@ -58,7 +59,7 @@ describe('XmlDefinition', () => {
     test('incorrect definition version name', async () => {
         getComprobante().addAttributes({
             Version: null,
-            version: '4.0',
+            version: '4.0'
         });
 
         await runValidate();
@@ -68,7 +69,7 @@ describe('XmlDefinition', () => {
 
     test('incorrect definition version value', async () => {
         getComprobante().addAttributes({
-            Version: '4.1',
+            Version: '4.1'
         });
 
         await runValidate();

@@ -2,7 +2,7 @@ export enum StatusLvl {
     ERROR = 'ERROR',
     WARNING = 'WARN',
     NONE = 'NONE',
-    OK = 'OK',
+    OK = 'OK'
 }
 
 export class Status {

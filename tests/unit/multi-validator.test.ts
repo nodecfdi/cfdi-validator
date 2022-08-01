@@ -1,7 +1,7 @@
-import { useTestCase } from '../test-case';
-import { Asserts, Hydrater, MultiValidator, Status, ValidatorInterface } from '../../src';
-import { ImplementationValidatorInterface } from '../fake-objects/implementation-validator-interface';
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useTestCase } from '../test-case';
+import { Asserts, Hydrater, MultiValidator, Status, ValidatorInterface } from '~/index';
+import { ImplementationValidatorInterface } from '../fake-objects/implementation-validator-interface';
 import { ImplementationRequireXmlResolverInterface } from '../fake-objects/implementation-require-xml-resolver-interface';
 import { ImplementationRequireXmlStringInterface } from '../fake-objects/implementation-require-xml-string-interface';
 
@@ -104,7 +104,7 @@ describe('MultiValidator', () => {
             ...[
                 new ImplementationValidatorInterface(),
                 new ImplementationValidatorInterface(),
-                new ImplementationValidatorInterface(),
+                new ImplementationValidatorInterface()
             ]
         );
         expect(validator).toHaveLength(4);
@@ -135,7 +135,7 @@ describe('MultiValidator', () => {
             ...[
                 new ImplementationValidatorInterface(),
                 new ImplementationValidatorInterface(),
-                new ImplementationValidatorInterface(),
+                new ImplementationValidatorInterface()
             ]
         );
         expect(validator).toHaveLength(3);

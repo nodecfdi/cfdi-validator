@@ -1,22 +1,19 @@
-import { ValidatorInterface } from '../contracts/validator-interface';
 import { XmlResolverPropertyInterface, XmlResolverPropertyTrait } from '@nodecfdi/cfdiutils-core';
+import { Schema, Schemas, SchemaValidator } from '@nodecfdi/xml-schema-validator';
+import { CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
+import { Mixin } from 'ts-mixer';
+import { existsSync } from 'fs';
+import { ValidatorInterface } from '../contracts/validator-interface';
 import { RequireXmlStringInterface } from '../contracts/require-xml-string-interface';
 import { RequireXmlResolverInterface } from '../contracts/require-xml-resolver-interface';
-import { use } from 'typescript-mix';
 import { XmlStringPropertyTrait } from '../traits/xml-string-property-trait';
-import { CNodeInterface, XmlNodeUtils } from '@nodecfdi/cfdiutils-common';
 import { Asserts } from '../asserts';
-import { Schema, Schemas, SchemaValidator } from '@nodecfdi/xml-schema-validator';
-import { existsSync } from 'fs';
 import { Status } from '../status';
 
-interface XmlFollowSchema extends XmlStringPropertyTrait, XmlResolverPropertyTrait {}
-
 class XmlFollowSchema
+    extends Mixin(XmlStringPropertyTrait, XmlResolverPropertyTrait)
     implements ValidatorInterface, XmlResolverPropertyInterface, RequireXmlStringInterface, RequireXmlResolverInterface
 {
-    @use(XmlStringPropertyTrait, XmlResolverPropertyTrait) protected this: unknown;
-
     public canValidateCfdiVersion(_version: string): boolean {
         return true;
     }
@@ -43,6 +40,7 @@ class XmlFollowSchema
         } catch (e) {
             assert.setStatus(Status.error(), (e as Error).message);
             asserts.mustStop(true);
+
             return Promise.resolve();
         }
 
@@ -66,6 +64,7 @@ class XmlFollowSchema
             // this call will change the value, not insert a new entry
             schemas.insert(new Schema(schema.getNamespace(), localPath));
         }
+
         return Promise.resolve(schemas);
     }
 }

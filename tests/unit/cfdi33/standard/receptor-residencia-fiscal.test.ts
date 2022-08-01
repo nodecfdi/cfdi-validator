@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ReceptorResidenciaFiscal } from '../../../../src/cfdi33/standard/receptor-residencia-fiscal';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
-import { Status } from '../../../../src';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ReceptorResidenciaFiscal } from '~/cfdi33/standard/receptor-residencia-fiscal';
+import { Status } from '~/status';
 
 describe('ReceptorResidenciaFiscal', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();
@@ -20,7 +21,7 @@ describe('ReceptorResidenciaFiscal', () => {
         ['XEXX010101000', 'XXX', null, true, 'RESFISC02'],
         // RESFISC03: Si el RFC sí es XEXX010101000 y se registró el número de registro de identificación fiscal
         // entonces la residencia fiscal debe establecerse y no puede ser "MEX"
-        ['XEXX010101000', 'XXX', '1234', false, 'RESFISC03'],
+        ['XEXX010101000', 'XXX', '1234', false, 'RESFISC03']
     ])(
         'valid case',
         async (
@@ -34,7 +35,7 @@ describe('ReceptorResidenciaFiscal', () => {
                 new CNode('cfdi:Receptor', {
                     Rfc: receptorRfc,
                     ResidenciaFiscal: residenciaFiscal,
-                    NumRegIdTrib: numRegIdTrib,
+                    NumRegIdTrib: numRegIdTrib
                 })
             );
             if (putComercioExterior) {
@@ -66,7 +67,7 @@ describe('ReceptorResidenciaFiscal', () => {
         // entonces la residencia fiscal debe establecerse y no puede ser "MEX"
         ['XEXX010101000', null, '1234', false, 'RESFISC03'],
         ['XEXX010101000', '', '1234', false, 'RESFISC03'],
-        ['XEXX010101000', 'MEX', '1234', false, 'RESFISC03'],
+        ['XEXX010101000', 'MEX', '1234', false, 'RESFISC03']
     ])(
         'invalid case',
         async (
@@ -80,7 +81,7 @@ describe('ReceptorResidenciaFiscal', () => {
                 new CNode('cfdi:Receptor', {
                     Rfc: receptorRfc,
                     ResidenciaFiscal: residenciaFiscal,
-                    NumRegIdTrib: numRegIdTrib,
+                    NumRegIdTrib: numRegIdTrib
                 })
             );
             if (putComercioExterior) {

@@ -1,4 +1,4 @@
-import { Status, StatusLvl, Assert } from '../../src';
+import { Status, StatusLvl, Assert } from '~/index';
 
 describe('Assert', () => {
     test('constructor', () => {
@@ -20,13 +20,10 @@ describe('Assert', () => {
     });
 
     test('constructor with empty status throw exception', () => {
-        expect.hasAssertions();
-        try {
-            new Assert('');
-        } catch (e) {
-            expect(e).toBeInstanceOf(SyntaxError);
-            expect(e).toHaveProperty('message', 'Code cannot be an empty string');
-        }
+        const t = (): Assert => new Assert('');
+
+        expect(t).toThrow(SyntaxError);
+        expect(t).toThrow('Code cannot be an empty string');
     });
 
     test('set title', () => {

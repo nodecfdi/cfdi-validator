@@ -1,17 +1,17 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Rfc } from '@nodecfdi/rfc';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO11: En un pago, cuando el RFC del banco emisor sea "XEXX010101000" el nombre del banco es requerido (CRP211)
  */
 export class BancoOrdenanteNombreRequerido extends AbstractPagoValidator {
-    protected code = 'PAGO11';
+    protected override code = 'PAGO11';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando el RFC del banco emisor sea "XEXX010101000"',
-        ' el nombre del banco es requerido (CRP211)',
+        ' el nombre del banco es requerido (CRP211)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -20,6 +20,7 @@ export class BancoOrdenanteNombreRequerido extends AbstractPagoValidator {
                 `Rfc: "${pago.get('RfcEmisorCtaOrd')}", Nombre "${pago.get('NomBancoOrdExt')}"`
             );
         }
+
         return true;
     }
 }

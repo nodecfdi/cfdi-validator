@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { ComprobanteDecimalesMoneda } from '../../../../src/cfdi33/standard/comprobante-decimales-moneda';
-import { Status } from '../../../../src';
+/* eslint-disable jest/expect-expect */
 import { CNode } from '@nodecfdi/cfdiutils-common';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { ComprobanteDecimalesMoneda } from '~/cfdi33/standard/comprobante-decimales-moneda';
+import { Status } from '~/status';
 
 describe('ComprobanteDecimalesMoneda', () => {
     const {
@@ -11,7 +12,7 @@ describe('ComprobanteDecimalesMoneda', () => {
         getAsserts,
         assertStatusEqualsStatus,
         assertStatusEqualsAssert,
-        assertStatusEqualsCode,
+        assertStatusEqualsCode
     } = useValidate33TestCase();
 
     beforeEach(() => {
@@ -32,18 +33,18 @@ describe('ComprobanteDecimalesMoneda', () => {
             Moneda: 'MXN',
             SubTotal: '123',
             Descuento: '1.2',
-            Total: '999.99',
+            Total: '999.99'
         });
         getComprobante33().addChild(
             new CNode(
                 'cfdi:Impuestos',
                 {
                     TotalImpuestosTrasladados: '1.23',
-                    TotalImpuestosRetenidos: '1.23',
+                    TotalImpuestosRetenidos: '1.23'
                 },
                 [
                     new CNode('cfdi:Traslados', {}, [new CNode('cfdi:Traslado', { Importe: '123.45' })]),
-                    new CNode('cfdi:Retenciones', {}, [new CNode('cfdi:Retencion', { Importe: '123.45' })]),
+                    new CNode('cfdi:Retenciones', {}, [new CNode('cfdi:Retencion', { Importe: '123.45' })])
                 ]
             )
         );
@@ -56,12 +57,12 @@ describe('ComprobanteDecimalesMoneda', () => {
 
     test('all asserts missing attributes', async () => {
         getComprobante33().addAttributes({
-            Moneda: 'MXN',
+            Moneda: 'MXN'
         });
         getComprobante33().addChild(
             new CNode('cfdi:Impuestos', {}, [
                 new CNode('cfdi:Traslados', {}, [new CNode('cfdi:Traslado', {})]),
-                new CNode('cfdi:Retenciones', {}, [new CNode('cfdi:Retencion', {})]),
+                new CNode('cfdi:Retenciones', {}, [new CNode('cfdi:Retencion', {})])
             ])
         );
 
@@ -78,24 +79,24 @@ describe('ComprobanteDecimalesMoneda', () => {
             Moneda: 'MXN',
             SubTotal: '123.000',
             Descuento: '123.000',
-            Total: '123.000',
+            Total: '123.000'
         });
         getComprobante33().addChild(
             new CNode(
                 'cfdi:Impuestos',
                 {
                     TotalImpuestosTrasladados: '123.000',
-                    TotalImpuestosRetenidos: '123.000',
+                    TotalImpuestosRetenidos: '123.000'
                 },
                 [
                     new CNode('cfdi:Traslados', {}, [
                         new CNode('cfdi:Traslado', { Importe: '123.00' }),
-                        new CNode('cfdi:Traslado', { Importe: '123.000' }),
+                        new CNode('cfdi:Traslado', { Importe: '123.000' })
                     ]),
                     new CNode('cfdi:Retenciones', {}, [
                         new CNode('cfdi:Retencion', { Importe: '123.000' }),
-                        new CNode('cfdi:Retencion', { Importe: '123.000' }),
-                    ]),
+                        new CNode('cfdi:Retencion', { Importe: '123.000' })
+                    ])
                 ]
             )
         );

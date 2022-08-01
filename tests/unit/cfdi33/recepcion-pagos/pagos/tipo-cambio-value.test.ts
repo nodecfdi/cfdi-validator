@@ -1,13 +1,13 @@
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { TipoCambioValue } from '../../../../../src/cfdi33/recepcion-pagos/pagos/tipo-cambio-value';
-import { ValidatePagoException } from '../../../../../src/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
+import { TipoCambioValue } from '~/cfdi33/recepcion-pagos/pagos/tipo-cambio-value';
+import { ValidatePagoException } from '~/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
 
 describe('TipoCambioValue', () => {
     const { Pago } = Pagos10;
 
     test.each([['0.000002'], ['18.5623'], [null]])('valid', (exchangeRate: string | null) => {
         const pago = new Pago({
-            TipoCambioP: exchangeRate,
+            TipoCambioP: exchangeRate
         });
         const validator = new TipoCambioValue();
 
@@ -18,16 +18,13 @@ describe('TipoCambioValue', () => {
         'invalid',
         (exchangeRate: string | null) => {
             const pago = new Pago({
-                TipoCambioP: exchangeRate,
+                TipoCambioP: exchangeRate
             });
             const validator = new TipoCambioValue();
 
-            expect.hasAssertions();
-            try {
-                validator.validatePago(pago);
-            } catch (e) {
-                expect(e).toBeInstanceOf(ValidatePagoException);
-            }
+            const t = (): boolean => validator.validatePago(pago);
+
+            expect(t).toThrow(ValidatePagoException);
         }
     );
 });

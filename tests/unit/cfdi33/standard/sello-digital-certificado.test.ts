@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import { useValidate33TestCase } from '../validate33-test-case';
-import { SelloDigitalCertificado } from '../../../../src/cfdi33/standard/sello-digital-certificado';
-import { Status } from '../../../../src';
+import { SelloDigitalCertificado } from '~/cfdi33/standard/sello-digital-certificado';
+import { Status } from '~/status';
 
 describe('SelloDigitalCertificado', () => {
     const {
@@ -10,7 +11,7 @@ describe('SelloDigitalCertificado', () => {
         getComprobante,
         runValidate,
         assertStatusEqualsCode,
-        getAsserts,
+        getAsserts
     } = useValidate33TestCase();
 
     let validator: SelloDigitalCertificado;

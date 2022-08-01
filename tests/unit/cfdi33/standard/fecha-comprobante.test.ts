@@ -1,7 +1,8 @@
-import { useValidate33TestCase } from '../validate33-test-case';
-import { FechaComprobante } from '../../../../src/cfdi33/standard/fecha-comprobante';
+/* eslint-disable jest/expect-expect */
 import { DateTime } from 'luxon';
-import { Status } from '../../../../src';
+import { useValidate33TestCase } from '../validate33-test-case';
+import { FechaComprobante } from '~/cfdi33/standard/fecha-comprobante';
+import { Status } from '~/status';
 
 describe('FechaComprobante', () => {
     const { setValidator, getComprobante33, runValidate, assertStatusEqualsCode, getAsserts } = useValidate33TestCase();
@@ -16,7 +17,7 @@ describe('FechaComprobante', () => {
         const expectedTolerance = 300;
         const expectedMaxTime = Date.now() + expectedTolerance;
 
-        const validator = new FechaComprobante();
+        validator = new FechaComprobante();
 
         expect(validator.canValidateCfdiVersion('3.3')).toBeTruthy();
         expect(validator.getMaximumDate() - expectedMaxTime <= 2).toBeTruthy();
@@ -24,13 +25,13 @@ describe('FechaComprobante', () => {
     });
 
     test('set maximum date', () => {
-        const validator = new FechaComprobante();
+        validator = new FechaComprobante();
         validator.setMaximumDate(0);
         expect(validator.getMaximumDate()).toBe(0);
     });
 
     test('set tolerance', () => {
-        const validator = new FechaComprobante();
+        validator = new FechaComprobante();
         validator.setTolerance(1000);
         expect(validator.getTolerance()).toBe(1000);
     });
@@ -38,7 +39,7 @@ describe('FechaComprobante', () => {
     test('validate ok current date', async () => {
         const timestamp = Date.now();
         getComprobante33().addAttributes({
-            Fecha: DateTime.fromMillis(timestamp).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
+            Fecha: DateTime.fromMillis(timestamp).toFormat("yyyy-LL-dd'T'HH:mm:ss")
         });
 
         await runValidate();
@@ -51,7 +52,7 @@ describe('FechaComprobante', () => {
     test('validate ok minimum date', async () => {
         const now = validator.getMinimumDate();
         getComprobante33().addAttributes({
-            Fecha: DateTime.fromMillis(now).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
+            Fecha: DateTime.fromMillis(now).toFormat("yyyy-LL-dd'T'HH:mm:ss")
         });
 
         await runValidate();
@@ -64,7 +65,7 @@ describe('FechaComprobante', () => {
     test('validate ok maximum date', async () => {
         const nowMax = validator.getMaximumDate();
         getComprobante33().addAttributes({
-            Fecha: DateTime.fromMillis(nowMax).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
+            Fecha: DateTime.fromMillis(nowMax).toFormat("yyyy-LL-dd'T'HH:mm:ss")
         });
 
         await runValidate();
@@ -83,7 +84,7 @@ describe('FechaComprobante', () => {
 
     test('validate empty fecha', async () => {
         getComprobante33().addAttributes({
-            Fecha: '',
+            Fecha: ''
         });
 
         await runValidate();
@@ -94,7 +95,7 @@ describe('FechaComprobante', () => {
 
     test('validate malformed fecha', async () => {
         getComprobante33().addAttributes({
-            Fecha: 'YYYY-MM-DD hh:mm:ss',
+            Fecha: 'YYYY-MM-DD hh:mm:ss'
         });
 
         await runValidate();
@@ -105,7 +106,7 @@ describe('FechaComprobante', () => {
 
     test('validate older fecha', async () => {
         getComprobante33().addAttributes({
-            Fecha: '2017-06-30T23:59:59',
+            Fecha: '2017-06-30T23:59:59'
         });
 
         await runValidate();
@@ -116,7 +117,7 @@ describe('FechaComprobante', () => {
 
     test('validate future fecha', async () => {
         getComprobante33().addAttributes({
-            Fecha: DateTime.fromMillis(validator.getMaximumDate() + 1000).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
+            Fecha: DateTime.fromMillis(validator.getMaximumDate() + 1000).toFormat("yyyy-LL-dd'T'HH:mm:ss")
         });
 
         await runValidate();

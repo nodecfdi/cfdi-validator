@@ -1,23 +1,19 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
-import { use } from 'typescript-mix';
-import { CalculateDocumentAmountTrait } from '../helpers/calculate-document-amount-trait';
 import { CNodeInterface, CurrencyDecimals } from '@nodecfdi/cfdiutils-common';
+import { Mixin } from 'ts-mixer';
+import { AbstractPagoValidator } from './abstract-pago-validator';
+import { CalculateDocumentAmountTrait } from '../helpers/calculate-document-amount-trait';
 import { ValidatePagoException } from './validate-pago-exception';
-
-interface MontoGreaterOrEqualThanSumOfDocuments extends AbstractPagoValidator, CalculateDocumentAmountTrait {}
 
 /**
  * PAGO30: En un pago, la suma de los valores registrados o predeterminados en el importe pagado
  *         de los documentos relacionados debe ser menor o igual que el monto del pago (CRP206)
  */
-class MontoGreaterOrEqualThanSumOfDocuments extends AbstractPagoValidator {
-    @use(CalculateDocumentAmountTrait) private this: unknown;
+class MontoGreaterOrEqualThanSumOfDocuments extends Mixin(AbstractPagoValidator, CalculateDocumentAmountTrait) {
+    protected override code = 'PAGO30';
 
-    protected code = 'PAGO30';
-
-    protected title = [
+    protected override title = [
         'En un pago, la suma de los valores registrados o predeterminados en el importe pagado',
-        ' de los documentos relacionados debe ser menor o igual que el monto del pago (CRP206)',
+        ' de los documentos relacionados debe ser menor o igual que el monto del pago (CRP206)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -41,6 +37,7 @@ class MontoGreaterOrEqualThanSumOfDocuments extends AbstractPagoValidator {
             }
             sumOfDocuments += currency.round(this.calculateDocumentAmount(document, pago) / exchangeRate);
         });
+
         return sumOfDocuments;
     }
 }

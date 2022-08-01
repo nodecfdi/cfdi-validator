@@ -1,3 +1,4 @@
+import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { AbstractPagoValidator } from './abstract-pago-validator';
 import { AbstractDoctoRelacionadoValidator } from './docto-relacionado/abstract-docto-relacionado-validator';
 import { Moneda } from './docto-relacionado/moneda';
@@ -12,7 +13,6 @@ import { NumeroParcialidadRequerido } from './docto-relacionado/numero-parcialid
 import { ImporteSaldoAnteriorRequerido } from './docto-relacionado/importe-saldo-anterior-requerido';
 import { ImporteSaldoInsolutoRequerido } from './docto-relacionado/importe-saldo-insoluto-requerido';
 import { Asserts } from '../../../asserts';
-import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 
 export class DoctoRelacionado extends AbstractPagoValidator {
     protected validators: AbstractDoctoRelacionadoValidator[];
@@ -38,12 +38,12 @@ export class DoctoRelacionado extends AbstractPagoValidator {
             new ImportePagadoRequerido(), // PAGO30
             new NumeroParcialidadRequerido(), // PAGO31
             new ImporteSaldoAnteriorRequerido(), // PAGO32
-            new ImporteSaldoInsolutoRequerido(), // PAGO33
+            new ImporteSaldoInsolutoRequerido() // PAGO33
         ];
     }
 
     // override registerInAssets to add validators instead of itself
-    public registerInAssets(asserts: Asserts): void {
+    public override registerInAssets(asserts: Asserts): void {
         this.validators.forEach((validator) => {
             validator.registerInAssets(asserts);
         });

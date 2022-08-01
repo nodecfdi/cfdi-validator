@@ -1,6 +1,8 @@
-import { Status } from '../../src';
+/* eslint-disable jest/no-export */
+/* eslint-disable jest/expect-expect */
 import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Tfd11 } from '@nodecfdi/cfdiutils-elements';
+import { Status } from '~/status';
 
 const useSelloDigitalCertificadoWithCfdiRegistroFiscalTrait = (
     runValidate: () => Promise<void>,
@@ -18,8 +20,8 @@ const useSelloDigitalCertificadoWithCfdiRegistroFiscalTrait = (
         getComprobante().addChild(
             new CNode('cfdi:Complemento', {}, [
                 new Tfd11.TimbreFiscalDigital({
-                    NoCertificadoSAT: '00001000000403258748',
-                }),
+                    NoCertificadoSAT: '00001000000403258748'
+                })
             ])
         );
 
@@ -43,8 +45,8 @@ const useSelloDigitalCertificadoWithCfdiRegistroFiscalTrait = (
             new CNode('cfdi:Complemento', {}, [
                 new CNode('registrofiscal:CFDIRegistroFiscal'),
                 new Tfd11.TimbreFiscalDigital({
-                    NoCertificadoSAT: '00001000000403258748',
-                }),
+                    NoCertificadoSAT: '00001000000403258748'
+                })
             ])
         );
 

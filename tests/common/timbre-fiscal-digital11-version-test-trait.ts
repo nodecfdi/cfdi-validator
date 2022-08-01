@@ -1,6 +1,8 @@
-import { Status } from '../../src';
+/* eslint-disable jest/no-export */
+/* eslint-disable jest/expect-expect */
 import { CNode, CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Tfd11 } from '@nodecfdi/cfdiutils-elements';
+import { Status } from '~/status';
 
 const useTimbreFiscalDigital11VersionTestTrait = (
     runValidate: () => Promise<void>,
@@ -20,7 +22,7 @@ const useTimbreFiscalDigital11VersionTestTrait = (
         async (version: string | null) => {
             const tfd = new Tfd11.TimbreFiscalDigital();
             tfd.addAttributes({
-                Version: version, // override version
+                Version: version // override version
             });
             getComprobante().addChild(new CNode('cfdi:Complemento', {}, [tfd]));
 

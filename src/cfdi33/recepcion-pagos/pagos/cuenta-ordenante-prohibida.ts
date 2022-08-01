@@ -1,16 +1,16 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
  * PAGO13: En un pago, cuando la forma de pago no sea bancarizada la cuenta ordenante no debe existir (CRP212)
  */
 export class CuentaOrdenanteProhibida extends AbstractPagoValidator {
-    protected code = 'PAGO13';
+    protected override code = 'PAGO13';
 
-    protected title = [
+    protected override title = [
         'En un pago, cuando la forma de pago no sea bancarizada',
-        ' la cuenta ordenante no debe existir (CRP212)',
+        ' la cuenta ordenante no debe existir (CRP212)'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -20,6 +20,7 @@ export class CuentaOrdenanteProhibida extends AbstractPagoValidator {
         if (!payment.allowSenderAccount() && pago.offsetExists('CtaOrdenante')) {
             throw new ValidatePagoException(`Bancarizado: Si, Cuenta: "${pago.get('CtaOrdenante')}"`);
         }
+
         return true;
     }
 }

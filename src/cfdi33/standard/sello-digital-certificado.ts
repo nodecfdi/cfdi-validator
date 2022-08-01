@@ -1,12 +1,9 @@
+import { Mixin } from 'ts-mixer';
 import { AbstractDiscoverableVersion33 } from '../abstracts/abstract-discoverable-version33';
 import { RequireXmlResolverInterface } from '../../contracts/require-xml-resolver-interface';
 import { RequireXsltBuilderInterface } from '../../contracts/require-xslt-builder-interface';
 import { RequireXmlStringInterface } from '../../contracts/require-xml-string-interface';
-import { ValidatorInterface } from '../../contracts/validator-interface';
-import { use } from 'typescript-mix';
 import { SelloDigitalCertificadoValidatorTrait } from '../../common/sello-digital-certificado-validator-trait';
-
-interface SelloDigitalCertificado extends SelloDigitalCertificadoValidatorTrait {}
 
 /**
  * SelloDigitalCertificado
@@ -22,14 +19,7 @@ interface SelloDigitalCertificado extends SelloDigitalCertificadoValidatorTrait 
  * - SELLO08: El sello del comprobante coincide con el certificado y la cadena de origen generada
  */
 class SelloDigitalCertificado
-    extends AbstractDiscoverableVersion33
-    implements RequireXmlStringInterface, RequireXmlResolverInterface, RequireXsltBuilderInterface
-{
-    @use(SelloDigitalCertificadoValidatorTrait) protected this: unknown;
-
-    public static createDiscovered(): ValidatorInterface {
-        return new SelloDigitalCertificado();
-    }
-}
+    extends Mixin(AbstractDiscoverableVersion33, SelloDigitalCertificadoValidatorTrait)
+    implements RequireXmlStringInterface, RequireXmlResolverInterface, RequireXsltBuilderInterface {}
 
 export { SelloDigitalCertificado };

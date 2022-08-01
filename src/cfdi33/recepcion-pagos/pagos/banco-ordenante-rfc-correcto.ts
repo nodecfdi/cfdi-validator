@@ -1,6 +1,6 @@
-import { AbstractPagoValidator } from './abstract-pago-validator';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
 import { Rfc } from '@nodecfdi/rfc';
+import { AbstractPagoValidator } from './abstract-pago-validator';
 import { ValidatePagoException } from './validate-pago-exception';
 
 /**
@@ -8,11 +8,11 @@ import { ValidatePagoException } from './validate-pago-exception';
  *         debe ser válido y diferente de "XAXX010101000"
  */
 export class BancoOrdenanteRfcCorrecto extends AbstractPagoValidator {
-    protected code = 'PAGO10';
+    protected override code = 'PAGO10';
 
-    protected title = [
+    protected override title = [
         'En en pago, cuando el RFC del banco emisor de la cuenta ordenante existe',
-        ' debe ser válido y diferente de "XAXX010101000"',
+        ' debe ser válido y diferente de "XAXX010101000"'
     ].join('');
 
     public validatePago(pago: CNodeInterface): boolean {
@@ -23,6 +23,7 @@ export class BancoOrdenanteRfcCorrecto extends AbstractPagoValidator {
                 throw new ValidatePagoException((e as Error).message);
             }
         }
+
         return true;
     }
 }

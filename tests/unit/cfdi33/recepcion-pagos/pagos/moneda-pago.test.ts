@@ -1,13 +1,13 @@
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { MonedaPago } from '../../../../../src/cfdi33/recepcion-pagos/pagos/moneda-pago';
-import { ValidatePagoException } from '../../../../../src/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
+import { MonedaPago } from '~/cfdi33/recepcion-pagos/pagos/moneda-pago';
+import { ValidatePagoException } from '~/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
 
 describe('MonedaPago', () => {
     const { Pago } = Pagos10;
 
     test('valid', () => {
         const pago = new Pago({
-            MonedaP: '999',
+            MonedaP: '999'
         });
         const validator = new MonedaPago();
 
@@ -16,15 +16,12 @@ describe('MonedaPago', () => {
 
     test.each([[null], [''], ['XXX']])('invalid', (currency: string | null) => {
         const pago = new Pago({
-            MonedaP: currency,
+            MonedaP: currency
         });
         const validator = new MonedaPago();
 
-        expect.hasAssertions();
-        try {
-            validator.validatePago(pago);
-        } catch (e) {
-            expect(e).toBeInstanceOf(ValidatePagoException);
-        }
+        const t = (): boolean => validator.validatePago(pago);
+
+        expect(t).toThrow(ValidatePagoException);
     });
 });

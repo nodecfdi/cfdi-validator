@@ -1,6 +1,6 @@
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { NumeroParcialidadRequerido } from '../../../../../../src/cfdi33/recepcion-pagos/pagos/docto-relacionado/numero-parcialidad-requerido';
-import { ValidateDoctoException } from '../../../../../../src/cfdi33/recepcion-pagos/pagos/docto-relacionado/validate-docto-exception';
+import { NumeroParcialidadRequerido } from '~/cfdi33/recepcion-pagos/pagos/docto-relacionado/numero-parcialidad-requerido';
+import { ValidateDoctoException } from '~/cfdi33/recepcion-pagos/pagos/docto-relacionado/validate-docto-exception';
 
 describe('NumeroParcialidadRequerido', () => {
     const { DoctoRelacionado } = Pagos10;
@@ -8,7 +8,7 @@ describe('NumeroParcialidadRequerido', () => {
     test('valid', () => {
         const docto = new DoctoRelacionado({
             MetodoDePagoDR: 'PPD',
-            NumParcialidad: '1',
+            NumParcialidad: '1'
         });
         const validator = new NumeroParcialidadRequerido();
         validator.setIndex(0);
@@ -19,16 +19,13 @@ describe('NumeroParcialidadRequerido', () => {
     test('invalid', () => {
         const docto = new DoctoRelacionado({
             MetodoDePagoDR: 'PPD',
-            NumParcialidad: null,
+            NumParcialidad: null
         });
         const validator = new NumeroParcialidadRequerido();
         validator.setIndex(0);
 
-        expect.hasAssertions();
-        try {
-            validator.validateDoctoRelacionado(docto);
-        } catch (e) {
-            expect(e).toBeInstanceOf(ValidateDoctoException);
-        }
+        const t = (): boolean => validator.validateDoctoRelacionado(docto);
+
+        expect(t).toThrow(ValidateDoctoException);
     });
 });

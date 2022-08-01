@@ -1,14 +1,11 @@
-import { Status, StatusLvl } from '../../src';
+import { Status, StatusLvl } from '~/status';
 
 describe('Status', () => {
     test('construct with invalid code', () => {
-        expect.hasAssertions();
-        try {
-            new Status('foo');
-        } catch (e) {
-            expect(e).toBeInstanceOf(SyntaxError);
-            expect(e).toHaveProperty('message', 'The status is not one of the defined valid constants enum');
-        }
+        const t = (): Status => new Status('foo');
+
+        expect(t).toThrow(SyntaxError);
+        expect(t).toThrow('The status is not one of the defined valid constants enum');
     });
 
     test('ok', () => {

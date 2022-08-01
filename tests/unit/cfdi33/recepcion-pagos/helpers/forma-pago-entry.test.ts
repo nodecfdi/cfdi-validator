@@ -1,7 +1,4 @@
-import {
-    FormaPagoEntry,
-    FormaPagoEntryInterface,
-} from '../../../../../src/cfdi33/recepcion-pagos/helpers/forma-pago-entry';
+import { FormaPagoEntry, FormaPagoEntryInterface } from '~/cfdi33/recepcion-pagos/helpers/forma-pago-entry';
 
 describe('FormaPagoEntry', () => {
     const createEntry = (
@@ -24,7 +21,7 @@ describe('FormaPagoEntry', () => {
             useReceiverRfc,
             useReceiverAccount,
             useReceiverAccountRegExp,
-            allowPaymentSignature,
+            allowPaymentSignature
         };
     };
 
@@ -32,13 +29,13 @@ describe('FormaPagoEntry', () => {
         [createEntry('foo', 'bar', false, false, undefined, false, false, undefined, false)],
         [createEntry('foo', 'bar', true, false, undefined, false, false, undefined, false)],
         [createEntry('foo', 'bar', false, true, undefined, false, false, undefined, false)],
-        [createEntry('foo', 'bar', false, true, /[0-9]+/, false, false, undefined, false)],
-        [createEntry('foo', 'bar', false, false, /[0-9]+/, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, true, /\d+/, false, false, undefined, false)],
+        [createEntry('foo', 'bar', false, false, /\d+/, false, false, undefined, false)],
         [createEntry('foo', 'bar', false, false, undefined, true, false, undefined, false)],
         [createEntry('foo', 'bar', false, false, undefined, false, true, undefined, false)],
-        [createEntry('foo', 'bar', false, false, undefined, false, true, /[0-9]+/, false)],
-        [createEntry('foo', 'bar', false, false, undefined, false, false, /[0-9]+/, false)],
-        [createEntry('foo', 'bar', false, false, undefined, false, false, undefined, true)],
+        [createEntry('foo', 'bar', false, false, undefined, false, true, /\d+/, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, false, /\d+/, false)],
+        [createEntry('foo', 'bar', false, false, undefined, false, false, undefined, true)]
     ])('construct valid object', (entry: FormaPagoEntryInterface) => {
         const paymentType = new FormaPagoEntry(entry);
         let expectedSenderAccountPattern = /^$/;
@@ -62,8 +59,7 @@ describe('FormaPagoEntry', () => {
     });
 
     test('construct without key', () => {
-        expect.hasAssertions();
-        try {
+        const t = (): FormaPagoEntry =>
             new FormaPagoEntry({
                 key: '',
                 description: 'bar',
@@ -73,17 +69,15 @@ describe('FormaPagoEntry', () => {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             });
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain(' key ');
-        }
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow(' key ');
     });
 
     test('construct without description', () => {
-        expect.hasAssertions();
-        try {
+        const t = (): FormaPagoEntry =>
             new FormaPagoEntry({
                 key: 'foo',
                 description: '',
@@ -93,11 +87,10 @@ describe('FormaPagoEntry', () => {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             });
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect((e as Error).message).toContain(' description ');
-        }
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow(' description ');
     });
 });

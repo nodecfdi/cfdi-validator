@@ -12,62 +12,62 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '02',
                 description: 'Cheque nominativo',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{11}|[0-9]{18})$/,
+                useSenderAccountRegExp: /^(\d{11}|\d{18})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
-                allowPaymentSignature: false,
+                useReceiverAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
+                allowPaymentSignature: false
             },
             {
                 key: '03',
                 description: 'Transferencia electrónica de fondos',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{10}|[0-9]{16}|[0-9]{18})$/,
+                useSenderAccountRegExp: /^(\d{10}|\d{16}|\d{18})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10}|[0-9]{18})$/,
-                allowPaymentSignature: true,
+                useReceiverAccountRegExp: /^(\d{10}|\d{18})$/,
+                allowPaymentSignature: true
             },
             {
                 key: '04',
                 description: 'Tarjeta de crédito',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{16})$/,
+                useSenderAccountRegExp: /^(\d{16})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
-                allowPaymentSignature: false,
+                useReceiverAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
+                allowPaymentSignature: false
             },
             {
                 key: '05',
                 description: 'Monedero electrónico',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
+                useSenderAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
-                allowPaymentSignature: false,
+                useReceiverAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
+                allowPaymentSignature: false
             },
             {
                 key: '06',
                 description: 'Dinero electrónico',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{10})$/,
+                useSenderAccountRegExp: /^(\d{10})$/,
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '08',
@@ -78,7 +78,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '12',
@@ -89,7 +89,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '13',
@@ -100,7 +100,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '14',
@@ -111,7 +111,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '15',
@@ -122,7 +122,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '17',
@@ -133,7 +133,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '23',
@@ -144,7 +144,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '24',
@@ -155,7 +155,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '25',
@@ -166,7 +166,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '26',
@@ -177,7 +177,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '27',
@@ -188,29 +188,29 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '28',
                 description: 'Tarjeta de débito',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{16})$/,
+                useSenderAccountRegExp: /^(\d{16})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
-                allowPaymentSignature: false,
+                useReceiverAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
+                allowPaymentSignature: false
             },
             {
                 key: '29',
                 description: 'Tarjeta de servicios',
                 useSenderRfc: true,
                 useSenderAccount: true,
-                useSenderAccountRegExp: /^([0-9]{15,16})$/,
+                useSenderAccountRegExp: /^(\d{15,16})$/,
                 useReceiverRfc: true,
                 useReceiverAccount: true,
-                useReceiverAccountRegExp: /^([0-9]{10,11}|[0-9]{15,16}|[0-9]{18}|[A-Z0-9_]{10,50})$/,
-                allowPaymentSignature: false,
+                useReceiverAccountRegExp: /^(\d{10,11}|\d{15,16}|\d{18}|[A-Z0-9_]{10,50})$/,
+                allowPaymentSignature: false
             },
             {
                 key: '30',
@@ -221,7 +221,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '31',
@@ -232,7 +232,7 @@ export class FormaPagoCatalog {
                 useReceiverRfc: false,
                 useReceiverAccount: false,
                 useReceiverAccountRegExp: undefined,
-                allowPaymentSignature: false,
+                allowPaymentSignature: false
             },
             {
                 key: '99',
@@ -243,8 +243,8 @@ export class FormaPagoCatalog {
                 useReceiverRfc: true,
                 useReceiverAccount: true,
                 useReceiverAccountRegExp: /^S*$/,
-                allowPaymentSignature: true,
-            },
+                allowPaymentSignature: true
+            }
         ];
 
         const keys = map.map((entry) => entry.key);
@@ -252,6 +252,7 @@ export class FormaPagoCatalog {
         if (index === -1) {
             throw new RangeError(`Key '${key}' was not found in the catalog`);
         }
+
         return new FormaPagoEntry(map[index]);
     }
 }

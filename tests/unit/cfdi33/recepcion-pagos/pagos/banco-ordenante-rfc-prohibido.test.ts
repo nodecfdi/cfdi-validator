@@ -1,6 +1,6 @@
 import { Pagos10 } from '@nodecfdi/cfdiutils-elements';
-import { BancoOrdenanteRfcProhibido } from '../../../../../src/cfdi33/recepcion-pagos/pagos/banco-ordenante-rfc-prohibido';
-import { ValidatePagoException } from '../../../../../src/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
+import { BancoOrdenanteRfcProhibido } from '~/cfdi33/recepcion-pagos/pagos/banco-ordenante-rfc-prohibido';
+import { ValidatePagoException } from '~/cfdi33/recepcion-pagos/pagos/validate-pago-exception';
 
 describe('BancoOrdenanteRfcProhibido', () => {
     const { Pago } = Pagos10;
@@ -9,11 +9,11 @@ describe('BancoOrdenanteRfcProhibido', () => {
         ['02', 'COSC8001137NA'],
         ['02', ''],
         ['02', null],
-        ['01', null],
+        ['01', null]
     ])('valid', (paymentType: string, rfc: string | null) => {
         const pago = new Pago({
             FormaDePagoP: paymentType,
-            RfcEmisorCtaOrd: rfc,
+            RfcEmisorCtaOrd: rfc
         });
         const validator = new BancoOrdenanteRfcProhibido();
 
@@ -23,19 +23,16 @@ describe('BancoOrdenanteRfcProhibido', () => {
     test.each([
         ['01', 'COSC8001137NA'],
         ['01', ''],
-        [null, 'COSC8001137NA'],
+        [null, 'COSC8001137NA']
     ])('invalid', (paymentType: string | null, rfc: string) => {
         const pago = new Pago({
             FormaDePagoP: paymentType,
-            RfcEmisorCtaOrd: rfc,
+            RfcEmisorCtaOrd: rfc
         });
         const validator = new BancoOrdenanteRfcProhibido();
 
-        expect.hasAssertions();
-        try {
-            validator.validatePago(pago);
-        } catch (e) {
-            expect(e).toBeInstanceOf(ValidatePagoException);
-        }
+        const t = (): boolean => validator.validatePago(pago);
+
+        expect(t).toThrow(ValidatePagoException);
     });
 });

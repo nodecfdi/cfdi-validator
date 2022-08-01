@@ -1,4 +1,4 @@
-import { Status, Asserts, Assert } from '../../src';
+import { Status, Asserts, Assert } from '~/index';
 
 describe('Asserts', () => {
     test('constructor', () => {
@@ -93,13 +93,10 @@ describe('Asserts', () => {
     test('get with not existent status', () => {
         const asserts = new Asserts();
 
-        expect.hasAssertions();
-        try {
-            asserts.get('X02');
-        } catch (e) {
-            expect(e).toBeInstanceOf(Error);
-            expect(e).toHaveProperty('message', 'There is no assert with code X02');
-        }
+        const t = (): Assert => asserts.get('X02');
+
+        expect(t).toThrow(Error);
+        expect(t).toThrow('There is no assert with code X02');
     });
 
     test('get by status', () => {

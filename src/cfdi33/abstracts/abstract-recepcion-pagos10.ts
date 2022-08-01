@@ -1,10 +1,7 @@
-import { AbstractVersion33 } from './abstract-version33';
 import { CNodeInterface } from '@nodecfdi/cfdiutils-common';
+import { AbstractVersion33 } from './abstract-version33';
 import { Asserts } from '../../asserts';
 
-/**
- * Manual add public static createDiscovered(): ValidatorInterface
- */
 export abstract class AbstractRecepcionPagos10 extends AbstractVersion33 {
     public abstract validateRecepcionPagos(comprobante: CNodeInterface, asserts: Asserts): Promise<void>;
 
@@ -19,6 +16,7 @@ export abstract class AbstractRecepcionPagos10 extends AbstractVersion33 {
         ) {
             return Promise.resolve();
         }
+
         return this.validateRecepcionPagos(comprobante, asserts);
     }
 }

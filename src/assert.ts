@@ -2,17 +2,20 @@ import { Status } from './status';
 
 export class Assert {
     private _title: string;
+
     private _status!: Status;
+
     private _explanation: string;
+
     private readonly _code: string;
 
     /**
      * Assert constructor
      *
-     * @param code
-     * @param title
-     * @param status If null the status will be NONE
-     * @param explanation
+     * @param code -
+     * @param title -
+     * @param status - If null the status will be NONE
+     * @param explanation -
      */
     constructor(code: string, title = '', status: Status | null = null, explanation = '') {
         if ('' == code) {
