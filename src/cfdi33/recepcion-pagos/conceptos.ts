@@ -13,15 +13,15 @@ import { Status } from '../../status';
 export class Conceptos extends AbstractRecepcionPagos10 {
     public static REQUIRED_CLAVEPRODSERV = '84111506';
 
-    public static REQUIRED_CANTIDAD = /^1(\.[0]{1,6})?$/;
+    public static REQUIRED_CANTIDAD = /^1(\.0{1,6})?$/;
 
     public static REQUIRED_CLAVEUNIDAD = 'ACT';
 
     public static REQUIRED_DESCRIPCION = 'Pago';
 
-    public static REQUIRED_VALORUNITARIO = /^0(\.[0]{1,6})?$/;
+    public static REQUIRED_VALORUNITARIO = /^0(\.0{1,6})?$/;
 
-    public static REQUIRED_IMPORTE = /^0(\.[0]{1,6})?$/;
+    public static REQUIRED_IMPORTE = /^0(\.0{1,6})?$/;
 
     public validateRecepcionPagos(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         const assert = asserts.put('PAGCON01', 'Se debe usar el concepto predefinido (CRP107 - CRP121)');
