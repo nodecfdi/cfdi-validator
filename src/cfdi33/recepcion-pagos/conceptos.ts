@@ -13,15 +13,15 @@ import { Status } from '../../status';
 export class Conceptos extends AbstractRecepcionPagos10 {
     public static REQUIRED_CLAVEPRODSERV = '84111506';
 
-    public static REQUIRED_CANTIDAD = '1';
+    public static REQUIRED_CANTIDAD = /^1(\.0{1,6})?$/;
 
     public static REQUIRED_CLAVEUNIDAD = 'ACT';
 
     public static REQUIRED_DESCRIPCION = 'Pago';
 
-    public static REQUIRED_VALORUNITARIO = '0';
+    public static REQUIRED_VALORUNITARIO = /^0(\.0{1,6})?$/;
 
-    public static REQUIRED_IMPORTE = '0';
+    public static REQUIRED_IMPORTE = /^0(\.0{1,6})?$/;
 
     public validateRecepcionPagos(comprobante: CNodeInterface, asserts: Asserts): Promise<void> {
         const assert = asserts.put('PAGCON01', 'Se debe usar el concepto predefinido (CRP107 - CRP121)');
@@ -68,7 +68,7 @@ export class Conceptos extends AbstractRecepcionPagos10 {
         if (concepto.offsetExists('NoIdentificacion')) {
             throw new Error('No debe existir el número de identificación');
         }
-        if (Conceptos.REQUIRED_CANTIDAD !== concepto.get('Cantidad')) {
+        if (!Conceptos.REQUIRED_CANTIDAD.test(concepto.get('Cantidad'))) {
             throw new Error(
                 `La cantidad debe ser "${Conceptos.REQUIRED_CANTIDAD}" y se registró ${concepto.get('Cantidad')}`
             );
@@ -90,14 +90,14 @@ export class Conceptos extends AbstractRecepcionPagos10 {
                 )}"`
             );
         }
-        if (Conceptos.REQUIRED_VALORUNITARIO !== concepto.get('ValorUnitario')) {
+        if (!Conceptos.REQUIRED_VALORUNITARIO.test(concepto.get('ValorUnitario'))) {
             throw new Error(
                 `El valor unitario debe ser "${Conceptos.REQUIRED_VALORUNITARIO}" y se registró "${concepto.get(
                     'ValorUnitario'
                 )}"`
             );
         }
-        if (Conceptos.REQUIRED_IMPORTE !== concepto.get('Importe')) {
+        if (!Conceptos.REQUIRED_IMPORTE.test(concepto.get('Importe'))) {
             throw new Error(
                 `El importe debe ser "${Conceptos.REQUIRED_IMPORTE}" y se registró "${concepto.get('Importe')}"`
             );

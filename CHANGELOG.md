@@ -1,5 +1,12 @@
 # @nodecfdi/cfdi-validator ChangeLog
 
+## 1.1.1
+
+### Patch Changes
+
+- added case colapse cfdi33 and pago10 standards technical guides
+- update dependencies
+
 ## 1.1.0
 
 ### DOM agnostic
