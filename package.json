@@ -1,6 +1,6 @@
 {
     "name": "@nodecfdi/cfdi-validator",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Librería para contener las validaciones que aplican a un cfdi",
     "keywords": [
         "cfdi",
