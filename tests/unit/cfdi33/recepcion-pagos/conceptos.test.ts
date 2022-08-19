@@ -25,9 +25,9 @@ describe('Conceptos', () => {
             ClaveProdServ: Conceptos.REQUIRED_CLAVEPRODSERV,
             ClaveUnidad: Conceptos.REQUIRED_CLAVEUNIDAD,
             Descripcion: Conceptos.REQUIRED_DESCRIPCION,
-            Cantidad: Conceptos.REQUIRED_CANTIDAD,
-            ValorUnitario: Conceptos.REQUIRED_VALORUNITARIO,
-            Importe: Conceptos.REQUIRED_IMPORTE
+            Cantidad: '1',
+            ValorUnitario: '0',
+            Importe: '0'
         });
     });
 
